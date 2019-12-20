@@ -1,0 +1,10 @@
+img {
+      border-radius: 20px;
+}
+
+body {
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    padding-top: 70px;
+    padding-bottom: 30px;
+}
