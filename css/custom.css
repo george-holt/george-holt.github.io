@@ -8,3 +8,41 @@ body {
     padding-top: 70px;
     padding-bottom: 30px;
 }
+
+#testimonials {
+    padding: 50px 0;
+  }
+  
+  #testimonials h2 {
+    font-size: 2.5rem;
+    color: #343a40;
+    margin-bottom: 40px;
+  }
+  
+  .card {
+    border: none;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px); /* Subtle hover effect */
+  }
+  
+  .blockquote {
+    margin-top: 20px;
+    font-style: italic;
+    color: #6c757d;
+    background-color: #f1f1f1; /* Light gray background for each quote */
+    padding: 20px; /* Add padding inside the quote */
+    border-radius: 8px; /* Rounded corners */
+    /*margin-bottom: 0; /* Remove extra spacing at bottom of blockquote */
+  }
+  
+  .blockquote-footer {
+    font-weight: bold;
+    color: #343a40;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
