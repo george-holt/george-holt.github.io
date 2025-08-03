@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Engineering Responsibilities Radar Chart - George Holt" />
+    <meta name="author" content="George Holt" />
+    <meta name="keywords" content="engineering management, responsibilities, radar chart" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <title>Engineering Responsibilities - George Holt</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" />
+
+    <!-- Load jQuery -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="css/custom.css" rel="stylesheet" />
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Chart.js and PapaParse for CSV handling -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <style>
+      .chart-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 1rem;
+        position: relative;
+        height: 500px;
+      }
+      .chart-layout {
+        display: flex;
+        gap: 2rem;
+        height: 100%;
+      }
+      .company-details {
+        flex: 0 0 250px;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        border-left: 4px solid transparent;
+      }
+      .company-details h4 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+        color: #495057;
+      }
+      .company-description {
+        font-size: 1.2rem !important;
+        line-height: 1.5;
+        color: #333;
+        margin-bottom: 0;
+      }
+      .chart-center {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .company-selector {
+        margin-bottom: 2rem;
+      }
+      .back-link {
+        margin-bottom: 2rem;
+      }
+      canvas {
+        max-width: 100%;
+      }
+      .comparison-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+      .vs-label {
+        font-weight: bold;
+        color: #666;
+        font-size: 1.2rem;
+      }
+      .company-dropdown {
+        min-width: 200px;
+      }
+      .dropdown-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 0.5rem;
+      }
+      .legend {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .legend-color {
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
+        flex-shrink: 0;
+      }
+      /* Alternative styles - uncomment one of these for different looks */
+      /*
+      .legend-color {
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
+        flex-shrink: 0;
+      }
+      */
+      /*
+      .legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+        flex-shrink: 0;
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 1px #ccc;
+      }
+      */
+      /*
+      .legend-color {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 1px #ccc;
+      }
+      */
+      /* Make the "About this chart" section text larger */
+      .chart-container .well p, 
+      .chart-container .well li {
+        font-size: 1.1rem;
+        line-height: 1.5;
+      }
+      /* Make chart labels wrap to multiple lines */
+      .chart-container canvas {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="back-link">
+        <a href="index.html" class="btn btn-default">
+          <span class="glyphicon glyphicon-arrow-left"></span> Back to Home
+        </a>
+      </div>
+
+      <h1>What Engineering Managers Do In Different Companies</h1>
+      <p class="lead">Compare how different companies emphasize various engineering management responsibilities.</p>
+
+      <div class="company-selector">
+        <div class="comparison-controls">
+          <div>
+            <label for="companyA" class="control-label">Select up to 2 companies:</label>
+            <div class="dropdown-container">
+              <select id="companyA" class="form-control company-dropdown"></select>
+              <div class="legend-item">
+                <div class="legend-color" style="background-color: rgba(54, 162, 235, 1);"></div>
+              </div>
+            </div>
+          </div>
+          <div class="vs-label">vs</div>
+          <div>
+            <label for="companyB" class="control-label">&nbsp;</label>
+            <div class="dropdown-container">
+              <select id="companyB" class="form-control company-dropdown"></select>
+              <div class="legend-item">
+                <div class="legend-color" style="background-color: rgba(255, 99, 132, 1);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-layout">
+          <div id="companyA-details" class="company-details">
+            <h4>Company 1 Details</h4>
+            <p class="company-description">Select a company to see details...</p>
+          </div>
+          <div class="chart-center">
+            <canvas id="radarChart"></canvas>
+          </div>
+          <div id="companyB-details" class="company-details">
+            <h4>Company 2 Details</h4>
+            <p class="company-description">Select a company to see details...</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="well">
+        <h4>About this chart:</h4>
+        <p>This radar chart shows the relative emphasis (1-5 scale) that different companies place on various engineering management responsibilities. The data is based on my observations and experience in the industry.</p>
+        <ul id="responsibility-list">
+          <li><strong>People Management:</strong> Team building, hiring, performance management</li>
+          <li><strong>Tech Strategy:</strong> Technical direction, architecture decisions</li>
+          <li><strong>Execution:</strong> Project delivery, timeline management</li>
+          <li><strong>Product:</strong> Product strategy, feature prioritization</li>
+          <li><strong>Customer:</strong> Customer engagement, requirements gathering</li>
+          <li><strong>Quality:</strong> Code quality, testing, reliability</li>
+          <li><strong>Cross-functional:</strong> Collaboration with other departments</li>
+          <li><strong>IC Work:</strong> Individual contributor technical work</li>
+          <li><strong>Tech Mentorship:</strong> Technical guidance and coaching</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      // Master debug flag - set to true to enable all debug output
+      const DEBUG_MODE = false;
+      
+      // Debug utility function
+      function debug(...args) {
+        if (DEBUG_MODE) {
+          console.log(...args);
+        }
+      }
+      
+      function debugError(...args) {
+        if (DEBUG_MODE) {
+          console.error(...args);
+        }
+      }
+      
+      const csvPath = './data/engineering_responsibilities_compact.csv';
+      const responsibilityLabels = [
+        'People Management',
+        'Tech Strategy',
+        'Execution',
+        'Product',
+        'Customer',
+        'Quality',
+        'Cross-functional',
+        'IC Work',
+        'Tech Mentorship'
+      ];
+
+      const chartLabels = [
+        'PeoplePri', 'TechPri', 'ExecPri', 'ProductPri', 'CustomerPri',
+        'QualityPri', 'XFuncPri', 'TechConPri', 'MentorPri'
+      ];
+
+      let chart;
+      let allData = [];
+      let companyDetails = {};
+      let responsibilityConfig = {};
+
+      // Load company details with error handling
+      fetch('./data/company_details.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          companyDetails = data;
+          debug('Company details loaded successfully');
+          // Update chart if data is already loaded
+          if (allData.length > 0) {
+            updateChart();
+          }
+        })
+        .catch(error => {
+          debugError('Error loading company details:', error);
+          // Continue without company details - chart will still work
+          companyDetails = {};
+        });
+
+      // Parse responsibility config from CSV header
+      function parseResponsibilityConfig(csvText) {
+        const lines = csvText.split('\n');
+        const header = lines[0];
+        const columns = header.split(',');
+        
+        const config = {};
+        const chartLabels = [];
+        
+        columns.forEach((column, index) => {
+          if (column !== 'Company' && column.trim()) {
+            const displayName = column.trim();
+            const key = displayName.replace(/\s+/g, ''); // Remove spaces for key
+            
+            config[key] = {
+              displayName: displayName,
+              description: `${displayName} responsibilities and focus areas`
+            };
+            chartLabels.push(displayName);
+          }
+        });
+        
+        return { config, chartLabels };
+      }
+
+      // Load CSV with error handling
+      const cacheBuster = '?v=' + Math.random() + '&t=' + Date.now();
+      fetch(csvPath + cacheBuster)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then(csv => {
+          debug('Raw CSV content (first 200 chars):', csv.substring(0, 200));
+          Papa.parse(csv, {
+            header: true,
+            dynamicTyping: true,
+            complete: function(results) {
+              if (results.errors.length > 0) {
+                debugError('CSV parsing errors:', results.errors);
+              }
+              if (!results.data || results.data.length === 0) {
+                debugError('No data found in CSV');
+                return;
+              }
+              allData = results.data;
+              debug('CSV data loaded:', allData);
+              responsibilityConfig = parseResponsibilityConfig(csv).config;
+              populateAboutSection();
+              populateSelectors(results.data);
+            },
+            error: function(error) {
+              debugError('PapaParse error:', error);
+            }
+          });
+        })
+        .catch(error => {
+          debugError('Error loading CSV:', error);
+          // Try alternative path if first one fails
+          if (csvPath.startsWith('./')) {
+            const altPath = csvPath.substring(2) + cacheBuster;
+            debug('Trying alternative path:', altPath);
+            fetch(altPath)
+              .then(response => response.text())
+              .then(csv => {
+                debug('Raw CSV content (alt path, first 200 chars):', csv.substring(0, 200));
+                Papa.parse(csv, {
+                  header: true,
+                  dynamicTyping: true,
+                  complete: function(results) {
+                    if (results.data && results.data.length > 0) {
+                      allData = results.data;
+                      debug('CSV data loaded (alternative path):', allData);
+                      debug('Snowflake data:', allData.find(d => d.Company === 'Snowflake'));
+                      debug('Snowflake MentorPri value:', allData.find(d => d.Company === 'Snowflake')?.MentorPri);
+                      responsibilityConfig = parseResponsibilityConfig(csv).config;
+                      populateAboutSection();
+                      populateSelectors(results.data);
+                    }
+                  }
+                });
+              })
+              .catch(altError => {
+                debugError('Alternative path also failed:', altError);
+              });
+          }
+        });
+
+      // Fallback for older browsers that don't support fetch
+      if (typeof fetch === 'undefined') {
+        debugError('Fetch API not supported - this browser may not work properly');
+      }
+
+      // Debug: Check actual font sizes
+      setTimeout(() => {
+        if (!DEBUG_MODE) return;
+        
+        const subtitle = document.querySelector('.lead');
+        const companyDesc = document.querySelector('.company-description');
+        const aboutText = document.querySelector('.well p');
+        
+        if (subtitle) {
+          const subtitleSize = window.getComputedStyle(subtitle).fontSize;
+          debug('Subtitle font size:', subtitleSize);
+        }
+        if (companyDesc) {
+          const descSize = window.getComputedStyle(companyDesc).fontSize;
+          debug('Company description font size:', descSize);
+        }
+        if (aboutText) {
+          const aboutSize = window.getComputedStyle(aboutText).fontSize;
+          debug('About section font size:', aboutSize);
+        }
+        
+        // Also check the root font size
+        const rootSize = window.getComputedStyle(document.documentElement).fontSize;
+        debug('Root font size:', rootSize);
+      }, 1000);
+
+      function renderChart(companyA, companyB) {
+        const ctx = document.getElementById('radarChart');
+        if (!ctx) {
+          console.error('Canvas element not found');
+          return;
+        }
+
+        const context = ctx.getContext('2d');
+        if (!context) {
+          console.error('Could not get canvas context');
+          return;
+        }
+        
+        if (chart) {
+          chart.destroy();
+        }
+
+        const datasets = [];
+
+        // Add Company A if selected
+        if (companyA) {
+          const chartLabels = Object.keys(responsibilityConfig);
+          const dataA = chartLabels.map(label => {
+            const displayName = responsibilityConfig[label].displayName;
+            return companyA[displayName] ?? 0;
+          });
+          datasets.push({
+            label: companyA.Company,
+            data: dataA,
+            fill: true,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(54, 162, 235, 1)'
+          });
+        }
+
+        // Add Company B if selected
+        if (companyB) {
+          const chartLabels = Object.keys(responsibilityConfig);
+          const dataB = chartLabels.map(label => {
+            const displayName = responsibilityConfig[label].displayName;
+            return companyB[displayName] ?? 0;
+          });
+          datasets.push({
+            label: companyB.Company,
+            data: dataB,
+            fill: true,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(255, 99, 132, 1)'
+          });
+        }
+
+        try {
+          chart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+              labels: Object.values(responsibilityConfig).map(r => r.displayName),
+              datasets: datasets
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false
+                }
+              },
+              scales: {
+                r: {
+                  min: 0,
+                  max: 5,
+                  beginAtZero: true,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      return value;
+                    }
+                  },
+                  pointLabels: {
+                    font: {
+                      size: 12
+                    },
+                    callback: function(value) {
+                      // Split long labels into multiple lines
+                      const words = value.split(' ');
+                      if (words.length > 1) {
+                        return words;
+                      }
+                      return value;
+                    }
+                  }
+                }
+              }
+            }
+          });
+        } catch (error) {
+          console.error('Error creating chart:', error);
+          // Fail quietly - just don't show the chart
+        }
+      }
+
+      function populateAboutSection() {
+        const list = document.getElementById('responsibility-list');
+        if (!list) return;
+        
+        list.innerHTML = '';
+        Object.values(responsibilityConfig).forEach(responsibility => {
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${responsibility.displayName}:</strong> ${responsibility.description}`;
+          list.appendChild(li);
+        });
+      }
+
+      function populateSelectors(data) {
+        const selectA = document.getElementById('companyA');
+        const selectB = document.getElementById('companyB');
+        
+        if (!selectA || !selectB) {
+          console.error('Company selector elements not found');
+          return;
+        }
+        
+        const validRows = data.filter(row => row.Company);
+        
+        if (validRows.length === 0) {
+          console.error('No valid company data found');
+          // Fail quietly - just leave dropdowns empty
+          return;
+        }
+        
+        // Clear existing options
+        selectA.innerHTML = '<option value="">Select Company A</option>';
+        selectB.innerHTML = '<option value="">Select Company B</option>';
+        
+        validRows.forEach(row => {
+          const optA = document.createElement('option');
+          optA.value = row.Company;
+          optA.textContent = row.Company;
+          selectA.appendChild(optA);
+
+          const optB = document.createElement('option');
+          optB.value = row.Company;
+          optB.textContent = row.Company;
+          selectB.appendChild(optB);
+        });
+
+        // Set default selections
+        if (validRows.length >= 2) {
+          selectA.value = validRows[0].Company;
+          selectB.value = validRows[1].Company;
+          updateChart();
+        }
+
+        // Add event listeners
+        selectA.addEventListener('change', updateChart);
+        selectB.addEventListener('change', updateChart);
+      }
+
+      function updateChart() {
+        const companyA = document.getElementById('companyA')?.value || '';
+        const companyB = document.getElementById('companyB')?.value || '';
+        
+        const dataA = companyA ? allData.find(d => d.Company === companyA) : null;
+        const dataB = companyB ? allData.find(d => d.Company === companyB) : null;
+        
+        // Update company details
+        updateCompanyDetails('companyA-details', companyA, 'rgba(54, 162, 235, 1)');
+        updateCompanyDetails('companyB-details', companyB, 'rgba(255, 99, 132, 1)');
+        
+        renderChart(dataA, dataB);
+      }
+
+      function updateCompanyDetails(elementId, companyName, color) {
+        const element = document.getElementById(elementId);
+        if (!element) {
+          console.error(`Element ${elementId} not found`);
+          return;
+        }
+
+        const titleElement = element.querySelector('h4');
+        const descriptionElement = element.querySelector('.company-description');
+        
+        if (!titleElement || !descriptionElement) {
+          console.error(`Required elements not found in ${elementId}`);
+          return;
+        }
+        
+        if (companyName && companyDetails[companyName]) {
+          titleElement.textContent = companyName;
+          titleElement.style.color = color;
+          descriptionElement.textContent = companyDetails[companyName];
+          element.style.borderLeftColor = color;
+        } else {
+          titleElement.textContent = elementId === 'companyA-details' ? 'Company 1 Details' : 'Company 2 Details';
+          titleElement.style.color = '#495057';
+          descriptionElement.textContent = companyName ? 
+            `No details available for "${companyName}"` : 
+            'Select a company to see details...';
+          element.style.borderLeftColor = 'transparent';
+        }
+      }
+    </script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script>
+      window.jQuery || document.write('<script src="/js/vendor/jquery.min.js"><\/script>');
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
