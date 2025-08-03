@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="referrer" content="no-referrer-when-downgrade">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Professional resume of George Holt, an experienced software engineering manager and leader." />
+    <meta name="description" content="Professional resume of George Holt, an experienced software engineering manager, technical product managerand leader." />
     <meta name="author" content="George Holt" />
     <meta name="keywords" content="George Holt, software engineer, engineering manager, software development, technical product manager, AI, developer tools" />
     <meta name="robots" content="index, follow" />
@@ -13,21 +13,67 @@
 
     <title>George Holt</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" />
+    <!-- Preload Google Font for better performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:300" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet"></noscript>
+
+    <!-- Critical CSS Inlined -->
+    <style>
+      img {
+        border-radius: 20px;
+      }
+      body {
+        color: black;
+        font-family: 'Roboto', sans-serif;
+        padding-top: 70px;
+        padding-bottom: 30px;
+      }
+      #testimonials {
+        padding: 50px 0;
+      }
+      #testimonials h2 {
+        font-size: 2.5rem;
+        color: #343a40;
+        margin-bottom: 40px;
+      }
+      .card {
+        border: none;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+      }
+      .blockquote {
+        margin-top: 20px;
+        font-style: italic;
+        color: #6c757d;
+        background-color: #f1f1f1;
+        padding: 20px;
+        border-radius: 8px;
+      }
+      .blockquote-footer {
+        font-weight: bold;
+        color: #343a40;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
 
     <!-- Load jQuery -->
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Bootstrap theme -->
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet" />
+    <!-- Bootstrap core CSS - Deferred -->
+    <link href="css/bootstrap.min.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <!-- Bootstrap theme - Deferred -->
+    <link href="css/bootstrap-theme.min.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <!-- IE10 viewport hack - Deferred -->
+    <link href="css/ie10-viewport-bug-workaround.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <!-- Custom styles for this template -->
-    <link href="css/custom.css" rel="stylesheet" />
+    <!-- Custom styles - Deferred -->
+    <link href="css/custom.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <script src="js/ie-emulation-modes-warning.js"></script>
+    <script src="js/ie-emulation-modes-warning.js?v=1.0" defer></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -37,7 +83,7 @@
   </head>
 
   <body>
-    <script type="text/javascript">
+    <script type="text/javascript" defer>
       (function (window, document, dataLayerName, id) {
         (window[dataLayerName] = window[dataLayerName] || []),
           window[dataLayerName].push({
@@ -82,10 +128,10 @@
 
     <div class="container">
       <h1>George Holt</h1>
-      <h3>Principal Engineering Manager</h3>
+      <h3>Engineering Leader with Product Ownership Experience in Developer Tools</h3>
 
       <p>
-        <img class="img-responsive" src="img/George Holt small.png" alt="picture of George Holt" />
+        <img class="img-responsive" src="img/George Holt small.png?v=1.0" alt="picture of George Holt" loading="lazy" />
       </p>
       <p>&nbsp;</p>
       <p>
@@ -112,11 +158,11 @@
       </p>
       <p>&nbsp;</p>
       <ul>
-        <li>25 years of experience in the software industry as an SDM, PM, and Engineer.</li>
-        <li>Strong technical leader with a record of managing and growing engineering teams.</li>
-        <li>Proven expertise in developing and managing software projects, particularly in the AI and developer tools space.</li>
-        <li>Excellent communicator capable of aligning cross-functional teams and engaging with highly technical customers.</li>
-        <li>Innovative problem solver with a passion for developing efficient and engaging user experiences.</li>
+        <li>25 years of experience in the software industry with leadership roles spanning Engineering Management, Product, and hands-on engineering.</li>
+        <li>Proven track record of managing and scaling high-performing engineering teams while owning product vision, roadmap, and success metrics.</li>
+        <li>Deep expertise in developer tools and AI-driven workflows, including customer-facing and internal platforms used by hundreds of thousands of developers.</li>
+        <li>Strong communicator and cross-functional leader — skilled at aligning engineering, design, and executive stakeholders around developer needs and product goals.</li>
+        <li>Experienced in defining product metrics, driving customer discovery, and translating feedback into high-impact, intuitive developer experiences</li>
         <li>Experienced public speaker at major industry events.</li>
         <li>
           Experienced public speaker. <small>Examples from</small>
@@ -186,9 +232,9 @@
     <script>
       window.jQuery || document.write('<script src="/js/vendor/jquery.min.js"><\/script>');
     </script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/docs.min.js"></script>
+    <script src="js/bootstrap.min.js?v=1.0" defer></script>
+    <script src="js/docs.min.js?v=1.0" defer></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/ie10-viewport-bug-workaround.js?v=1.0" defer></script>
   </body>
 </html>

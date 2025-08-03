@@ -11,35 +11,23 @@
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#ffffff" />
 
-    <title>Engineering Responsibilities - George Holt</title>
+    <title>Engineering Responsibilities Comparison</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" />
+    <!-- Preload Google Font for better performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:300" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet"></noscript>
 
-    <!-- Load jQuery -->
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Bootstrap theme -->
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet" />
-
-    <!-- Custom styles for this template -->
-    <link href="css/custom.css" rel="stylesheet" />
-
-    <script src="js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Chart.js and PapaParse for CSV handling -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-
+    <!-- Critical CSS Inlined -->
     <style>
+      html {
+        font-size: 14px;
+      }
+      body {
+        color: black;
+        font-family: 'Roboto', sans-serif;
+        padding-top: 70px;
+        padding-bottom: 30px;
+      }
       .chart-container {
         max-width: 1200px;
         margin: 2rem auto;
@@ -51,6 +39,12 @@
         display: flex;
         gap: 2rem;
         height: 100%;
+      }
+      .chart-center {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       .company-details {
         flex: 0 0 250px;
@@ -66,25 +60,20 @@
         color: #495057;
       }
       .company-description {
-        font-size: 1.2rem !important;
+        font-size: 1.8rem;
         line-height: 1.5;
         color: #333;
-        margin-bottom: 0;
       }
-      .chart-center {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .chart-container .well p, 
+      .chart-container .well li {
+        font-size: 1.8rem;
+        line-height: 1.5;
       }
       .company-selector {
         margin-bottom: 2rem;
       }
       .back-link {
         margin-bottom: 2rem;
-      }
-      canvas {
-        max-width: 100%;
       }
       .comparison-controls {
         display: flex;
@@ -126,46 +115,34 @@
         border-radius: 3px;
         flex-shrink: 0;
       }
-      /* Alternative styles - uncomment one of these for different looks */
-      /*
-      .legend-color {
-        width: 16px;
-        height: 16px;
-        border-radius: 3px;
-        flex-shrink: 0;
-      }
-      */
-      /*
-      .legend-color {
-        width: 12px;
-        height: 12px;
-        border-radius: 2px;
-        flex-shrink: 0;
-        border: 2px solid #fff;
-        box-shadow: 0 0 0 1px #ccc;
-      }
-      */
-      /*
-      .legend-color {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        flex-shrink: 0;
-        border: 2px solid #fff;
-        box-shadow: 0 0 0 1px #ccc;
-      }
-      */
-      /* Make the "About this chart" section text larger */
-      .chart-container .well p, 
-      .chart-container .well li {
-        font-size: 1.1rem;
-        line-height: 1.5;
-      }
-      /* Make chart labels wrap to multiple lines */
-      .chart-container canvas {
+      canvas {
         max-width: 100%;
       }
     </style>
+
+    <!-- Load jQuery -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- Bootstrap core CSS - Deferred -->
+    <link href="css/bootstrap.min.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <!-- Bootstrap theme - Deferred -->
+    <link href="css/bootstrap-theme.min.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <!-- IE10 viewport hack - Deferred -->
+    <link href="css/ie10-viewport-bug-workaround.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+
+    <!-- Custom styles - Deferred -->
+    <link href="css/custom.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+
+    <script src="js/ie-emulation-modes-warning.js?v=1.0" defer></script>
+
+    <!-- Chart.js and PapaParse for CSV handling -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
 
   <body>
@@ -633,9 +610,9 @@
     <script>
       window.jQuery || document.write('<script src="/js/vendor/jquery.min.js"><\/script>');
     </script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/docs.min.js"></script>
+    <script src="js/bootstrap.min.js?v=1.0" defer></script>
+    <script src="js/docs.min.js?v=1.0" defer></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/ie10-viewport-bug-workaround.js?v=1.0" defer></script>
   </body>
 </html>
