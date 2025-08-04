@@ -23,9 +23,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300"
+      href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <!-- Preload critical image to prevent layout shift -->
     <link
       rel="preload"
@@ -320,8 +328,8 @@
       }
     </style>
 
-    <!-- Load jQuery -->
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- Load jQuery - Deferred to prevent render blocking -->
+    <script src="https://code.jquery.com/jquery-latest.min.js" defer></script>
     <!-- Bootstrap core CSS - Deferred -->
     <link
       href="css/bootstrap.min.css?v=1.0"
