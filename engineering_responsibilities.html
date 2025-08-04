@@ -3,25 +3,34 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="referrer" content="no-referrer-when-downgrade">
+    <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Engineering Responsibilities Radar Chart - George Holt" />
+    <meta
+      name="description"
+      content="Engineering Responsibilities Radar Chart - George Holt"
+    />
     <meta name="author" content="George Holt" />
-    <meta name="keywords" content="engineering management, responsibilities, radar chart" />
+    <meta
+      name="keywords"
+      content="engineering management, responsibilities, radar chart"
+    />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#ffffff" />
 
     <title>Engineering Responsibilities Comparison</title>
 
     <!-- Font loading optimization -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300"
+      rel="stylesheet"
+    />
 
     <!-- Critical CSS Inlined -->
     <style>
       html {
-        font-size: 14px;
+        font-size: 1rem;
       }
       :root {
         /* Color Palette */
@@ -36,66 +45,102 @@
         --background-secondary: #f8f9fa;
         --background-muted: #f1f1f1;
         --border-color: #dee2e6;
-        
+
         /* Typography */
-        --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        --font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         --font-size-base: 1.4rem;
         --font-size-sm: 1rem;
+        --font-size-md: 1.5rem;
         --font-size-lg: 1.8rem;
         --font-size-xl: 2.25rem;
         --font-size-2xl: 2.5rem;
         --line-height-base: 1.6;
         --line-height-tight: 1.3;
-        
+
+        /* Layout Constants */
+        --navbar-height: 70px;
+        --footer-spacing: 30px;
+        --section-padding: 50px;
+        --section-margin: 32px;
+        --heading-margin: 40px;
+        --content-padding: 20px;
+        --micro-spacing: 10px;
+        --hover-offset: 5px;
+
+        /* Component Dimensions */
+        --chart-max-width: 1200px;
+        --chart-min-height: 500px;
+        --chart-center-min-height: 400px;
+        --legend-size: 16px;
+
         /* Spacing */
         --spacing-xs: 0.5rem;
         --spacing-sm: 1rem;
         --spacing-md: 1.5rem;
         --spacing-lg: 2rem;
         --spacing-xl: 3rem;
-        
+
         /* Border Radius */
         --border-radius: 8px;
         --border-radius-lg: 20px;
-        
+        --border-radius-sm: calc(var(--border-radius) * 0.375);
+
         /* Shadows */
-        --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
         --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
         --shadow-lg: 0 4px 8px rgba(0, 123, 255, 0.3);
-        
+        --shadow-opacity: 0.3;
+        --shadow-light-opacity: 0.04;
+        --shadow-medium-opacity: 0.1;
+
         /* Transitions */
         --transition-fast: 150ms ease-in-out;
         --transition-normal: 0.3s ease-in-out;
+
+        /* Media Query Breakpoints */
+        --breakpoint-mobile: 480px;
+        --breakpoint-tablet: 768px;
+        --breakpoint-desktop: 992px;
+        --breakpoint-large: 1200px;
+
+        /* Chart Configuration */
+        --chart-fill-opacity: 0.2;
+        --chart-border-opacity: 1;
+        --chart-max-scale: 5;
+        --chart-step-size: 1;
+        --chart-font-size: 12;
       }
-      
+
       body {
         color: var(--text-primary);
         font-family: var(--font-family);
-        padding-top: 70px;
-        padding-bottom: 30px;
+        padding-top: var(--navbar-height);
+        padding-bottom: var(--footer-spacing);
       }
-      h1 { 
-        font-size: var(--font-size-xl); 
-        font-weight: 600; 
+      h1 {
+        font-size: var(--font-size-xl);
+        font-weight: 600;
       }
-      h2 { 
-        font-size: 1.5rem; 
-        font-weight: 500; 
-        margin-top: var(--spacing-lg); 
+      h2 {
+        font-size: var(--font-size-md);
+        font-weight: 500;
+        margin-top: var(--spacing-lg);
       }
-      p, li { 
-        font-size: var(--font-size-base); 
-        line-height: var(--line-height-base); 
+      p,
+      li {
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-base);
       }
       .chart-container {
-        max-width: 1200px;
-        margin: 2rem auto;
-        padding: 1rem;
+        max-width: var(--chart-max-width);
+        margin: var(--spacing-lg) auto;
+        padding: var(--spacing-sm);
         position: relative;
         height: auto;
-        min-height: 500px;
+        min-height: var(--chart-min-height);
         opacity: 0;
-        transition: opacity 0.3s ease-in-out;
+        transition: opacity var(--transition-normal);
       }
       .chart-container.loaded {
         opacity: 1;
@@ -103,18 +148,18 @@
       .chart-layout {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: var(--spacing-sm);
         height: auto;
       }
-      
+
       .chart-center {
         order: 1;
-        min-height: 400px;
+        min-height: var(--chart-center-min-height);
         display: flex;
         align-items: center;
         justify-content: center;
       }
-      
+
       .company-details {
         order: 2;
         width: 100%;
@@ -122,7 +167,7 @@
         margin-bottom: var(--spacing-xs);
         background-color: var(--background-secondary);
         border-radius: var(--border-radius);
-        border-left: 4px solid transparent;
+        border-left: calc(var(--border-radius) * 0.5) solid transparent;
         opacity: 0;
         transition: opacity var(--transition-normal);
         display: flex;
@@ -130,18 +175,18 @@
         justify-content: flex-start;
         contain: layout style;
       }
-      
+
       .company-details.loaded {
         opacity: 1;
       }
-      
+
       .company-details h4 {
         margin-top: 0;
         margin-bottom: var(--spacing-xs);
-        font-size: 1.3rem;
+        font-size: var(--font-size-sm);
         color: var(--text-dark);
       }
-      
+
       .company-description {
         font-size: var(--font-size-lg);
         line-height: var(--line-height-tight);
@@ -149,7 +194,7 @@
         margin: 0;
       }
 
-      .chart-container .well p, 
+      .chart-container .well p,
       .chart-container .well li {
         font-size: var(--font-size-lg);
         line-height: var(--line-height-tight);
@@ -163,48 +208,48 @@
         opacity: 1;
       }
       .back-link {
-        margin-bottom: 2rem;
+        margin-bottom: var(--spacing-lg);
       }
       .comparison-controls {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 1rem;
-        margin-bottom: 2rem;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-lg);
         flex-wrap: wrap;
       }
       .vs-label {
         font-weight: bold;
-        color: #666;
-        font-size: 1rem;
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
         align-self: flex-end;
-        margin-bottom: 0.5rem;
+        margin-bottom: var(--spacing-xs);
       }
       .company-dropdown {
-        min-width: 200px;
+        min-width: calc(var(--spacing-sm) * 12.5);
       }
       .dropdown-container {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        margin-top: 0.5rem;
+        gap: var(--spacing-sm);
+        margin-top: var(--spacing-xs);
       }
       .legend {
         display: flex;
         justify-content: center;
-        gap: 2rem;
-        margin-top: 1rem;
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-sm);
         flex-wrap: wrap;
       }
       .legend-item {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: var(--spacing-xs);
       }
       .legend-color {
-        width: 16px;
-        height: 16px;
-        border-radius: 3px;
+        width: var(--legend-size);
+        height: var(--legend-size);
+        border-radius: var(--border-radius-sm);
         flex-shrink: 0;
       }
       canvas {
@@ -217,12 +262,27 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css?v=1.0" rel="stylesheet" />
     <!-- Bootstrap theme - Deferred -->
-    <link href="css/bootstrap-theme.min.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link
+      href="css/bootstrap-theme.min.css?v=1.0"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
     <!-- IE10 viewport hack - Deferred -->
-    <link href="css/ie10-viewport-bug-workaround.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link
+      href="css/ie10-viewport-bug-workaround.css?v=1.0"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
 
     <!-- Custom styles - Deferred -->
-    <link href="css/custom.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link
+      href="css/custom.css?v=1.0"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
 
     <script src="js/ie-emulation-modes-warning.js?v=1.0" defer></script>
 
@@ -238,147 +298,203 @@
   </head>
 
   <body>
-    <div class="container">
-      <div class="back-link">
-        <a href="index.html" class="btn btn-default">
-          <span class="glyphicon glyphicon-arrow-left"></span> Back to Home
-        </a>
-      </div>
+    <header role="banner">
+      <nav role="navigation" aria-label="Main navigation">
+        <div class="container">
+          <div class="back-link">
+            <a href="index.html" class="btn btn-default">
+              <span class="glyphicon glyphicon-arrow-left"></span> Back to Home
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-      <h1>What Engineering Managers Do In Different Companies</h1>
-      <p class="lead">Compare how different companies emphasize various engineering management responsibilities.</p>
+    <main role="main">
+      <section class="introduction" aria-labelledby="page-title">
+        <div class="container">
+          <header>
+            <h1 id="page-title">
+              What Engineering Managers Do In Different Companies
+            </h1>
+            <p class="lead">
+              Compare how different companies emphasize various engineering
+              management responsibilities.
+            </p>
+          </header>
+        </div>
+      </section>
 
-      <div class="company-selector">
-        <div class="comparison-controls">
-          <div>
-            <label for="companyA" class="control-label">Select up to 2 companies:</label>
-            <div class="dropdown-container">
-              <select id="companyA" class="form-control company-dropdown"></select>
-              <div class="legend-item">
-                <div class="legend-color" style="background-color: rgba(54, 162, 235, 1);"></div>
+      <section class="chart-section" aria-labelledby="chart-title">
+        <div class="container">
+          <div class="company-selector">
+            <div class="comparison-controls">
+              <div>
+                <label for="companyA" class="control-label"
+                  >Select up to 2 companies:</label
+                >
+                <div class="dropdown-container">
+                  <select
+                    id="companyA"
+                    class="form-control company-dropdown"
+                    aria-describedby="companyA-description"
+                  ></select>
+                  <div class="legend-item">
+                    <div
+                      class="legend-color"
+                      style="background-color: rgba(54, 162, 235, 1)"
+                      aria-label="Company A color indicator"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div class="vs-label" aria-label="versus">vs</div>
+              <div>
+                <label for="companyB" class="control-label">&nbsp;</label>
+                <div class="dropdown-container">
+                  <select
+                    id="companyB"
+                    class="form-control company-dropdown"
+                    aria-describedby="companyB-description"
+                  ></select>
+                  <div class="legend-item">
+                    <div
+                      class="legend-color"
+                      style="background-color: rgba(255, 99, 132, 1)"
+                      aria-label="Company B color indicator"
+                    ></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="vs-label">vs</div>
-          <div>
-            <label for="companyB" class="control-label">&nbsp;</label>
-            <div class="dropdown-container">
-              <select id="companyB" class="form-control company-dropdown"></select>
-              <div class="legend-item">
-                <div class="legend-color" style="background-color: rgba(255, 99, 132, 1);"></div>
+
+          <div
+            class="chart-container"
+            role="region"
+            aria-label="Engineering responsibilities comparison chart"
+          >
+            <div class="chart-layout">
+              <article
+                id="companyA-details"
+                class="company-details"
+                aria-labelledby="companyA-title"
+              >
+                <h4 id="companyA-title">Select a company to see details...</h4>
+                <p id="companyA-description" class="company-description">
+                  Choose a company from the dropdown above to view their
+                  engineering management focus areas.
+                </p>
+              </article>
+              <div class="chart-center">
+                <canvas
+                  id="radarChart"
+                  aria-label="Radar chart showing engineering management responsibilities comparison"
+                ></canvas>
               </div>
+              <article
+                id="companyB-details"
+                class="company-details"
+                aria-labelledby="companyB-title"
+              >
+                <h4 id="companyB-title">Select a company to see details...</h4>
+                <p id="companyB-description" class="company-description">
+                  Choose a company from the dropdown above to view their
+                  engineering management focus areas.
+                </p>
+              </article>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="chart-container">
-        <div class="chart-layout">
-          <div id="companyA-details" class="company-details">
-            <h4>Select a company to see details...</h4>
-            <p class="company-description">Choose a company from the dropdown above to view their engineering management focus areas.</p>
-          </div>
-          <div class="chart-center">
-            <canvas id="radarChart"></canvas>
-          </div>
-          <div id="companyB-details" class="company-details">
-            <h4>Select a company to see details...</h4>
-            <p class="company-description">Choose a company from the dropdown above to view their engineering management focus areas.</p>
-          </div>
+      <section class="about-chart" aria-labelledby="about-title">
+        <div class="container">
+          <article class="well">
+            <header>
+              <h2 id="about-title">About this chart:</h2>
+            </header>
+            <p>
+              This radar chart shows the relative emphasis (1-5 scale) that
+              different companies place on various engineering management
+              responsibilities. The data is based on my observations and
+              experience in the industry.
+            </p>
+            <p><strong>What each responsibility means in practice:</strong></p>
+            <ul id="responsibility-list" role="list">
+              <li role="listitem">
+                <strong>People Management:</strong> Hiring, performance reviews,
+                career development, team building, conflict resolution, and
+                organizational design. Higher scores mean more time spent on
+                people vs. technical work.
+              </li>
+              <li role="listitem">
+                <strong>Tech Strategy:</strong> Architecture decisions,
+                technology choices, technical roadmap planning, and setting
+                technical direction. Higher scores indicate more strategic
+                technical leadership.
+              </li>
+              <li role="listitem">
+                <strong>Execution:</strong> Project management, timeline
+                tracking, resource allocation, and delivery coordination. Higher
+                scores mean more hands-on project management.
+              </li>
+              <li role="listitem">
+                <strong>Product:</strong> Product strategy, feature
+                prioritization, roadmap planning, and product-market fit
+                decisions. Higher scores indicate more product ownership
+                responsibilities.
+              </li>
+              <li role="listitem">
+                <strong>Customer:</strong> Direct customer interaction,
+                requirements gathering, user research, and customer success.
+                Higher scores mean more customer-facing responsibilities.
+              </li>
+              <li role="listitem">
+                <strong>Quality:</strong> Code review processes, testing
+                strategies, reliability engineering, and quality assurance
+                oversight. Higher scores indicate stronger quality focus.
+              </li>
+              <li role="listitem">
+                <strong>Cross-functional:</strong> Working with design,
+                marketing, sales, legal, and other departments. Higher scores
+                mean more cross-team collaboration.
+              </li>
+              <li role="listitem">
+                <strong>IC Work:</strong> Hands-on coding, debugging, and
+                technical implementation. Higher scores indicate more individual
+                contributor responsibilities alongside management.
+              </li>
+              <li role="listitem">
+                <strong>Tech Mentorship:</strong> Technical coaching, code
+                reviews, architecture guidance, and technical skill development.
+                Higher scores mean more technical teaching and mentoring.
+              </li>
+            </ul>
+            <p>
+              <strong>How to interpret the chart:</strong> A score of 1 means
+              minimal emphasis, while 5 indicates heavy focus. Companies with
+              higher scores in certain areas typically expect managers to spend
+              more time on those responsibilities.
+            </p>
+          </article>
         </div>
-      </div>
-
-      <div class="well">
-        <h4>About this chart:</h4>
-        <p>This radar chart shows the relative emphasis (1-5 scale) that different companies place on various engineering management responsibilities. The data is based on my observations and experience in the industry.</p>
-        <ul id="responsibility-list">
-          <li><strong>People Management:</strong> Team building, hiring, performance management</li>
-          <li><strong>Tech Strategy:</strong> Technical direction, architecture decisions</li>
-          <li><strong>Execution:</strong> Project delivery, timeline management</li>
-          <li><strong>Product:</strong> Product strategy, feature prioritization</li>
-          <li><strong>Customer:</strong> Customer engagement, requirements gathering</li>
-          <li><strong>Quality:</strong> Code quality, testing, reliability</li>
-          <li><strong>Cross-functional:</strong> Collaboration with other departments</li>
-          <li><strong>IC Work:</strong> Individual contributor technical work</li>
-          <li><strong>Tech Mentorship:</strong> Technical guidance and coaching</li>
-        </ul>
-      </div>
-    </div>
+      </section>
+    </main>
 
     <script>
-      // Auto-open DevTools Performance tab for profiling
-      if (window.location.search.includes('profile=true')) {
-        // Auto-open DevTools (Firefox doesn't support this directly, but we can prompt)
-        console.log('🔍 Profiling mode detected!');
-        console.log('📊 Please open DevTools (F12) and go to the Performance tab');
-        console.log('⏱️ Then click Record and refresh the page to capture the first-load behavior');
-        
-        // Add a visual indicator
-        const indicator = document.createElement('div');
-        indicator.style.cssText = `
-          position: fixed; top: 10px; right: 10px; 
-          background: #ff6b6b; color: white; padding: 10px; 
-          border-radius: 5px; z-index: 10000; font-family: monospace;
-        `;
-        indicator.textContent = '🔍 PROFILING MODE - Open DevTools Performance tab';
-        document.body.appendChild(indicator);
-      }
-
-      // Performance logging for debugging
-      const performanceObserver = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          if (entry.entryType === 'paint') {
-            console.log(`🎨 Paint: ${entry.name} at ${entry.startTime}ms`);
-          }
-        }
-      });
-      performanceObserver.observe({ entryTypes: ['paint'] });
-
-      // Log layout shifts
-      const layoutObserver = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          console.log(`📐 Layout shift: ${entry.value} at ${entry.startTime}ms`);
-        }
-      });
-      layoutObserver.observe({ entryTypes: ['layout-shift'] });
-
-
-      
-      // Mark key events
-      performance.mark('page-load-start');
-
-      // Master debug flag - set to true to enable all debug output
-      const DEBUG_MODE = true;
-      
-      // Debug utility function
-      function debug(...args) {
-        if (DEBUG_MODE) {
-          console.log(...args);
-        }
-      }
-      
-      function debugError(...args) {
-        if (DEBUG_MODE) {
-          console.error(...args);
-        }
-      }
-      
-      const csvPath = './data/engineering_responsibilities_compact.csv';
-      const responsibilityLabels = [
-        'People Management',
-        'Tech Strategy',
-        'Execution',
-        'Product',
-        'Customer',
-        'Quality',
-        'Cross-functional',
-        'IC Work',
-        'Tech Mentorship'
-      ];
+      const csvPath = "./data/engineering_responsibilities_compact.csv";
 
       const chartLabels = [
-        'PeoplePri', 'TechPri', 'ExecPri', 'ProductPri', 'CustomerPri',
-        'QualityPri', 'XFuncPri', 'TechConPri', 'MentorPri'
+        "PeoplePri",
+        "TechPri",
+        "ExecPri",
+        "ProductPri",
+        "CustomerPri",
+        "QualityPri",
+        "XFuncPri",
+        "TechConPri",
+        "MentorPri",
       ];
 
       let chart;
@@ -387,190 +503,141 @@
       let responsibilityConfig = {};
 
       // Load company details with error handling
-      const companyDetailsPath = './data/company_details.json';
-      debug('Attempting to fetch company details from:', companyDetailsPath);
+      const companyDetailsPath = "./data/company_details.json";
       fetch(companyDetailsPath)
-        .then(response => {
-          debug('Company details response status:', response.status, response.statusText);
+        .then((response) => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
           return response.json();
         })
-        .then(data => {
+        .then((data) => {
           companyDetails = data;
-          debug('Company details loaded successfully');
-          performance.mark('company-details-loaded');
           // Don't update chart here - let populateSelectors handle it
         })
-        .catch(error => {
-          debugError('Error loading company details:', error);
+        .catch((error) => {
+          console.error("Error loading company details:", error);
           // Continue without company details - chart will still work
           companyDetails = {};
         });
 
       // Parse responsibility config from CSV header
       function parseResponsibilityConfig(csvText) {
-        const lines = csvText.split('\n');
+        const lines = csvText.split("\n");
         const header = lines[0];
-        const columns = header.split(',');
-        
+        const columns = header.split(",");
+
         const config = {};
         const chartLabels = [];
-        
+
         columns.forEach((column, index) => {
-          if (column !== 'Company' && column.trim()) {
+          if (column !== "Company" && column.trim()) {
             const displayName = column.trim();
-            const key = displayName.replace(/\s+/g, ''); // Remove spaces for key
-            
+            const key = displayName.replace(/\s+/g, ""); // Remove spaces for key
+
             config[key] = {
               displayName: displayName,
-              description: `${displayName} responsibilities and focus areas`
+              description: `${displayName} responsibilities and focus areas`,
             };
             chartLabels.push(displayName);
           }
         });
-        
+
         return { config, chartLabels };
       }
 
       // Load CSV with error handling
-      const cacheBuster = '?v=1.0';
+      const cacheBuster = "?v=1.0";
       const fullCsvPath = csvPath + cacheBuster;
-      debug('Attempting to fetch CSV from:', fullCsvPath);
       fetch(fullCsvPath)
-        .then(response => {
-          debug('CSV response status:', response.status, response.statusText);
+        .then((response) => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
           return response.text();
         })
-        .then(csv => {
-          debug('Raw CSV content (first 200 chars):', csv.substring(0, 200));
+        .then((csv) => {
           Papa.parse(csv, {
             header: true,
             dynamicTyping: true,
-            complete: function(results) {
+            complete: function (results) {
               if (results.errors.length > 0) {
-                debugError('CSV parsing errors:', results.errors);
+                console.error("CSV parsing errors:", results.errors);
               }
               if (!results.data || results.data.length === 0) {
-                debugError('No data found in CSV');
+                console.error("No data found in CSV");
                 return;
               }
               allData = results.data;
-              debug('CSV data loaded:', allData);
               responsibilityConfig = parseResponsibilityConfig(csv).config;
-              performance.mark('csv-data-loaded');
               populateAboutSection();
               populateSelectors(results.data);
             },
-            error: function(error) {
-              debugError('PapaParse error:', error);
-            }
+            error: function (error) {
+              console.error("PapaParse error:", error);
+            },
           });
         })
-        .catch(error => {
-          debugError('Error loading CSV:', error);
+        .catch((error) => {
+          console.error("Error loading CSV:", error);
           // Try alternative path if first one fails
-          if (csvPath.startsWith('./')) {
+          if (csvPath.startsWith("./")) {
             const altPath = csvPath.substring(2) + cacheBuster;
-            debug('Trying alternative path:', altPath);
             fetch(altPath)
-              .then(response => response.text())
-              .then(csv => {
-                debug('Raw CSV content (alt path, first 200 chars):', csv.substring(0, 200));
+              .then((response) => response.text())
+              .then((csv) => {
                 Papa.parse(csv, {
                   header: true,
                   dynamicTyping: true,
-                  complete: function(results) {
+                  complete: function (results) {
                     if (results.data && results.data.length > 0) {
                       allData = results.data;
-                      debug('CSV data loaded (alternative path):', allData);
-                      debug('Snowflake data:', allData.find(d => d.Company === 'Snowflake'));
-                      debug('Snowflake MentorPri value:', allData.find(d => d.Company === 'Snowflake')?.MentorPri);
-                      responsibilityConfig = parseResponsibilityConfig(csv).config;
+                      responsibilityConfig =
+                        parseResponsibilityConfig(csv).config;
                       populateAboutSection();
                       populateSelectors(results.data);
                     }
-                  }
+                  },
                 });
               })
-              .catch(altError => {
-                debugError('Alternative path also failed:', altError);
+              .catch((altError) => {
+                console.error("Alternative path also failed:", altError);
               });
           }
         });
 
       // Fallback for older browsers that don't support fetch
-      if (typeof fetch === 'undefined') {
-        debugError('Fetch API not supported - this browser may not work properly');
+      if (typeof fetch === "undefined") {
+        console.error(
+          "Fetch API not supported - this browser may not work properly"
+        );
       }
 
-      // Debug: Check actual font sizes
-      setTimeout(() => {
-        if (!DEBUG_MODE) return;
-        
-        // Log performance measurements with error handling
-        try {
-          if (performance.getEntriesByName('page-load-start').length > 0 && 
-              performance.getEntriesByName('chart-rendered').length > 0) {
-            performance.measure('total-load-time', 'page-load-start', 'chart-rendered');
-          }
-          
-          if (performance.getEntriesByName('page-load-start').length > 0 && 
-              performance.getEntriesByName('csv-data-loaded').length > 0) {
-            performance.measure('data-load-time', 'page-load-start', 'csv-data-loaded');
-          }
-          
-          if (performance.getEntriesByName('csv-data-loaded').length > 0 && 
-              performance.getEntriesByName('chart-rendered').length > 0) {
-            performance.measure('chart-render-time', 'csv-data-loaded', 'chart-rendered');
-          }
-          
-          performance.getEntriesByType('measure').forEach(measure => {
-            console.log(`⏱️ ${measure.name}: ${measure.duration}ms`);
-          });
-        } catch (error) {
-          console.log('⚠️ Performance measurement error:', error.message);
-        }
-        
-        const subtitle = document.querySelector('.lead');
-        const companyDesc = document.querySelector('.company-description');
-        const aboutText = document.querySelector('.well p');
-        
-        if (subtitle) {
-          const subtitleSize = window.getComputedStyle(subtitle).fontSize;
-          debug('Subtitle font size:', subtitleSize);
-        }
-        if (companyDesc) {
-          const descSize = window.getComputedStyle(companyDesc).fontSize;
-          debug('Company description font size:', descSize);
-        }
-        if (aboutText) {
-          const aboutSize = window.getComputedStyle(aboutText).fontSize;
-          debug('About section font size:', aboutSize);
-        }
-        
-        // Also check the root font size
-        const rootSize = window.getComputedStyle(document.documentElement).fontSize;
-        debug('Root font size:', rootSize);
-      }, 1000);
+      // Chart configuration constants
+      const CHART_CONFIG = {
+        DEFAULT_VALUE: 0,
+        MAX_SCALE: 5,
+        STEP_SIZE: 1,
+        FONT_SIZE: 12,
+        COMPANY_A_COLOR: "rgba(54, 162, 235, 1)",
+        COMPANY_B_COLOR: "rgba(255, 99, 132, 1)",
+        COMPANY_A_FILL: "rgba(54, 162, 235, 0.2)",
+        COMPANY_B_FILL: "rgba(255, 99, 132, 0.2)",
+      };
 
       function renderChart(companyA, companyB) {
-        const ctx = document.getElementById('radarChart');
+        const ctx = document.getElementById("radarChart");
         if (!ctx) {
-          console.error('Canvas element not found');
+          console.error("Canvas element not found");
           return;
         }
 
-        const context = ctx.getContext('2d');
+        const context = ctx.getContext("2d");
         if (!context) {
-          console.error('Could not get canvas context');
+          console.error("Could not get canvas context");
           return;
         }
-        
+
         if (chart) {
           chart.destroy();
         }
@@ -580,140 +647,165 @@
         // Add Company A if selected
         if (companyA) {
           const chartLabels = Object.keys(responsibilityConfig);
-          const dataA = chartLabels.map(label => {
+          const dataA = chartLabels.map((label) => {
             const displayName = responsibilityConfig[label].displayName;
-            return companyA[displayName] ?? 0;
+            return companyA[displayName] ?? CHART_CONFIG.DEFAULT_VALUE;
           });
           datasets.push({
             label: companyA.Company,
             data: dataA,
             fill: true,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            pointBackgroundColor: 'rgba(54, 162, 235, 1)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(54, 162, 235, 1)'
+            backgroundColor: CHART_CONFIG.COMPANY_A_FILL,
+            borderColor: CHART_CONFIG.COMPANY_A_COLOR,
+            pointBackgroundColor: CHART_CONFIG.COMPANY_A_COLOR,
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: CHART_CONFIG.COMPANY_A_COLOR,
           });
         }
 
         // Add Company B if selected
         if (companyB) {
           const chartLabels = Object.keys(responsibilityConfig);
-          const dataB = chartLabels.map(label => {
+          const dataB = chartLabels.map((label) => {
             const displayName = responsibilityConfig[label].displayName;
-            return companyB[displayName] ?? 0;
+            return companyB[displayName] ?? CHART_CONFIG.DEFAULT_VALUE;
           });
           datasets.push({
             label: companyB.Company,
             data: dataB,
             fill: true,
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            pointBackgroundColor: 'rgba(255, 99, 132, 1)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(255, 99, 132, 1)'
+            backgroundColor: CHART_CONFIG.COMPANY_B_FILL,
+            borderColor: CHART_CONFIG.COMPANY_B_COLOR,
+            pointBackgroundColor: CHART_CONFIG.COMPANY_B_COLOR,
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: CHART_CONFIG.COMPANY_B_COLOR,
           });
         }
 
         try {
           chart = new Chart(ctx, {
-            type: 'radar',
+            type: "radar",
             data: {
-              labels: Object.values(responsibilityConfig).map(r => r.displayName),
-              datasets: datasets
+              labels: Object.values(responsibilityConfig).map(
+                (r) => r.displayName
+              ),
+              datasets: datasets,
             },
             options: {
               responsive: true,
               maintainAspectRatio: false,
               plugins: {
                 legend: {
-                  display: false
-                }
+                  display: false,
+                },
               },
               scales: {
                 r: {
-                  min: 0,
-                  max: 5,
+                  min: CHART_CONFIG.DEFAULT_VALUE,
+                  max: CHART_CONFIG.MAX_SCALE,
                   beginAtZero: true,
                   ticks: {
-                    stepSize: 1,
-                    callback: function(value) {
+                    stepSize: CHART_CONFIG.STEP_SIZE,
+                    callback: function (value) {
                       return value;
-                    }
+                    },
                   },
                   pointLabels: {
                     font: {
-                      size: 12
+                      size: CHART_CONFIG.FONT_SIZE,
                     },
-                    callback: function(value) {
+                    callback: function (value) {
                       // Split long labels into multiple lines
-                      const words = value.split(' ');
+                      const words = value.split(" ");
                       if (words.length > 1) {
                         return words;
                       }
                       return value;
-                    }
-                  }
-                }
-              }
-            }
+                    },
+                  },
+                },
+              },
+            },
           });
-          
-          performance.mark('chart-rendered');
-          
+
           // Add loaded class immediately after chart creation
-          const chartContainer = document.querySelector('.chart-container');
+          const chartContainer = document.querySelector(".chart-container");
           if (chartContainer) {
-            chartContainer.classList.add('loaded');
+            chartContainer.classList.add("loaded");
           }
         } catch (error) {
-          console.error('Error creating chart:', error);
+          console.error("Error creating chart:", error);
           // Fail quietly - just don't show the chart
         }
       }
 
       function populateAboutSection() {
-        const list = document.getElementById('responsibility-list');
+        const list = document.getElementById("responsibility-list");
         if (!list) return;
-        
-        list.innerHTML = '';
-        Object.values(responsibilityConfig).forEach(responsibility => {
-          const li = document.createElement('li');
-          li.innerHTML = `<strong>${responsibility.displayName}:</strong> ${responsibility.description}`;
+
+        // Use improved descriptions instead of the repetitive ones from responsibilityConfig
+        const improvedDescriptions = {
+          "People Management":
+            "Hiring, performance reviews, career development, team building, conflict resolution, and organizational design. Higher scores mean more time spent on people vs. technical work.",
+          "Tech Strategy":
+            "Architecture decisions, technology choices, technical roadmap planning, and setting technical direction. Higher scores indicate more strategic technical leadership.",
+          Execution:
+            "Project management, timeline tracking, resource allocation, and delivery coordination. Higher scores mean more hands-on project management.",
+          Product:
+            "Product strategy, feature prioritization, roadmap planning, and product-market fit decisions. Higher scores indicate more product ownership responsibilities.",
+          Customer:
+            "Direct customer interaction, requirements gathering, user research, and customer success. Higher scores mean more customer-facing responsibilities.",
+          Quality:
+            "Code review processes, testing strategies, reliability engineering, and quality assurance oversight. Higher scores indicate stronger quality focus.",
+          "Cross-functional":
+            "Working with design, marketing, sales, legal, and other departments. Higher scores mean more cross-team collaboration.",
+          "IC Work":
+            "Hands-on coding, debugging, and technical implementation. Higher scores indicate more individual contributor responsibilities alongside management.",
+          "Tech Mentorship":
+            "Technical coaching, code reviews, architecture guidance, and technical skill development. Higher scores mean more technical teaching and mentoring.",
+        };
+
+        list.innerHTML = "";
+        Object.values(responsibilityConfig).forEach((responsibility) => {
+          const li = document.createElement("li");
+          const improvedDescription =
+            improvedDescriptions[responsibility.displayName] ||
+            responsibility.description;
+          li.innerHTML = `<strong>${responsibility.displayName}:</strong> ${improvedDescription}`;
           list.appendChild(li);
         });
       }
 
       function populateSelectors(data) {
-        const selectA = document.getElementById('companyA');
-        const selectB = document.getElementById('companyB');
-        
+        const selectA = document.getElementById("companyA");
+        const selectB = document.getElementById("companyB");
+
         if (!selectA || !selectB) {
-          console.error('Company selector elements not found');
+          console.error("Company selector elements not found");
           return;
         }
-        
-        const validRows = data.filter(row => row.Company);
-        
+
+        const validRows = data.filter((row) => row.Company);
+
         if (validRows.length === 0) {
-          console.error('No valid company data found');
+          console.error("No valid company data found");
           // Fail quietly - just leave dropdowns empty
           return;
         }
-        
+
         // Clear existing options
-        selectA.innerHTML = '';
-        selectB.innerHTML = '';
-        
-        validRows.forEach(row => {
-          const optA = document.createElement('option');
+        selectA.innerHTML = "";
+        selectB.innerHTML = "";
+
+        validRows.forEach((row) => {
+          const optA = document.createElement("option");
           optA.value = row.Company;
           optA.textContent = row.Company;
           selectA.appendChild(optA);
 
-          const optB = document.createElement('option');
+          const optB = document.createElement("option");
           optB.value = row.Company;
           optB.textContent = row.Company;
           selectB.appendChild(optB);
@@ -726,78 +818,92 @@
         }
 
         // Add event listeners
-        selectA.addEventListener('change', updateChart);
-        selectB.addEventListener('change', updateChart);
-        
+        selectA.addEventListener("change", updateChart);
+        selectB.addEventListener("change", updateChart);
+
         // Add loaded class to company selector for fade-in
-        const companySelector = document.querySelector('.company-selector');
+        const companySelector = document.querySelector(".company-selector");
         if (companySelector) {
-          companySelector.classList.add('loaded');
+          companySelector.classList.add("loaded");
         }
-        
+
         // Single coordinated update: update chart and fade-in together
         updateChart();
-        
+
         // Add loaded classes immediately after chart update
-        const companyADetails = document.getElementById('companyA-details');
-        const companyBDetails = document.getElementById('companyB-details');
-        if (companyADetails) companyADetails.classList.add('loaded');
-        if (companyBDetails) companyBDetails.classList.add('loaded');
+        const companyADetails = document.getElementById("companyA-details");
+        const companyBDetails = document.getElementById("companyB-details");
+        if (companyADetails) companyADetails.classList.add("loaded");
+        if (companyBDetails) companyBDetails.classList.add("loaded");
       }
 
       function updateChart() {
-        const companyA = document.getElementById('companyA')?.value || '';
-        const companyB = document.getElementById('companyB')?.value || '';
-        
-        const dataA = companyA ? allData.find(d => d.Company === companyA) : null;
-        const dataB = companyB ? allData.find(d => d.Company === companyB) : null;
-        
-        // Batch DOM updates to reduce reflow
-        requestAnimationFrame(() => {
-          // Update company details
-          updateCompanyDetails('companyA-details', companyA, 'rgba(54, 162, 235, 1)');
-          updateCompanyDetails('companyB-details', companyB, 'rgba(255, 99, 132, 1)');
-          
-          // Render chart in the same frame
-          renderChart(dataA, dataB);
-        });
+        const companyA = document.getElementById("companyA")?.value || "";
+        const companyB = document.getElementById("companyB")?.value || "";
+
+        const dataA = companyA
+          ? allData.find((d) => d.Company === companyA)
+          : null;
+        const dataB = companyB
+          ? allData.find((d) => d.Company === companyB)
+          : null;
+
+        // Update company details
+        updateCompanyDetails(
+          "companyA-details",
+          companyA,
+          CHART_CONFIG.COMPANY_A_COLOR
+        );
+        updateCompanyDetails(
+          "companyB-details",
+          companyB,
+          CHART_CONFIG.COMPANY_B_COLOR
+        );
+
+        // Render chart
+        renderChart(dataA, dataB);
       }
 
       function updateCompanyDetails(elementId, companyName, color) {
-        debug(`Updating company details for ${elementId}: ${companyName}`);
         const element = document.getElementById(elementId);
         if (!element) {
           console.error(`Element ${elementId} not found`);
           return;
         }
 
-        const titleElement = element.querySelector('h4');
-        const descriptionElement = element.querySelector('.company-description');
-        
+        const titleElement = element.querySelector("h4");
+        const descriptionElement = element.querySelector(
+          ".company-description"
+        );
+
         if (!titleElement || !descriptionElement) {
           console.error(`Required elements not found in ${elementId}`);
           return;
         }
-        
+
         if (companyName && companyDetails[companyName]) {
           titleElement.textContent = companyName;
           titleElement.style.color = color;
           descriptionElement.textContent = companyDetails[companyName];
           element.style.borderLeftColor = color;
         } else {
-          titleElement.textContent = elementId === 'companyA-details' ? 'Company 1 Details' : 'Company 2 Details';
-          titleElement.style.color = '#495057';
-          descriptionElement.textContent = companyName ? 
-            `No details available for "${companyName}"` : 
-            'Select a company to see details...';
-          element.style.borderLeftColor = 'transparent';
+          titleElement.textContent =
+            elementId === "companyA-details"
+              ? "Company 1 Details"
+              : "Company 2 Details";
+          titleElement.style.color = "#495057";
+          descriptionElement.textContent = companyName
+            ? `No details available for "${companyName}"`
+            : "Select a company to see details...";
+          element.style.borderLeftColor = "transparent";
         }
       }
     </script>
 
     <!-- Bootstrap core JavaScript -->
     <script>
-      window.jQuery || document.write('<script src="/js/vendor/jquery.min.js"><\/script>');
+      window.jQuery ||
+        document.write('<script src="/js/vendor/jquery.min.js"><\/script>');
     </script>
     <script src="js/bootstrap.min.js?v=1.0" defer></script>
     <script src="js/docs.min.js?v=1.0" defer></script>

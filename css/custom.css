@@ -1,48 +1,47 @@
 img {
-      border-radius: 20px;
+      border-radius: var(--border-radius-lg);
 }
 
 body {
-    color: black;
-    font-family: 'Roboto', sans-serif;
-    padding-top: 70px;
-    padding-bottom: 30px;
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    padding-top: var(--navbar-height);
+    padding-bottom: var(--footer-spacing);
 }
 
 #testimonials {
-    padding: 50px 0;
+    padding: var(--section-padding) 0;
   }
   
   #testimonials h2 {
-    font-size: 2.5rem;
-    color: #343a40;
-    margin-bottom: 40px;
+    font-size: var(--font-size-2xl);
+    color: var(--text-dark);
+    margin-bottom: var(--heading-margin);
   }
   
   .card {
     border: none;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-    transition: transform 0.2s ease-in-out;
+    background-color: var(--background-primary);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-fast);
   }
   
   .card:hover {
-    transform: translateY(-5px); /* Subtle hover effect */
+    transform: translateY(calc(-1 * var(--hover-offset)));
   }
   
   .blockquote {
-    margin-top: 20px;
+    margin-top: var(--content-padding);
     font-style: italic;
-    color: #6c757d;
-    background-color: #f1f1f1; /* Light gray background for each quote */
-    padding: 20px; /* Add padding inside the quote */
-    border-radius: 8px; /* Rounded corners */
-    /*margin-bottom: 0; /* Remove extra spacing at bottom of blockquote */
+    color: var(--text-muted);
+    background-color: var(--background-muted);
+    padding: var(--content-padding);
+    border-radius: var(--border-radius);
   }
   
   .blockquote-footer {
     font-weight: bold;
-    color: #343a40;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    color: var(--text-dark);
+    margin-top: var(--micro-spacing);
+    margin-bottom: var(--micro-spacing);
   }

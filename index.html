@@ -3,53 +3,73 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="referrer" content="no-referrer-when-downgrade">
+    <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Professional resume of George Holt, an experienced software engineering manager, technical product managerand leader." />
+    <meta
+      name="description"
+      content="Professional resume of George Holt, an experienced software engineering manager, technical product managerand leader."
+    />
     <meta name="author" content="George Holt" />
-    <meta name="keywords" content="George Holt, software engineer, engineering manager, software development, technical product manager, AI, developer tools" />
+    <meta
+      name="keywords"
+      content="George Holt, software engineer, engineering manager, software development, technical product manager, AI, developer tools"
+    />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#ffffff" />
 
     <title>George Holt</title>
 
     <!-- Font loading optimization -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300"
+      rel="stylesheet"
+    />
     <!-- Preload critical image to prevent layout shift -->
-    <link rel="preload" href="img/George Holt small.png?v=1.0" as="image">
+    <link
+      rel="preload"
+      href="img/George Holt small.webp?v=1.0"
+      as="image"
+      type="image/webp"
+    />
+    <link
+      rel="preload"
+      href="img/George Holt small.png?v=1.0"
+      as="image"
+      type="image/png"
+    />
 
     <!-- Critical CSS Inlined -->
     <style>
-
       body {
         color: var(--text-primary);
         font-family: var(--font-family);
-        padding-top: 70px;
-        padding-bottom: 30px;
+        padding-top: var(--navbar-height);
+        padding-bottom: var(--footer-spacing);
       }
-      h1 { 
-        font-size: var(--font-size-xl); 
-        font-weight: 600; 
+      h1 {
+        font-size: var(--font-size-xl);
+        font-weight: 600;
       }
-      h2 { 
-        font-size: 1.5rem; 
-        font-weight: 500; 
-        margin-top: var(--spacing-lg); 
+      h2 {
+        font-size: var(--font-size-md);
+        font-weight: 500;
+        margin-top: var(--spacing-lg);
       }
-      p, li { 
-        font-size: var(--font-size-base); 
-        line-height: var(--line-height-base); 
+      p,
+      li {
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-base);
       }
       #testimonials {
-        padding: 50px 0;
-        margin-top: 32px;
+        padding: var(--section-padding) 0;
+        margin-top: var(--section-margin);
       }
       #testimonials h2 {
         font-size: var(--font-size-2xl);
         color: var(--text-dark);
-        margin-bottom: 40px;
+        margin-bottom: var(--heading-margin);
       }
       .card {
         border: none;
@@ -58,52 +78,54 @@
         transition: transform var(--transition-fast);
       }
       .card:hover {
-        transform: translateY(-5px);
+        transform: translateY(calc(-1 * var(--hover-offset)));
       }
       .blockquote {
-        margin-top: 20px;
+        margin-top: var(--content-padding);
         font-style: italic;
         color: var(--text-muted);
         background-color: var(--background-muted);
-        padding: 20px;
+        padding: var(--content-padding);
         border-radius: var(--border-radius);
       }
       .blockquote-footer {
         font-weight: bold;
         color: var(--text-dark);
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-top: var(--micro-spacing);
+        margin-bottom: var(--micro-spacing);
       }
       .btn {
         background-color: var(--primary-color);
         border-color: var(--primary-color);
         border-radius: var(--border-radius);
-        padding: 12px 24px;
+        padding: var(--spacing-sm) calc(var(--spacing-sm) * 2);
         font-weight: 500;
         transition: all var(--transition-fast);
       }
-      .btn:hover, .btn:focus {
+      .btn:hover,
+      .btn:focus {
         background-color: var(--primary-hover);
         border-color: var(--primary-hover);
         box-shadow: var(--shadow-lg);
       }
       .btn:active {
-        box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+        box-shadow: 0 2px 4px rgba(0, 123, 255, var(--shadow-opacity));
       }
       .btn-primary {
         background-color: var(--primary-color);
         border-color: var(--primary-color);
       }
-      .btn-primary:hover, .btn-primary:focus {
+      .btn-primary:hover,
+      .btn-primary:focus {
         background-color: var(--primary-hover);
         border-color: var(--primary-hover);
       }
       .btn-md {
-        padding: 12px 24px;
+        padding: var(--spacing-sm) calc(var(--spacing-sm) * 2);
         font-size: var(--font-size-sm);
       }
       .cta-section {
-        margin-bottom: 40px;
+        margin-bottom: var(--heading-margin);
       }
       :root {
         /* Color Palette */
@@ -118,42 +140,70 @@
         --background-secondary: #f8f9fa;
         --background-muted: #f1f1f1;
         --border-color: #dee2e6;
-        
+
         /* Typography */
-        --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        --font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         --font-size-base: 1.4rem;
         --font-size-sm: 1rem;
+        --font-size-md: 1.5rem;
         --font-size-lg: 1.8rem;
         --font-size-xl: 2.25rem;
         --font-size-2xl: 2.5rem;
         --line-height-base: 1.6;
         --line-height-tight: 1.3;
-        
+
+        /* Layout Constants */
+        --navbar-height: 70px;
+        --footer-spacing: 30px;
+        --section-padding: 50px;
+        --section-margin: 32px;
+        --heading-margin: 40px;
+        --content-padding: 20px;
+        --micro-spacing: 10px;
+        --hover-offset: 5px;
+
+        /* Component Dimensions */
+        --hero-portrait-size: 200px;
+        --hero-min-height: 600px;
+        --hero-bullets-min-height: 400px;
+        --quotes-max-width: 900px;
+
         /* Spacing */
         --spacing-xs: 0.5rem;
         --spacing-sm: 1rem;
         --spacing-md: 1.5rem;
         --spacing-lg: 2rem;
         --spacing-xl: 3rem;
-        
+
         /* Border Radius */
         --border-radius: 8px;
         --border-radius-lg: 20px;
-        
+        --border-radius-sm: calc(var(--border-radius) * 0.375);
+
         /* Shadows */
-        --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
         --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
         --shadow-lg: 0 4px 8px rgba(0, 123, 255, 0.3);
-        
+        --shadow-opacity: 0.3;
+        --shadow-light-opacity: 0.04;
+        --shadow-medium-opacity: 0.1;
+
         /* Transitions */
         --transition-fast: 150ms ease-in-out;
         --transition-normal: 0.3s ease-in-out;
+
+        /* Media Query Breakpoints */
+        --breakpoint-mobile: 480px;
+        --breakpoint-tablet: 768px;
+        --breakpoint-desktop: 992px;
+        --breakpoint-large: 1200px;
       }
       .quotes {
-        max-width: 900px;
+        max-width: var(--quotes-max-width);
         margin: 0 auto;
-        padding: 50px 20px;
-        margin-top: 32px;
+        padding: var(--section-padding) var(--content-padding);
+        margin-top: var(--section-margin);
         width: 100%;
         box-sizing: border-box;
       }
@@ -166,14 +216,14 @@
       .quote-list {
         list-style: none;
         padding: 0;
-        margin: 1.5rem 0;
+        margin: var(--spacing-md) 0;
       }
       .quote-card {
         background: var(--background-secondary);
-        border-left: 4px solid var(--accent-color);
+        border-left: calc(var(--border-radius) * 0.5) solid var(--accent-color);
         box-shadow: var(--shadow-sm);
         border-radius: var(--border-radius);
-        padding: 1.25rem 1.5rem;
+        padding: calc(var(--spacing-sm) * 1.25) var(--spacing-md);
         margin-bottom: var(--spacing-sm);
         font-style: italic;
         max-width: 100%;
@@ -183,7 +233,7 @@
       }
       .quote-card cite {
         display: block;
-        margin-top: .75rem;
+        margin-top: calc(var(--spacing-sm) * 0.75);
         font-style: normal;
         color: var(--text-secondary);
         font-size: var(--font-size-sm);
@@ -194,22 +244,29 @@
         align-items: flex-start;
         gap: var(--spacing-xl);
         margin-bottom: var(--spacing-lg);
-        min-height: 600px;
+        min-height: var(--hero-min-height);
       }
       .hero-portrait {
-        flex: 0 0 200px;
-        width: 200px;
-        height: 200px;
+        flex: 0 0 var(--hero-portrait-size);
+        width: var(--hero-portrait-size);
+        height: var(--hero-portrait-size);
         display: flex;
         align-items: center;
         justify-content: center;
       }
-      
+
       .hero-portrait img {
-        width: 200px;
-        height: 200px;
+        width: var(--hero-portrait-size);
+        height: var(--hero-portrait-size);
         object-fit: cover;
         border-radius: var(--border-radius-lg);
+        /* Prevent layout shift */
+        aspect-ratio: 1 / 1;
+        /* Optimize rendering */
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        /* Improve loading performance */
+        will-change: transform;
       }
       .hero-content {
         flex: 1;
@@ -218,7 +275,7 @@
         gap: var(--spacing-sm);
       }
       .hero-title {
-        margin-bottom: 0.5rem;
+        margin-bottom: var(--spacing-xs);
       }
       .hero-subtitle {
         margin-bottom: var(--spacing-sm);
@@ -226,39 +283,39 @@
       }
       .hero-bullets {
         margin: 0;
-        padding-left: 1.2rem;
+        padding-left: calc(var(--spacing-sm) * 1.2);
         list-style: disc;
-        min-height: 400px;
+        min-height: var(--hero-bullets-min-height);
       }
       .hero-bullets li {
-        margin-bottom: 0.75rem;
+        margin-bottom: calc(var(--spacing-sm) * 0.75);
         line-height: var(--line-height-base);
       }
-      @media (max-width: 768px) {
+      @media (max-width: var(--breakpoint-tablet)) {
         .hero-section {
           flex-direction: column;
-          gap: 1.5rem;
+          gap: var(--spacing-md);
         }
         .hero-portrait {
           flex: none;
           text-align: center;
         }
         .hero-portrait img {
-          width: 200px;
-          height: 200px;
-          max-width: 200px;
+          width: var(--hero-portrait-size);
+          height: var(--hero-portrait-size);
+          max-width: var(--hero-portrait-size);
         }
         .quotes {
-          padding: 50px 15px;
+          padding: var(--section-padding) calc(var(--content-padding) * 0.75);
         }
       }
-      
-      @media (max-width: 480px) {
+
+      @media (max-width: var(--breakpoint-mobile)) {
         .quotes {
-          padding: 50px 10px;
+          padding: var(--section-padding) calc(var(--content-padding) * 0.5);
         }
         .quote-card {
-          padding: 1rem 1.25rem;
+          padding: var(--spacing-sm) calc(var(--spacing-sm) * 1.25);
         }
       }
     </style>
@@ -266,14 +323,34 @@
     <!-- Load jQuery -->
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <!-- Bootstrap core CSS - Deferred -->
-    <link href="css/bootstrap.min.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link
+      href="css/bootstrap.min.css?v=1.0"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
     <!-- Bootstrap theme - Deferred -->
-    <link href="css/bootstrap-theme.min.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link
+      href="css/bootstrap-theme.min.css?v=1.0"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
     <!-- IE10 viewport hack - Deferred -->
-    <link href="css/ie10-viewport-bug-workaround.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link
+      href="css/ie10-viewport-bug-workaround.css?v=1.0"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
 
     <!-- Custom styles - Deferred -->
-    <link href="css/custom.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link
+      href="css/custom.css?v=1.0"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
 
     <script src="js/ie-emulation-modes-warning.js?v=1.0" defer></script>
 
@@ -298,16 +375,28 @@
           var d = "";
           if (c) {
             var e = new Date();
-            e.setTime(e.getTime() + 24 * c * 60 * 60 * 1e3), (d = "; expires=" + e.toUTCString());
+            e.setTime(e.getTime() + 24 * c * 60 * 60 * 1e3),
+              (d = "; expires=" + e.toUTCString());
           }
           document.cookie = a + "=" + b + d + "; path=/";
         }
-        var isStgDebug = (window.location.href.match("stg_debug") || document.cookie.match("stg_debug")) && !window.location.href.match("stg_disable_debug");
+        var isStgDebug =
+          (window.location.href.match("stg_debug") ||
+            document.cookie.match("stg_debug")) &&
+          !window.location.href.match("stg_disable_debug");
         stgCreateCookie("stg_debug", isStgDebug ? 1 : "", isStgDebug ? 14 : -1);
         var qP = [];
-        dataLayerName !== "dataLayer" && qP.push("data_layer_name=" + dataLayerName), isStgDebug && qP.push("stg_debug");
+        dataLayerName !== "dataLayer" &&
+          qP.push("data_layer_name=" + dataLayerName),
+          isStgDebug && qP.push("stg_debug");
         var qPString = qP.length > 0 ? "?" + qP.join("&") : "";
-        (tags.async = !0), (tags.src = "https://george-holt.containers.piwik.pro/" + id + ".js" + qPString), scripts.parentNode.insertBefore(tags, scripts);
+        (tags.async = !0),
+          (tags.src =
+            "https://george-holt.containers.piwik.pro/" +
+            id +
+            ".js" +
+            qPString),
+          scripts.parentNode.insertBefore(tags, scripts);
         !(function (a, n, i) {
           a[n] = a[n] || {};
           for (var c = 0; c < i.length; c++)
@@ -328,105 +417,195 @@
       })(window, document, "dataLayer", "b6ca6764-4b6c-4bfe-b0a5-896cc9f6b48e");
     </script>
 
-    <div class="container">
-      <div class="hero-section">
-        <div class="hero-portrait">
-          <img class="img-responsive" src="img/George Holt small.png?v=1.0" alt="picture of George Holt" loading="lazy" />
+    <header role="banner">
+      <nav role="navigation" aria-label="Main navigation">
+        <div class="container">
+          <!-- Navigation content can be added here in the future -->
         </div>
-        <div class="hero-content">
-          <h1 class="hero-title">George Holt</h1>
-          <h3 class="hero-subtitle">Engineering Leader with Product Ownership Experience in Developer Tools</h3>
-          
-          <div class="cta-section">
-            <p>
-              <a
-                class="btn btn-primary btn-md"
-                rel="noopener noreferrer"
-                target="_blank"
-                href="https://www.linkedin.com/in/george-holt-software-engineer/"
-                role="button"
-                aria-label="View my profile on LinkedIn"
-                >View my profile on LinkedIn »</a
-              >
-            </p>
-            <p>
-              <a
-                class="btn btn-primary btn-md"
-                rel="noopener noreferrer"
-                target="_blank"
-                href="https://1drv.ms/w/s!Ap_BKoirOMD7t7xBTOzfFoY_yELynw?e=qwCWhL"
-                role="button"
-                aria-label="View my resume"
-                >View my resume »</a
-              >
-            </p>
+      </nav>
+    </header>
+
+    <main role="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container">
+          <div class="hero-section">
+            <figure class="hero-portrait">
+              <picture>
+                <!-- WebP format for modern browsers -->
+                <source
+                  srcset="img/George Holt small.webp?v=1.0"
+                  type="image/webp"
+                />
+                <!-- Fallback PNG for older browsers -->
+                <img
+                  class="img-responsive"
+                  src="img/George Holt small.png?v=1.0"
+                  alt="George Holt, Engineering Leader with Product Ownership Experience in Developer Tools"
+                  width="200"
+                  height="200"
+                  decoding="async"
+                  fetchpriority="high"
+                />
+              </picture>
+            </figure>
+            <div class="hero-content">
+              <h1 id="hero-title" class="hero-title">George Holt</h1>
+              <h2 class="hero-subtitle">
+                Engineering Leader with Product Ownership Experience in
+                Developer Tools
+              </h2>
+
+              <div class="cta-section">
+                <p>
+                  <a
+                    class="btn btn-primary btn-md"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    href="https://www.linkedin.com/in/george-holt-software-engineer/"
+                    role="button"
+                    aria-label="View my profile on LinkedIn"
+                    >View my profile on LinkedIn »</a
+                  >
+                </p>
+                <p>
+                  <a
+                    class="btn btn-primary btn-md"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    href="https://1drv.ms/w/s!Ap_BKoirOMD7t7xBTOzfFoY_yELynw?e=qwCWhL"
+                    role="button"
+                    aria-label="View my resume"
+                    >View my resume »</a
+                  >
+                </p>
+              </div>
+
+              <ul class="hero-bullets">
+                <li>
+                  25 years of experience in the software industry with
+                  leadership roles spanning Engineering Management, Product, and
+                  hands-on engineering.
+                </li>
+                <li>
+                  Proven track record of managing and scaling high-performing
+                  engineering teams while owning product vision, roadmap, and
+                  success metrics.
+                </li>
+                <li>
+                  Deep expertise in developer tools and AI-driven workflows,
+                  including customer-facing and internal platforms used by
+                  hundreds of thousands of developers.
+                </li>
+                <li>
+                  Strong communicator and cross-functional leader — skilled at
+                  aligning engineering, design, and executive stakeholders
+                  around developer needs and product goals.
+                </li>
+                <li>
+                  Experienced in defining product metrics, driving customer
+                  discovery, and translating feedback into high-impact,
+                  intuitive developer experiences
+                </li>
+                <li>Experienced public speaker at major industry events.</li>
+                <li>
+                  Experienced public speaker. <small>Examples from</small>
+                  <a
+                    href="https://learn.microsoft.com/en-us/events/build-build2011/hw-118t"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    aria-label="Microsoft Build 2011"
+                    ><small>Microsoft Build 2011</small></a
+                  >
+                  and
+                  <a
+                    href="https://www.youtube.com/watch?v=9Wl1b3LNTEc"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    aria-label="AWS New York Summit 2019"
+                    ><small>AWS New York Summit 2019</small></a
+                  >
+                </li>
+              </ul>
+            </div>
           </div>
-          
-          <ul class="hero-bullets">
-            <li>25 years of experience in the software industry with leadership roles spanning Engineering Management, Product, and hands-on engineering.</li>
-            <li>Proven track record of managing and scaling high-performing engineering teams while owning product vision, roadmap, and success metrics.</li>
-            <li>Deep expertise in developer tools and AI-driven workflows, including customer-facing and internal platforms used by hundreds of thousands of developers.</li>
-            <li>Strong communicator and cross-functional leader — skilled at aligning engineering, design, and executive stakeholders around developer needs and product goals.</li>
-            <li>Experienced in defining product metrics, driving customer discovery, and translating feedback into high-impact, intuitive developer experiences</li>
-            <li>Experienced public speaker at major industry events.</li>
-            <li>
-              Experienced public speaker. <small>Examples from</small>
-              <a href="https://learn.microsoft.com/en-us/events/build-build2011/hw-118t" rel="noopener noreferrer" target="_blank" aria-label="Microsoft Build 2011"
-                ><small>Microsoft Build 2011</small></a
-              >
-              and
-              <a href="https://www.youtube.com/watch?v=9Wl1b3LNTEc" rel="noopener noreferrer" target="_blank" aria-label="AWS New York Summit 2019"
-                ><small>AWS New York Summit 2019</small></a>
+        </div>
+      </section>
+
+      <section class="quotes" aria-labelledby="testimonials-title">
+        <div class="container">
+          <header>
+            <h2 id="testimonials-title" class="text-center">
+              What Colleagues Say About Me
+            </h2>
+            <h3 class="text-center">Direct Quotes from Annual Reviews</h3>
+          </header>
+          <ul class="quote-list" role="list">
+            <li class="quote-card" role="listitem">
+              <blockquote cite="Direct Report, 2023">
+                "George trusts team members to make decisions and provides
+                inspiration and guidance when we need it. I especially
+                appreciate when I can bring George into a tough conversation
+                because I know he'll be on my side and help find a solution."
+              </blockquote>
+              <cite>— Direct Report, 2023</cite>
+            </li>
+            <li class="quote-card" role="listitem">
+              <blockquote cite="Peer, 2023">
+                "George has hired some very skilled managers"
+              </blockquote>
+              <cite>— Peer, 2023</cite>
+            </li>
+            <li class="quote-card" role="listitem">
+              <blockquote cite="Manager, 2024">
+                "Under George's leadership, the Toolkits team managed to deliver
+                more results than anyone expected."
+              </blockquote>
+              <cite>— Manager, 2024</cite>
+            </li>
+            <li class="quote-card" role="listitem">
+              <blockquote cite="Direct Report, 2021">
+                "I was surprised to see myself venturing into new, challenging
+                roles as a result of George's encouragement and guidance. George
+                is unfailingly considerate and attentive to his team."
+              </blockquote>
+              <cite>— Direct Report, 2021</cite>
+            </li>
+            <li class="quote-card" role="listitem">
+              <blockquote cite="Peer, 2021">
+                "I really liked how under his leadership the IDE Toolkits was
+                able to release smaller and bigger features on a consistent
+                cadence"
+              </blockquote>
+              <cite>— Peer, 2021</cite>
             </li>
           </ul>
         </div>
-      </div>
-    </div>
-    <section class="quotes">
-      <div class="container">
-        <h2 class="text-center">What Colleagues Say About Me</h2>
-        <h5 class="text-center">Direct Quotes from Annual Reviews</h5>
-        <ul class="quote-list">
-          <li class="quote-card">
-            <blockquote>"George trusts team members to make decisions and provides inspiration and guidance when we need it. I especially appreciate when I can bring George into a tough conversation because I know he'll be on my side and help find a solution."</blockquote>
-            <cite>— Direct Report, 2023</cite>
-          </li>
-          <li class="quote-card">
-            <blockquote>"George has hired some very skilled managers"</blockquote>
-            <cite>— Peer, 2023</cite>
-          </li>
-          <li class="quote-card">
-            <blockquote>"Under George's leadership, the Toolkits team managed to deliver more results than anyone expected."</blockquote>
-            <cite>— Manager, 2024</cite>
-          </li>
-          <li class="quote-card">
-            <blockquote>"I was surprised to see myself venturing into new, challenging roles as a result of George's encouragement and guidance. George is unfailingly considerate and attentive to his team."</blockquote>
-            <cite>— Direct Report, 2021</cite>
-          </li>
-          <li class="quote-card">
-            <blockquote>"I really liked how under his leadership the IDE Toolkits was able to release smaller and bigger features on a consistent cadence"</blockquote>
-            <cite>— Peer, 2021</cite>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section>
+      </section>
+    </main>
+
+    <footer role="contentinfo">
       <div class="container">
         <p>
           <small
             >View the
-            <a target="_blank" rel="noopener noreferrer" href="https://github.com/george-holt/resume-website/">source for this website</a>
-            on GitHub. Please contact me via LinkedIn.</small>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/george-holt/resume-website/"
+              >source for this website</a
+            >
+            on GitHub. Please contact me via LinkedIn.</small
+          >
         </p>
       </div>
-    </section>
-    <!-- /container -->
+    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script>
-      window.jQuery || document.write('<script src="/js/vendor/jquery.min.js"><\/script>');
+      window.jQuery ||
+        document.write('<script src="/js/vendor/jquery.min.js"><\/script>');
     </script>
     <script src="js/bootstrap.min.js?v=1.0" defer></script>
     <script src="js/docs.min.js?v=1.0" defer></script>
