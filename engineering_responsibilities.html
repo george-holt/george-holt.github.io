@@ -45,7 +45,8 @@
         margin: 2rem auto;
         padding: 1rem;
         position: relative;
-        height: 500px;
+        height: auto;
+        min-height: 500px;
         opacity: 0;
         transition: opacity 0.3s ease-in-out;
       }
@@ -54,38 +55,53 @@
       }
       .chart-layout {
         display: flex;
-        gap: 2rem;
-        height: 100%;
+        flex-direction: column;
+        gap: 1rem;
+        height: auto;
       }
+      
       .chart-center {
-        flex: 1;
+        order: 1;
+        min-height: 400px;
         display: flex;
         align-items: center;
         justify-content: center;
       }
+      
       .company-details {
-        flex: 0 0 250px;
-        padding: 1rem;
+        order: 2;
+        width: 100%;
+        padding: 0.25rem 0.5rem;
+        margin-bottom: 0.5rem;
         background-color: #f8f9fa;
         border-radius: 8px;
         border-left: 4px solid transparent;
         opacity: 0;
         transition: opacity 0.3s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        contain: layout style;
       }
+      
       .company-details.loaded {
         opacity: 1;
       }
+      
       .company-details h4 {
         margin-top: 0;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         font-size: 1.3rem;
         color: #495057;
       }
+      
       .company-description {
         font-size: 1.8rem;
         line-height: 1.5;
         color: #333;
+        margin: 0;
       }
+
       .chart-container .well p, 
       .chart-container .well li {
         font-size: 1.8rem;
@@ -210,15 +226,15 @@
       <div class="chart-container">
         <div class="chart-layout">
           <div id="companyA-details" class="company-details">
-            <h4></h4>
-            <p class="company-description"></p>
+            <h4>Select a company to see details...</h4>
+            <p class="company-description">Choose a company from the dropdown above to view their engineering management focus areas.</p>
           </div>
           <div class="chart-center">
             <canvas id="radarChart"></canvas>
           </div>
           <div id="companyB-details" class="company-details">
-            <h4></h4>
-            <p class="company-description"></p>
+            <h4>Select a company to see details...</h4>
+            <p class="company-description">Choose a company from the dropdown above to view their engineering management focus areas.</p>
           </div>
         </div>
       </div>
@@ -596,13 +612,11 @@
           
           performance.mark('chart-rendered');
           
-          // Wait for chart to fully render before starting transitions
-          setTimeout(() => {
-            const chartContainer = document.querySelector('.chart-container');
-            if (chartContainer) {
-              chartContainer.classList.add('loaded');
-            }
-          }, 100); // Shorter delay
+          // Add loaded class immediately after chart creation
+          const chartContainer = document.querySelector('.chart-container');
+          if (chartContainer) {
+            chartContainer.classList.add('loaded');
+          }
         } catch (error) {
           console.error('Error creating chart:', error);
           // Fail quietly - just don't show the chart
@@ -671,18 +685,13 @@
         }
         
         // Single coordinated update: update chart and fade-in together
-        setTimeout(() => {
-          // First update the chart and company details
-          updateChart();
-          
-          // Wait for everything to settle before starting transitions
-          setTimeout(() => {
-            const companyADetails = document.getElementById('companyA-details');
-            const companyBDetails = document.getElementById('companyB-details');
-            if (companyADetails) companyADetails.classList.add('loaded');
-            if (companyBDetails) companyBDetails.classList.add('loaded');
-          }, 150); // Shorter delay
-        }, 100);
+        updateChart();
+        
+        // Add loaded classes immediately after chart update
+        const companyADetails = document.getElementById('companyA-details');
+        const companyBDetails = document.getElementById('companyB-details');
+        if (companyADetails) companyADetails.classList.add('loaded');
+        if (companyBDetails) companyBDetails.classList.add('loaded');
       }
 
       function updateChart() {
@@ -692,11 +701,15 @@
         const dataA = companyA ? allData.find(d => d.Company === companyA) : null;
         const dataB = companyB ? allData.find(d => d.Company === companyB) : null;
         
-        // Update company details
-        updateCompanyDetails('companyA-details', companyA, 'rgba(54, 162, 235, 1)');
-        updateCompanyDetails('companyB-details', companyB, 'rgba(255, 99, 132, 1)');
-        
-        renderChart(dataA, dataB);
+        // Batch DOM updates to reduce reflow
+        requestAnimationFrame(() => {
+          // Update company details
+          updateCompanyDetails('companyA-details', companyA, 'rgba(54, 162, 235, 1)');
+          updateCompanyDetails('companyB-details', companyB, 'rgba(255, 99, 132, 1)');
+          
+          // Render chart in the same frame
+          renderChart(dataA, dataB);
+        });
       }
 
       function updateCompanyDetails(elementId, companyName, color) {
