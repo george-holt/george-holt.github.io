@@ -13,20 +13,23 @@
 
     <title>George Holt</title>
 
-    <!-- Preload Google Font for better performance -->
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:300" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet"></noscript>
+    <!-- Font loading optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:300&display=fallback" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css?family=Roboto:300&display=fallback" rel="stylesheet"></noscript>
+    <!-- Preload critical image to prevent layout shift -->
+    <link rel="preload" href="img/George Holt small.png?v=1.0" as="image">
 
     <!-- Critical CSS Inlined -->
     <style>
-      img {
-        border-radius: 20px;
-      }
+
       body {
         color: black;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         padding-top: 70px;
         padding-bottom: 30px;
+        font-display: fallback;
       }
       h1 { 
         font-size: 2.25rem; 
@@ -112,7 +115,7 @@
       .quotes {
         max-width: 900px;
         margin: 0 auto;
-        padding: 50px 0;
+        padding: 50px 20px;
         margin-top: 32px;
       }
       .quote-list {
@@ -131,19 +134,33 @@
       }
       .quote-card cite {
         display: block;
-        margin-top: .5rem;
+        margin-top: .75rem;
         font-style: normal;
         color: #666;
-        font-size: .875rem;
+        font-size: 1rem;
+        font-weight: 500;
       }
       .hero-section {
         display: flex;
         align-items: flex-start;
         gap: 3rem;
         margin-bottom: 2rem;
+        min-height: 600px;
       }
       .hero-portrait {
         flex: 0 0 200px;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .hero-portrait img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 20px;
       }
       .hero-content {
         flex: 1;
@@ -161,9 +178,12 @@
       .hero-bullets {
         margin: 0;
         padding-left: 1.2rem;
+        list-style: disc;
+        min-height: 400px;
       }
       .hero-bullets li {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
+        line-height: 1.6;
       }
       @media (max-width: 768px) {
         .hero-section {
@@ -175,7 +195,21 @@
           text-align: center;
         }
         .hero-portrait img {
+          width: 200px;
+          height: 200px;
           max-width: 200px;
+        }
+        .quotes {
+          padding: 50px 15px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .quotes {
+          padding: 50px 10px;
+        }
+        .quote-card {
+          padding: 1rem 1.25rem;
         }
       }
     </style>
@@ -343,6 +377,12 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script>
+      // Font loading detection
+      document.fonts.ready.then(() => {
+        document.body.classList.add('fonts-loaded');
+        console.log('Fonts loaded successfully');
+      });
+      
       window.jQuery || document.write('<script src="/js/vendor/jquery.min.js"><\/script>');
     </script>
     <script src="js/bootstrap.min.js?v=1.0" defer></script>

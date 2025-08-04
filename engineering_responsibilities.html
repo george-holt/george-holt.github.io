@@ -13,8 +13,11 @@
 
     <title>Engineering Responsibilities Comparison</title>
 
-    <!-- Google Font - load immediately to prevent FOUT -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <!-- Font loading optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:300" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet"></noscript>
 
     <!-- Critical CSS Inlined -->
     <style>
@@ -23,7 +26,7 @@
       }
       body {
         color: black;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         padding-top: 70px;
         padding-bottom: 30px;
       }
@@ -293,6 +296,8 @@
       });
       layoutObserver.observe({ entryTypes: ['layout-shift'] });
 
+
+      
       // Mark key events
       performance.mark('page-load-start');
 
