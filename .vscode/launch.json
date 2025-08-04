@@ -12,6 +12,30 @@
             "request": "launch",
             "name": "Open engineering_responsibilities.html",
             "file": "${workspaceFolder}/engineering_responsibilities.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Profile engineering_responsibilities.html",
+            "file": "${workspaceFolder}/engineering_responsibilities.html?profile=true",
+            "runtimeArgs": [
+                "--auto-open-devtools-for-tabs",
+                "--disable-features=VizDisplayCompositor",
+                "--allow-file-access-from-files",
+                "--disable-file-access-restrictions",
+                "--disable-site-isolation-trials"
+            ],
+            "userDataDir": "${workspaceFolder}/.vscode/chrome-profile"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Profile with Live Server",
+            "url": "http://127.0.0.1:5500/engineering_responsibilities.html?profile=true",
+            "runtimeArgs": [
+                "--auto-open-devtools-for-tabs"
+            ],
+            "userDataDir": "${workspaceFolder}/.vscode/chrome-profile"
         }
     ]
 }

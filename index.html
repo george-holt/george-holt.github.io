@@ -28,8 +28,22 @@
         padding-top: 70px;
         padding-bottom: 30px;
       }
+      h1 { 
+        font-size: 2.25rem; 
+        font-weight: 600; 
+      }
+      h2 { 
+        font-size: 1.5rem; 
+        font-weight: 500; 
+        margin-top: 2rem; 
+      }
+      p, li { 
+        font-size: 1.4rem; 
+        line-height: 1.6; 
+      }
       #testimonials {
         padding: 50px 0;
+        margin-top: 32px;
       }
       #testimonials h2 {
         font-size: 2.5rem;
@@ -58,6 +72,111 @@
         color: #343a40;
         margin-top: 10px;
         margin-bottom: 10px;
+      }
+      .btn {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 8px;
+        padding: 12px 24px;
+        font-weight: 500;
+        transition: all 150ms ease-in-out;
+      }
+      .btn:hover, .btn:focus {
+        background-color: #0056b3;
+        border-color: #0056b3;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+      }
+      .btn:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+      .btn-primary:hover, .btn-primary:focus {
+        background-color: #0056b3;
+        border-color: #0056b3;
+      }
+      .btn-md {
+        padding: 12px 24px;
+        font-size: 1rem;
+      }
+      .cta-section {
+        margin-bottom: 40px;
+      }
+      :root {
+        --accent-colour: #0072b1;
+      }
+      .quotes {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 50px 0;
+        margin-top: 32px;
+      }
+      .quote-list {
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0;
+      }
+      .quote-card {
+        background: #f8f9fa;
+        border-left: 4px solid var(--accent-colour);
+        box-shadow: 0 1px 2px rgba(0,0,0,.04);
+        border-radius: 8px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1rem;
+        font-style: italic;
+      }
+      .quote-card cite {
+        display: block;
+        margin-top: .5rem;
+        font-style: normal;
+        color: #666;
+        font-size: .875rem;
+      }
+      .hero-section {
+        display: flex;
+        align-items: flex-start;
+        gap: 3rem;
+        margin-bottom: 2rem;
+      }
+      .hero-portrait {
+        flex: 0 0 200px;
+      }
+      .hero-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .hero-title {
+        margin-bottom: 0.5rem;
+      }
+      .hero-subtitle {
+        margin-bottom: 1rem;
+        color: #666;
+      }
+      .hero-bullets {
+        margin: 0;
+        padding-left: 1.2rem;
+      }
+      .hero-bullets li {
+        margin-bottom: 0.5rem;
+      }
+      @media (max-width: 768px) {
+        .hero-section {
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+        .hero-portrait {
+          flex: none;
+          text-align: center;
+        }
+        .hero-portrait img {
+          max-width: 200px;
+        }
       }
     </style>
 
@@ -127,89 +246,85 @@
     </script>
 
     <div class="container">
-      <h1>George Holt</h1>
-      <h3>Engineering Leader with Product Ownership Experience in Developer Tools</h3>
-
-      <p>
-        <img class="img-responsive" src="img/George Holt small.png?v=1.0" alt="picture of George Holt" loading="lazy" />
-      </p>
-      <p>&nbsp;</p>
-      <p>
-        <a
-          class="btn btn-primary btn-md"
-          rel="noopener noreferrer"
-          target="_blank"
-          href="https://www.linkedin.com/in/george-holt-software-engineer/"
-          role="button"
-          aria-label="View my profile on LinkedIn"
-          >View my profile on LinkedIn »</a
-        >
-      </p>
-      <p>
-        <a
-          class="btn btn-primary btn-md"
-          rel="noopener noreferrer"
-          target="_blank"
-          href="https://1drv.ms/w/s!Ap_BKoirOMD7t7xBTOzfFoY_yELynw?e=qwCWhL"
-          role="button"
-          aria-label="View my resume"
-          >View my resume »</a
-        >
-      </p>
-      <p>&nbsp;</p>
-      <ul>
-        <li>25 years of experience in the software industry with leadership roles spanning Engineering Management, Product, and hands-on engineering.</li>
-        <li>Proven track record of managing and scaling high-performing engineering teams while owning product vision, roadmap, and success metrics.</li>
-        <li>Deep expertise in developer tools and AI-driven workflows, including customer-facing and internal platforms used by hundreds of thousands of developers.</li>
-        <li>Strong communicator and cross-functional leader — skilled at aligning engineering, design, and executive stakeholders around developer needs and product goals.</li>
-        <li>Experienced in defining product metrics, driving customer discovery, and translating feedback into high-impact, intuitive developer experiences</li>
-        <li>
-          Experienced public speaker. <small>Examples from</small>
-          <a href="https://learn.microsoft.com/en-us/events/build-build2011/hw-118t" rel="noopener noreferrer" target="_blank" aria-label="Microsoft Build 2011">
-            <small>Microsoft Build 2011</small></a>
-          and
-          <a href="https://www.youtube.com/watch?v=9Wl1b3LNTEc" rel="noopener noreferrer" target="_blank" aria-label="AWS New York Summit 2019">
-            <small>AWS New York Summit 2019</small></a>
-        </li>
-      </ul>
-      <p>&nbsp;</p>
+      <div class="hero-section">
+        <div class="hero-portrait">
+          <img class="img-responsive" src="img/George Holt small.png?v=1.0" alt="picture of George Holt" loading="lazy" />
+        </div>
+        <div class="hero-content">
+          <h1 class="hero-title">George Holt</h1>
+          <h3 class="hero-subtitle">Engineering Leader with Product Ownership Experience in Developer Tools</h3>
+          
+          <div class="cta-section">
+            <p>
+              <a
+                class="btn btn-primary btn-md"
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://www.linkedin.com/in/george-holt-software-engineer/"
+                role="button"
+                aria-label="View my profile on LinkedIn"
+                >View my profile on LinkedIn »</a
+              >
+            </p>
+            <p>
+              <a
+                class="btn btn-primary btn-md"
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://1drv.ms/w/s!Ap_BKoirOMD7t7xBTOzfFoY_yELynw?e=qwCWhL"
+                role="button"
+                aria-label="View my resume"
+                >View my resume »</a
+              >
+            </p>
+          </div>
+          
+          <ul class="hero-bullets">
+            <li>25 years of experience in the software industry with leadership roles spanning Engineering Management, Product, and hands-on engineering.</li>
+            <li>Proven track record of managing and scaling high-performing engineering teams while owning product vision, roadmap, and success metrics.</li>
+            <li>Deep expertise in developer tools and AI-driven workflows, including customer-facing and internal platforms used by hundreds of thousands of developers.</li>
+            <li>Strong communicator and cross-functional leader — skilled at aligning engineering, design, and executive stakeholders around developer needs and product goals.</li>
+            <li>Experienced in defining product metrics, driving customer discovery, and translating feedback into high-impact, intuitive developer experiences</li>
+            <li>Experienced public speaker at major industry events.</li>
+            <li>
+              Experienced public speaker. <small>Examples from</small>
+              <a href="https://learn.microsoft.com/en-us/events/build-build2011/hw-118t" rel="noopener noreferrer" target="_blank" aria-label="Microsoft Build 2011"
+                ><small>Microsoft Build 2011</small></a
+              >
+              and
+              <a href="https://www.youtube.com/watch?v=9Wl1b3LNTEc" rel="noopener noreferrer" target="_blank" aria-label="AWS New York Summit 2019"
+                ><small>AWS New York Summit 2019</small></a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <section id="testimonials">
+    <section class="quotes">
       <div class="container">
         <h2 class="text-center">What Colleagues Say About Me</h2>
         <h5 class="text-center">Direct Quotes from Annual Reviews</h5>
-        <div class="card text-center">  
-          <blockquote class="blockquote">
-            <p>"George trusts team members to make decisions and provides inspiration and 
-              guidance when we need it. I especially appreciate when I can bring George into 
-              a tough conversation because I know he'll be on my side and help find a solution."</p>
-            <footer class="blockquote-footer">Direct Report, 2023</footer>
-          </blockquote>
-        </div>
-        <div class="card text-center">
-          <blockquote class="blockquote">
-            <p>"George has hired some very skilled managers"</p>
-            <footer class="blockquote-footer">Peer, 2023</footer>
-          </blockquote>
-        </div>
-        <div class="card text-center">
-          <blockquote class="blockquote">
-            <p>"Under George's leadership, the Toolkits team managed to deliver more results than anyone expected."</p>
-            <footer class="blockquote-footer">Manager, 2024</footer>
-          </blockquote>
-        </div>
-        <div class="card text-center">
-          <blockquote class="blockquote">
-            <p>"I was surprised to see myself venturing into new, challenging roles as a result of George's encouragement and guidance. George is unfailingly considerate and attentive to his team."</p>
-            <footer class="blockquote-footer">Direct Report, 2021</footer>
-          </blockquote>
-        </div>
-        <div class="card text-center">
-          <blockquote class="blockquote">
-            <p>"I really liked how under his leadership the IDE Toolkits was able to release smaller and bigger features on a consistent cadence"</p>
-            <footer class="blockquote-footer">Peer, 2021</footer>
-          </blockquote>
-        </div>
+        <ul class="quote-list">
+          <li class="quote-card">
+            <blockquote>"George trusts team members to make decisions and provides inspiration and guidance when we need it. I especially appreciate when I can bring George into a tough conversation because I know he'll be on my side and help find a solution."</blockquote>
+            <cite>— Direct Report, 2023</cite>
+          </li>
+          <li class="quote-card">
+            <blockquote>"George has hired some very skilled managers"</blockquote>
+            <cite>— Peer, 2023</cite>
+          </li>
+          <li class="quote-card">
+            <blockquote>"Under George's leadership, the Toolkits team managed to deliver more results than anyone expected."</blockquote>
+            <cite>— Manager, 2024</cite>
+          </li>
+          <li class="quote-card">
+            <blockquote>"I was surprised to see myself venturing into new, challenging roles as a result of George's encouragement and guidance. George is unfailingly considerate and attentive to his team."</blockquote>
+            <cite>— Direct Report, 2021</cite>
+          </li>
+          <li class="quote-card">
+            <blockquote>"I really liked how under his leadership the IDE Toolkits was able to release smaller and bigger features on a consistent cadence"</blockquote>
+            <cite>— Peer, 2021</cite>
+          </li>
+        </ul>
       </div>
     </section>
     <section>

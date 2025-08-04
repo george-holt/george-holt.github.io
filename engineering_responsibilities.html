@@ -13,9 +13,8 @@
 
     <title>Engineering Responsibilities Comparison</title>
 
-    <!-- Preload Google Font for better performance -->
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:300" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet"></noscript>
+    <!-- Google Font - load immediately to prevent FOUT -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
 
     <!-- Critical CSS Inlined -->
     <style>
@@ -28,12 +27,30 @@
         padding-top: 70px;
         padding-bottom: 30px;
       }
+      h1 { 
+        font-size: 2.25rem; 
+        font-weight: 600; 
+      }
+      h2 { 
+        font-size: 1.5rem; 
+        font-weight: 500; 
+        margin-top: 2rem; 
+      }
+      p, li { 
+        font-size: 1.4rem; 
+        line-height: 1.6; 
+      }
       .chart-container {
         max-width: 1200px;
         margin: 2rem auto;
         padding: 1rem;
         position: relative;
         height: 500px;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .chart-container.loaded {
+        opacity: 1;
       }
       .chart-layout {
         display: flex;
@@ -52,6 +69,11 @@
         background-color: #f8f9fa;
         border-radius: 8px;
         border-left: 4px solid transparent;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .company-details.loaded {
+        opacity: 1;
       }
       .company-details h4 {
         margin-top: 0;
@@ -71,6 +93,11 @@
       }
       .company-selector {
         margin-bottom: 2rem;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .company-selector.loaded {
+        opacity: 1;
       }
       .back-link {
         margin-bottom: 2rem;
@@ -122,8 +149,8 @@
 
     <!-- Load jQuery -->
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <!-- Bootstrap core CSS - Deferred -->
-    <link href="css/bootstrap.min.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css?v=1.0" rel="stylesheet" />
     <!-- Bootstrap theme - Deferred -->
     <link href="css/bootstrap-theme.min.css?v=1.0" rel="stylesheet" media="print" onload="this.media='all'" />
     <!-- IE10 viewport hack - Deferred -->
@@ -135,7 +162,7 @@
     <script src="js/ie-emulation-modes-warning.js?v=1.0" defer></script>
 
     <!-- Chart.js and PapaParse for CSV handling -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -183,15 +210,15 @@
       <div class="chart-container">
         <div class="chart-layout">
           <div id="companyA-details" class="company-details">
-            <h4>Company 1 Details</h4>
-            <p class="company-description">Select a company to see details...</p>
+            <h4></h4>
+            <p class="company-description"></p>
           </div>
           <div class="chart-center">
             <canvas id="radarChart"></canvas>
           </div>
           <div id="companyB-details" class="company-details">
-            <h4>Company 2 Details</h4>
-            <p class="company-description">Select a company to see details...</p>
+            <h4></h4>
+            <p class="company-description"></p>
           </div>
         </div>
       </div>
@@ -214,8 +241,47 @@
     </div>
 
     <script>
+      // Auto-open DevTools Performance tab for profiling
+      if (window.location.search.includes('profile=true')) {
+        // Auto-open DevTools (Firefox doesn't support this directly, but we can prompt)
+        console.log('🔍 Profiling mode detected!');
+        console.log('📊 Please open DevTools (F12) and go to the Performance tab');
+        console.log('⏱️ Then click Record and refresh the page to capture the first-load behavior');
+        
+        // Add a visual indicator
+        const indicator = document.createElement('div');
+        indicator.style.cssText = `
+          position: fixed; top: 10px; right: 10px; 
+          background: #ff6b6b; color: white; padding: 10px; 
+          border-radius: 5px; z-index: 10000; font-family: monospace;
+        `;
+        indicator.textContent = '🔍 PROFILING MODE - Open DevTools Performance tab';
+        document.body.appendChild(indicator);
+      }
+
+      // Performance logging for debugging
+      const performanceObserver = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          if (entry.entryType === 'paint') {
+            console.log(`🎨 Paint: ${entry.name} at ${entry.startTime}ms`);
+          }
+        }
+      });
+      performanceObserver.observe({ entryTypes: ['paint'] });
+
+      // Log layout shifts
+      const layoutObserver = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          console.log(`📐 Layout shift: ${entry.value} at ${entry.startTime}ms`);
+        }
+      });
+      layoutObserver.observe({ entryTypes: ['layout-shift'] });
+
+      // Mark key events
+      performance.mark('page-load-start');
+
       // Master debug flag - set to true to enable all debug output
-      const DEBUG_MODE = false;
+      const DEBUG_MODE = true;
       
       // Debug utility function
       function debug(...args) {
@@ -254,8 +320,11 @@
       let responsibilityConfig = {};
 
       // Load company details with error handling
-      fetch('./data/company_details.json')
+      const companyDetailsPath = './data/company_details.json';
+      debug('Attempting to fetch company details from:', companyDetailsPath);
+      fetch(companyDetailsPath)
         .then(response => {
+          debug('Company details response status:', response.status, response.statusText);
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
@@ -264,10 +333,8 @@
         .then(data => {
           companyDetails = data;
           debug('Company details loaded successfully');
-          // Update chart if data is already loaded
-          if (allData.length > 0) {
-            updateChart();
-          }
+          performance.mark('company-details-loaded');
+          // Don't update chart here - let populateSelectors handle it
         })
         .catch(error => {
           debugError('Error loading company details:', error);
@@ -301,9 +368,12 @@
       }
 
       // Load CSV with error handling
-      const cacheBuster = '?v=' + Math.random() + '&t=' + Date.now();
-      fetch(csvPath + cacheBuster)
+      const cacheBuster = '?v=1.0';
+      const fullCsvPath = csvPath + cacheBuster;
+      debug('Attempting to fetch CSV from:', fullCsvPath);
+      fetch(fullCsvPath)
         .then(response => {
+          debug('CSV response status:', response.status, response.statusText);
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
@@ -325,6 +395,7 @@
               allData = results.data;
               debug('CSV data loaded:', allData);
               responsibilityConfig = parseResponsibilityConfig(csv).config;
+              performance.mark('csv-data-loaded');
               populateAboutSection();
               populateSelectors(results.data);
             },
@@ -373,6 +444,30 @@
       // Debug: Check actual font sizes
       setTimeout(() => {
         if (!DEBUG_MODE) return;
+        
+        // Log performance measurements with error handling
+        try {
+          if (performance.getEntriesByName('page-load-start').length > 0 && 
+              performance.getEntriesByName('chart-rendered').length > 0) {
+            performance.measure('total-load-time', 'page-load-start', 'chart-rendered');
+          }
+          
+          if (performance.getEntriesByName('page-load-start').length > 0 && 
+              performance.getEntriesByName('csv-data-loaded').length > 0) {
+            performance.measure('data-load-time', 'page-load-start', 'csv-data-loaded');
+          }
+          
+          if (performance.getEntriesByName('csv-data-loaded').length > 0 && 
+              performance.getEntriesByName('chart-rendered').length > 0) {
+            performance.measure('chart-render-time', 'csv-data-loaded', 'chart-rendered');
+          }
+          
+          performance.getEntriesByType('measure').forEach(measure => {
+            console.log(`⏱️ ${measure.name}: ${measure.duration}ms`);
+          });
+        } catch (error) {
+          console.log('⚠️ Performance measurement error:', error.message);
+        }
         
         const subtitle = document.querySelector('.lead');
         const companyDesc = document.querySelector('.company-description');
@@ -498,6 +593,16 @@
               }
             }
           });
+          
+          performance.mark('chart-rendered');
+          
+          // Wait for chart to fully render before starting transitions
+          setTimeout(() => {
+            const chartContainer = document.querySelector('.chart-container');
+            if (chartContainer) {
+              chartContainer.classList.add('loaded');
+            }
+          }, 100); // Shorter delay
         } catch (error) {
           console.error('Error creating chart:', error);
           // Fail quietly - just don't show the chart
@@ -553,12 +658,31 @@
         if (validRows.length >= 2) {
           selectA.value = validRows[0].Company;
           selectB.value = validRows[1].Company;
-          updateChart();
         }
 
         // Add event listeners
         selectA.addEventListener('change', updateChart);
         selectB.addEventListener('change', updateChart);
+        
+        // Add loaded class to company selector for fade-in
+        const companySelector = document.querySelector('.company-selector');
+        if (companySelector) {
+          companySelector.classList.add('loaded');
+        }
+        
+        // Single coordinated update: update chart and fade-in together
+        setTimeout(() => {
+          // First update the chart and company details
+          updateChart();
+          
+          // Wait for everything to settle before starting transitions
+          setTimeout(() => {
+            const companyADetails = document.getElementById('companyA-details');
+            const companyBDetails = document.getElementById('companyB-details');
+            if (companyADetails) companyADetails.classList.add('loaded');
+            if (companyBDetails) companyBDetails.classList.add('loaded');
+          }, 150); // Shorter delay
+        }, 100);
       }
 
       function updateChart() {
@@ -576,6 +700,7 @@
       }
 
       function updateCompanyDetails(elementId, companyName, color) {
+        debug(`Updating company details for ${elementId}: ${companyName}`);
         const element = document.getElementById(elementId);
         if (!element) {
           console.error(`Element ${elementId} not found`);

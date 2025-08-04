@@ -4,3 +4,6 @@
 .idea/resume-website.iml
 .idea/vcs.xml
 .idea/workspace.xml
+
+# VS Code Chrome debugger profile
+.vscode/chrome-profile/
