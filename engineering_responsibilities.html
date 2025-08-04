@@ -16,32 +16,76 @@
     <!-- Font loading optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:300" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
 
     <!-- Critical CSS Inlined -->
     <style>
       html {
         font-size: 14px;
       }
+      :root {
+        /* Color Palette */
+        --primary-color: #007bff;
+        --primary-hover: #0056b3;
+        --accent-color: #0072b1;
+        --text-primary: #333;
+        --text-secondary: #666;
+        --text-muted: #6c757d;
+        --text-dark: #343a40;
+        --background-primary: #ffffff;
+        --background-secondary: #f8f9fa;
+        --background-muted: #f1f1f1;
+        --border-color: #dee2e6;
+        
+        /* Typography */
+        --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        --font-size-base: 1.4rem;
+        --font-size-sm: 1rem;
+        --font-size-lg: 1.8rem;
+        --font-size-xl: 2.25rem;
+        --font-size-2xl: 2.5rem;
+        --line-height-base: 1.6;
+        --line-height-tight: 1.3;
+        
+        /* Spacing */
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 1.5rem;
+        --spacing-lg: 2rem;
+        --spacing-xl: 3rem;
+        
+        /* Border Radius */
+        --border-radius: 8px;
+        --border-radius-lg: 20px;
+        
+        /* Shadows */
+        --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+        --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 4px 8px rgba(0, 123, 255, 0.3);
+        
+        /* Transitions */
+        --transition-fast: 150ms ease-in-out;
+        --transition-normal: 0.3s ease-in-out;
+      }
+      
       body {
-        color: black;
-        font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        color: var(--text-primary);
+        font-family: var(--font-family);
         padding-top: 70px;
         padding-bottom: 30px;
       }
       h1 { 
-        font-size: 2.25rem; 
+        font-size: var(--font-size-xl); 
         font-weight: 600; 
       }
       h2 { 
         font-size: 1.5rem; 
         font-weight: 500; 
-        margin-top: 2rem; 
+        margin-top: var(--spacing-lg); 
       }
       p, li { 
-        font-size: 1.4rem; 
-        line-height: 1.6; 
+        font-size: var(--font-size-base); 
+        line-height: var(--line-height-base); 
       }
       .chart-container {
         max-width: 1200px;
@@ -74,13 +118,13 @@
       .company-details {
         order: 2;
         width: 100%;
-        padding: 0.25rem 0.5rem;
-        margin-bottom: 0.5rem;
-        background-color: #f8f9fa;
-        border-radius: 8px;
+        padding: var(--spacing-xs) var(--spacing-xs);
+        margin-bottom: var(--spacing-xs);
+        background-color: var(--background-secondary);
+        border-radius: var(--border-radius);
         border-left: 4px solid transparent;
         opacity: 0;
-        transition: opacity 0.3s ease-in-out;
+        transition: opacity var(--transition-normal);
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -93,27 +137,27 @@
       
       .company-details h4 {
         margin-top: 0;
-        margin-bottom: 0.5rem;
+        margin-bottom: var(--spacing-xs);
         font-size: 1.3rem;
-        color: #495057;
+        color: var(--text-dark);
       }
       
       .company-description {
-        font-size: 1.8rem;
-        line-height: 1.5;
-        color: #333;
+        font-size: var(--font-size-lg);
+        line-height: var(--line-height-tight);
+        color: var(--text-primary);
         margin: 0;
       }
 
       .chart-container .well p, 
       .chart-container .well li {
-        font-size: 1.8rem;
-        line-height: 1.5;
+        font-size: var(--font-size-lg);
+        line-height: var(--line-height-tight);
       }
       .company-selector {
-        margin-bottom: 2rem;
+        margin-bottom: var(--spacing-lg);
         opacity: 0;
-        transition: opacity 0.3s ease-in-out;
+        transition: opacity var(--transition-normal);
       }
       .company-selector.loaded {
         opacity: 1;
@@ -132,7 +176,9 @@
       .vs-label {
         font-weight: bold;
         color: #666;
-        font-size: 1.2rem;
+        font-size: 1rem;
+        align-self: flex-end;
+        margin-bottom: 0.5rem;
       }
       .company-dropdown {
         min-width: 200px;
@@ -658,8 +704,8 @@
         }
         
         // Clear existing options
-        selectA.innerHTML = '<option value="">Select Company A</option>';
-        selectB.innerHTML = '<option value="">Select Company B</option>';
+        selectA.innerHTML = '';
+        selectB.innerHTML = '';
         
         validRows.forEach(row => {
           const optA = document.createElement('option');

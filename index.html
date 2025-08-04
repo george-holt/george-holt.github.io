@@ -16,8 +16,7 @@
     <!-- Font loading optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:300&display=fallback" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css?family=Roboto:300&display=fallback" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
     <!-- Preload critical image to prevent layout shift -->
     <link rel="preload" href="img/George Holt small.png?v=1.0" as="image">
 
@@ -25,39 +24,38 @@
     <style>
 
       body {
-        color: black;
-        font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        color: var(--text-primary);
+        font-family: var(--font-family);
         padding-top: 70px;
         padding-bottom: 30px;
-        font-display: fallback;
       }
       h1 { 
-        font-size: 2.25rem; 
+        font-size: var(--font-size-xl); 
         font-weight: 600; 
       }
       h2 { 
         font-size: 1.5rem; 
         font-weight: 500; 
-        margin-top: 2rem; 
+        margin-top: var(--spacing-lg); 
       }
       p, li { 
-        font-size: 1.4rem; 
-        line-height: 1.6; 
+        font-size: var(--font-size-base); 
+        line-height: var(--line-height-base); 
       }
       #testimonials {
         padding: 50px 0;
         margin-top: 32px;
       }
       #testimonials h2 {
-        font-size: 2.5rem;
-        color: #343a40;
+        font-size: var(--font-size-2xl);
+        color: var(--text-dark);
         margin-bottom: 40px;
       }
       .card {
         border: none;
-        background-color: #ffffff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease-in-out;
+        background-color: var(--background-primary);
+        box-shadow: var(--shadow-md);
+        transition: transform var(--transition-fast);
       }
       .card:hover {
         transform: translateY(-5px);
@@ -65,58 +63,105 @@
       .blockquote {
         margin-top: 20px;
         font-style: italic;
-        color: #6c757d;
-        background-color: #f1f1f1;
+        color: var(--text-muted);
+        background-color: var(--background-muted);
         padding: 20px;
-        border-radius: 8px;
+        border-radius: var(--border-radius);
       }
       .blockquote-footer {
         font-weight: bold;
-        color: #343a40;
+        color: var(--text-dark);
         margin-top: 10px;
         margin-bottom: 10px;
       }
       .btn {
-        background-color: #007bff;
-        border-color: #007bff;
-        border-radius: 8px;
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        border-radius: var(--border-radius);
         padding: 12px 24px;
         font-weight: 500;
-        transition: all 150ms ease-in-out;
+        transition: all var(--transition-fast);
       }
       .btn:hover, .btn:focus {
-        background-color: #0056b3;
-        border-color: #0056b3;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        box-shadow: var(--shadow-lg);
       }
       .btn:active {
-        transform: translateY(0);
         box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
       }
       .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
       }
       .btn-primary:hover, .btn-primary:focus {
-        background-color: #0056b3;
-        border-color: #0056b3;
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
       }
       .btn-md {
         padding: 12px 24px;
-        font-size: 1rem;
+        font-size: var(--font-size-sm);
       }
       .cta-section {
         margin-bottom: 40px;
       }
       :root {
-        --accent-colour: #0072b1;
+        /* Color Palette */
+        --primary-color: #007bff;
+        --primary-hover: #0056b3;
+        --accent-color: #0072b1;
+        --text-primary: #333;
+        --text-secondary: #666;
+        --text-muted: #6c757d;
+        --text-dark: #343a40;
+        --background-primary: #ffffff;
+        --background-secondary: #f8f9fa;
+        --background-muted: #f1f1f1;
+        --border-color: #dee2e6;
+        
+        /* Typography */
+        --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        --font-size-base: 1.4rem;
+        --font-size-sm: 1rem;
+        --font-size-lg: 1.8rem;
+        --font-size-xl: 2.25rem;
+        --font-size-2xl: 2.5rem;
+        --line-height-base: 1.6;
+        --line-height-tight: 1.3;
+        
+        /* Spacing */
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 1.5rem;
+        --spacing-lg: 2rem;
+        --spacing-xl: 3rem;
+        
+        /* Border Radius */
+        --border-radius: 8px;
+        --border-radius-lg: 20px;
+        
+        /* Shadows */
+        --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+        --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 4px 8px rgba(0, 123, 255, 0.3);
+        
+        /* Transitions */
+        --transition-fast: 150ms ease-in-out;
+        --transition-normal: 0.3s ease-in-out;
       }
       .quotes {
         max-width: 900px;
         margin: 0 auto;
         padding: 50px 20px;
         margin-top: 32px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .quotes .container {
+        max-width: 100%;
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
       }
       .quote-list {
         list-style: none;
@@ -124,27 +169,31 @@
         margin: 1.5rem 0;
       }
       .quote-card {
-        background: #f8f9fa;
-        border-left: 4px solid var(--accent-colour);
-        box-shadow: 0 1px 2px rgba(0,0,0,.04);
-        border-radius: 8px;
+        background: var(--background-secondary);
+        border-left: 4px solid var(--accent-color);
+        box-shadow: var(--shadow-sm);
+        border-radius: var(--border-radius);
         padding: 1.25rem 1.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: var(--spacing-sm);
         font-style: italic;
+        max-width: 100%;
+        box-sizing: border-box;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
       }
       .quote-card cite {
         display: block;
         margin-top: .75rem;
         font-style: normal;
-        color: #666;
-        font-size: 1rem;
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
         font-weight: 500;
       }
       .hero-section {
         display: flex;
         align-items: flex-start;
-        gap: 3rem;
-        margin-bottom: 2rem;
+        gap: var(--spacing-xl);
+        margin-bottom: var(--spacing-lg);
         min-height: 600px;
       }
       .hero-portrait {
@@ -160,20 +209,20 @@
         width: 200px;
         height: 200px;
         object-fit: cover;
-        border-radius: 20px;
+        border-radius: var(--border-radius-lg);
       }
       .hero-content {
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: var(--spacing-sm);
       }
       .hero-title {
         margin-bottom: 0.5rem;
       }
       .hero-subtitle {
-        margin-bottom: 1rem;
-        color: #666;
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-secondary);
       }
       .hero-bullets {
         margin: 0;
@@ -183,7 +232,7 @@
       }
       .hero-bullets li {
         margin-bottom: 0.75rem;
-        line-height: 1.6;
+        line-height: var(--line-height-base);
       }
       @media (max-width: 768px) {
         .hero-section {
@@ -377,12 +426,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script>
-      // Font loading detection
-      document.fonts.ready.then(() => {
-        document.body.classList.add('fonts-loaded');
-        console.log('Fonts loaded successfully');
-      });
-      
       window.jQuery || document.write('<script src="/js/vendor/jquery.min.js"><\/script>');
     </script>
     <script src="js/bootstrap.min.js?v=1.0" defer></script>
