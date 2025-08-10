@@ -32,8 +32,8 @@
         --primary-hover: #0056b3;
         --accent-color: #0072b1;
         --text-primary: #333;
-        --text-secondary: #666;
-        --text-muted: #6c757d;
+        --text-secondary: #3d3d3d;
+        --text-muted: #555;
         --text-dark: #343a40;
         --background-primary: #ffffff;
         --background-secondary: #f8f9fa;
@@ -126,6 +126,40 @@
         font-size: var(--font-size-base);
         line-height: var(--line-height-base);
       }
+      /* Accessibility utilities */
+      .visually-hidden {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+      }
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #000;
+        color: #fff;
+        padding: 8px 12px;
+        z-index: 1000;
+        transition: top var(--transition-fast);
+      }
+      .skip-link:focus {
+        top: 0;
+      }
+      /* Focus visibility */
+      a:focus-visible,
+      button:focus-visible,
+      select:focus-visible,
+      input:focus-visible {
+        outline: 3px solid var(--accent-color);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
       .lead {
         font-size: var(--font-size-md);
         line-height: var(--line-height-base);
@@ -178,7 +212,7 @@
         opacity: 1;
       }
 
-      .company-details h4 {
+      .company-details h2 {
         margin-top: 0;
         margin-bottom: var(--spacing-xs);
         font-size: var(--font-size-md);
@@ -208,6 +242,11 @@
       }
       .back-link {
         margin-bottom: var(--spacing-lg);
+      }
+      .back-link a:focus-visible {
+        outline: 3px solid var(--accent-color);
+        outline-offset: 3px;
+        border-radius: 4px;
       }
       .comparison-controls {
         display: flex;
@@ -351,6 +390,7 @@
   </head>
 
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <script type="text/javascript" defer>
       (function (window, document, dataLayerName, id) {
         (window[dataLayerName] = window[dataLayerName] || []),
@@ -418,7 +458,7 @@
       </nav>
     </header>
 
-    <main role="main">
+    <main role="main" id="main-content">
       <section class="introduction" aria-labelledby="page-title">
         <div class="container">
           <header>
@@ -436,37 +476,45 @@
       <section class="chart-section" aria-labelledby="chart-title">
         <div class="container">
           <div class="company-selector">
-            <label for="companyA" class="control-label"
-              >Select up to 2 companies:</label
-            >
+            <p id="company-help" class="control-label">
+              Select up to 2 companies:
+            </p>
             <div class="comparison-controls">
               <div class="dropdown-container">
                 <div class="legend-item company-a-legend">
                   <div
                     class="legend-color"
                     style="background-color: rgba(54, 162, 235, 1)"
-                    aria-label="Company A color indicator"
+                    aria-hidden="true"
                   ></div>
+                  <span class="visually-hidden">Company A color</span>
                 </div>
+                <label for="companyA" class="visually-hidden"
+                  >First company</label
+                >
                 <select
                   id="companyA"
                   class="form-control company-dropdown"
-                  aria-describedby="companyA-description"
+                  aria-describedby="company-help companyA-description"
                 ></select>
               </div>
-              <div class="vs-label" aria-label="versus">vs</div>
+              <div class="vs-label" role="separator" aria-hidden="true">vs</div>
               <div class="dropdown-container">
+                <label for="companyB" class="visually-hidden"
+                  >Second company</label
+                >
                 <select
                   id="companyB"
                   class="form-control company-dropdown"
-                  aria-describedby="companyB-description"
+                  aria-describedby="company-help companyB-description"
                 ></select>
                 <div class="legend-item">
                   <div
                     class="legend-color"
                     style="background-color: rgba(255, 99, 132, 1)"
-                    aria-label="Company B color indicator"
+                    aria-hidden="true"
                   ></div>
+                  <span class="visually-hidden">Company B color</span>
                 </div>
               </div>
             </div>
@@ -482,25 +530,33 @@
                 id="companyA-details"
                 class="company-details"
                 aria-labelledby="companyA-title"
+                aria-live="polite"
               >
-                <h4 id="companyA-title">Select a company to see details...</h4>
+                <h2 id="companyA-title">Select a company to see details...</h2>
                 <p id="companyA-description" class="company-description">
                   Choose a company from the dropdown above to view their
                   engineering management focus areas.
                 </p>
               </article>
               <div class="chart-center">
+                <p id="chart-desc" class="visually-hidden" aria-live="polite">
+                  Radar chart comparing selected companies across engineering
+                  management responsibilities.
+                </p>
                 <canvas
                   id="radarChart"
-                  aria-label="Radar chart showing engineering management responsibilities comparison"
+                  role="img"
+                  aria-describedby="chart-desc"
+                  aria-label="Engineering responsibilities comparison chart"
                 ></canvas>
               </div>
               <article
                 id="companyB-details"
                 class="company-details"
                 aria-labelledby="companyB-title"
+                aria-live="polite"
               >
-                <h4 id="companyB-title">Select a company to see details...</h4>
+                <h2 id="companyB-title">Select a company to see details...</h2>
                 <p id="companyB-description" class="company-description">
                   Choose a company from the dropdown above to view their
                   engineering management focus areas.

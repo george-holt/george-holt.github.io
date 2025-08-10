@@ -41,6 +41,21 @@ npm run build:watch
 1. Build the project first: `npm run build`
 2. Open `dist/index.html` or `dist/engineering_responsibilities.html` in your browser
 
+#### Run Performance Tests
+
+```bash
+npm test
+```
+
+This provides instructions for manual Lighthouse testing:
+
+- **Performance** (target: 90%+)
+- **Accessibility** (target: 90%+)
+- **Best Practices** (target: 90%+)
+- **SEO** (target: 90%+)
+
+**Note:** Automated testing has issues on Windows, so manual testing is recommended.
+
 ### VS Code Launch Configuration (Optional)
 
 1. Open the project in VS Code
@@ -118,6 +133,32 @@ The website is automatically deployed to GitHub Pages via GitHub Actions:
 - **Inline critical CSS** to prevent render blocking
 - **Removed unused libraries** (jQuery, Bootstrap, IE polyfills)
 - **PurgeCSS** to eliminate unused CSS rules
+
+## Testing
+
+The website includes automated Lighthouse testing to ensure quality:
+
+### Running Tests
+
+```bash
+npm test                    # Run full Lighthouse tests
+npm run test:lighthouse     # Same as npm test
+npm run test:ci            # Run Lighthouse CI (for CI/CD)
+```
+
+### Test Coverage
+
+- **Performance** - Core Web Vitals, loading speed
+- **Accessibility** - WCAG compliance, screen reader support
+- **Best Practices** - Security, modern web standards
+- **SEO** - Search engine optimization
+
+### Test Targets
+
+- Performance: 90%+
+- Accessibility: 90%+
+- Best Practices: 90%+
+- SEO: 90%+
 
 ## Development Notes
 
