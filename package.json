@@ -1,0 +1,25 @@
+{
+  "name": "george-holt-website",
+  "version": "1.0.0",
+  "description": "George Holt's professional website",
+  "main": "index.html",
+  "scripts": {
+    "build": "node build.js",
+    "build:watch": "node build.js --watch",
+    "clean": "rimraf dist",
+    "dev": "node build.js --dev"
+  },
+  "devDependencies": {
+    "html-minifier": "^4.0.0",
+    "clean-css": "^5.3.2",
+    "terser": "^5.19.2",
+    "purgecss": "^5.0.0",
+    "rimraf": "^5.0.1",
+    "fs-extra": "^11.1.1",
+    "glob": "^10.3.10",
+    "chokidar": "^3.5.3"
+  },
+  "keywords": ["website", "portfolio", "resume"],
+  "author": "George Holt",
+  "license": "MIT"
+}
