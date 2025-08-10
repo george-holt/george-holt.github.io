@@ -19,21 +19,7 @@
 
     <title>Engineering Responsibilities Comparison</title>
 
-    <!-- Font loading optimization -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
+    <!-- Using system fonts for zero-blink rendering -->
 
     <!-- Critical CSS Inlined -->
     <style>
@@ -55,8 +41,8 @@
         --border-color: #dee2e6;
 
         /* Typography */
-        --font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
         --font-size-base: 1.4rem;
         --font-size-sm: 1rem;
         --font-size-md: 1.5rem;
@@ -131,13 +117,17 @@
         font-weight: 600;
       }
       h2 {
-        font-size: var(--font-size-md);
+        font-size: var(--font-size-lg);
         font-weight: 500;
         margin-top: var(--spacing-lg);
       }
       p,
       li {
         font-size: var(--font-size-base);
+        line-height: var(--line-height-base);
+      }
+      .lead {
+        font-size: var(--font-size-md);
         line-height: var(--line-height-base);
       }
       .chart-container {
@@ -191,21 +181,22 @@
       .company-details h4 {
         margin-top: 0;
         margin-bottom: var(--spacing-xs);
-        font-size: var(--font-size-sm);
+        font-size: var(--font-size-md);
         color: var(--text-dark);
+        font-weight: 600;
       }
 
       .company-description {
-        font-size: var(--font-size-lg);
-        line-height: var(--line-height-tight);
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-base);
         color: var(--text-primary);
         margin: 0;
       }
 
       .chart-container .well p,
       .chart-container .well li {
-        font-size: var(--font-size-lg);
-        line-height: var(--line-height-tight);
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-base);
       }
       .company-selector {
         margin-bottom: var(--spacing-lg);
@@ -225,6 +216,7 @@
         gap: var(--spacing-sm);
         margin-bottom: var(--spacing-lg);
         flex-wrap: wrap;
+        padding-top: var(--spacing-sm);
       }
       .vs-label {
         font-weight: bold;
@@ -240,7 +232,11 @@
         display: flex;
         align-items: center;
         gap: var(--spacing-sm);
-        margin-top: var(--spacing-xs);
+      }
+
+      /* Desktop: Company A legend on left, Company B legend on right */
+      .company-a-legend {
+        order: -1; /* Move to left side */
       }
       .legend {
         display: flex;
@@ -263,23 +259,85 @@
       canvas {
         max-width: 100%;
       }
+
+      /* Container and responsive utilities */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      /* Mobile-specific adjustments */
+      @media (max-width: 768px) {
+        :root {
+          --font-size-base: 1.1rem;
+          --font-size-md: 1.3rem;
+          --font-size-xl: 1.8rem;
+          --font-size-2xl: 2rem;
+          --chart-min-height: 400px;
+          --chart-center-min-height: 300px;
+          --section-padding: 30px;
+          --content-padding: 15px;
+        }
+
+        .container {
+          padding: 0 10px;
+        }
+
+        .chart-container {
+          min-height: var(--chart-min-height);
+        }
+
+        .chart-center {
+          min-height: var(--chart-center-min-height);
+        }
+
+        .comparison-controls {
+          flex-direction: column;
+          align-items: center;
+          gap: var(--spacing-sm);
+        }
+
+        .vs-label {
+          align-self: center;
+          margin: 0;
+        }
+
+        .dropdown-container {
+          justify-content: center;
+          margin: 0;
+        }
+
+        /* Mobile: Move Company A legend back to right side when stacked */
+        .company-a-legend {
+          order: 1; /* Move back to right side */
+        }
+
+        /* Mobile: Add padding to control label for better spacing */
+        .control-label {
+          padding-bottom: var(--spacing-xs);
+        }
+      }
+
+      @media (max-width: 480px) {
+        :root {
+          --font-size-base: 1rem;
+          --font-size-md: 1.2rem;
+          --font-size-xl: 1.6rem;
+          --font-size-2xl: 1.8rem;
+          --chart-min-height: 350px;
+          --chart-center-min-height: 250px;
+          --section-padding: 20px;
+          --content-padding: 10px;
+        }
+
+        .container {
+          padding: 0 8px;
+        }
+      }
     </style>
 
-    <!-- Load jQuery - Deferred to prevent render blocking -->
-    <script src="https://code.jquery.com/jquery-latest.min.js" defer></script>
-    <!-- Bootstrap core CSS -->
-    <link href="css/minimal.css?v=1.0" rel="stylesheet" />
-
-
-    <!-- Custom styles - Deferred -->
-    <link
-      href="css/custom.css?v=1.0"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-
-    <script src="js/ie-emulation-modes-warning.js?v=1.0" defer></script>
+    <!-- No external CSS needed - all styles are inlined for optimal performance -->
 
     <!-- Chart.js and PapaParse for CSV handling -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -378,42 +436,37 @@
       <section class="chart-section" aria-labelledby="chart-title">
         <div class="container">
           <div class="company-selector">
+            <label for="companyA" class="control-label"
+              >Select up to 2 companies:</label
+            >
             <div class="comparison-controls">
-              <div>
-                <label for="companyA" class="control-label"
-                  >Select up to 2 companies:</label
-                >
-                <div class="dropdown-container">
-                  <select
-                    id="companyA"
-                    class="form-control company-dropdown"
-                    aria-describedby="companyA-description"
-                  ></select>
-                  <div class="legend-item">
-                    <div
-                      class="legend-color"
-                      style="background-color: rgba(54, 162, 235, 1)"
-                      aria-label="Company A color indicator"
-                    ></div>
-                  </div>
+              <div class="dropdown-container">
+                <div class="legend-item company-a-legend">
+                  <div
+                    class="legend-color"
+                    style="background-color: rgba(54, 162, 235, 1)"
+                    aria-label="Company A color indicator"
+                  ></div>
                 </div>
+                <select
+                  id="companyA"
+                  class="form-control company-dropdown"
+                  aria-describedby="companyA-description"
+                ></select>
               </div>
               <div class="vs-label" aria-label="versus">vs</div>
-              <div>
-                <label for="companyB" class="control-label">&nbsp;</label>
-                <div class="dropdown-container">
-                  <select
-                    id="companyB"
-                    class="form-control company-dropdown"
-                    aria-describedby="companyB-description"
-                  ></select>
-                  <div class="legend-item">
-                    <div
-                      class="legend-color"
-                      style="background-color: rgba(255, 99, 132, 1)"
-                      aria-label="Company B color indicator"
-                    ></div>
-                  </div>
+              <div class="dropdown-container">
+                <select
+                  id="companyB"
+                  class="form-control company-dropdown"
+                  aria-describedby="companyB-description"
+                ></select>
+                <div class="legend-item">
+                  <div
+                    class="legend-color"
+                    style="background-color: rgba(255, 99, 132, 1)"
+                    aria-label="Company B color indicator"
+                  ></div>
                 </div>
               </div>
             </div>
@@ -950,14 +1003,6 @@
       }
     </script>
 
-    <!-- Bootstrap core JavaScript -->
-    <script>
-      window.jQuery ||
-        document.write('<script src="/js/vendor/jquery.min.js"><\/script>');
-    </script>
-    <script src="js/bootstrap.min.js?v=1.0" defer></script>
-    <script src="js/docs.min.js?v=1.0" defer></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js?v=1.0" defer></script>
+    <!-- Chart.js and other dependencies are loaded in the head section -->
   </body>
 </html>

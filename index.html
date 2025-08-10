@@ -302,6 +302,9 @@
         margin-bottom: var(--spacing-lg);
         min-height: var(--hero-min-height);
       }
+      .hero-header {
+        display: none; /* Hidden on desktop - will show on mobile */
+      }
       .hero-portrait {
         flex: 0 0 var(--hero-portrait-size);
         width: var(--hero-portrait-size);
@@ -347,24 +350,6 @@
         margin-bottom: calc(var(--spacing-sm) * 0.75);
         line-height: var(--line-height-base);
       }
-      @media (max-width: var(--breakpoint-tablet)) {
-        .hero-section {
-          flex-direction: column;
-          gap: var(--spacing-md);
-        }
-        .hero-portrait {
-          flex: none;
-          text-align: center;
-        }
-        .hero-portrait img {
-          width: var(--hero-portrait-size);
-          height: var(--hero-portrait-size);
-          max-width: var(--hero-portrait-size);
-        }
-        .quotes {
-          padding: var(--section-padding) calc(var(--content-padding) * 0.75);
-        }
-      }
 
       @media (max-width: var(--breakpoint-mobile)) {
         .quotes {
@@ -389,6 +374,81 @@
       .img-responsive {
         max-width: 100%;
         height: auto;
+      }
+
+      /* Container and responsive utilities */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      /* Mobile-specific adjustments */
+      @media (max-width: 768px) {
+        :root {
+          --font-size-base: 1.1rem;
+          --font-size-md: 1.3rem;
+          --font-size-xl: 1.8rem;
+          --font-size-2xl: 2rem;
+          --hero-portrait-size: 150px;
+          --section-padding: 30px;
+          --content-padding: 15px;
+        }
+
+        .container {
+          padding: 0 10px;
+        }
+
+        .hero-section {
+          flex-direction: column;
+          gap: var(--spacing-md);
+          align-items: center;
+          min-height: auto;
+        }
+
+        .hero-header {
+          display: block;
+          text-align: center;
+          margin-bottom: var(--spacing-md);
+          order: 1;
+        }
+
+        .hero-content .hero-title,
+        .hero-content .hero-subtitle {
+          display: none; /* Hide the desktop version */
+        }
+
+        .hero-portrait {
+          flex: none;
+          text-align: center;
+          order: 2; /* Move photo after header */
+          margin-bottom: var(--spacing-md);
+        }
+
+        .hero-content {
+          order: 3; /* Move content after photo */
+          width: 100%;
+        }
+
+        .hero-bullets {
+          min-height: auto;
+        }
+      }
+
+      @media (max-width: 480px) {
+        :root {
+          --font-size-base: 1rem;
+          --font-size-md: 1.2rem;
+          --font-size-xl: 1.6rem;
+          --font-size-2xl: 1.8rem;
+          --hero-portrait-size: 120px;
+          --section-padding: 20px;
+          --content-padding: 10px;
+        }
+
+        .container {
+          padding: 0 8px;
+        }
       }
 
       /* Glyphicon replacement */
@@ -535,6 +595,14 @@
       <section class="hero" aria-labelledby="hero-title">
         <div class="container">
           <div class="hero-section">
+            <div class="hero-header">
+              <h1 id="hero-title" class="hero-title">George Holt</h1>
+              <h2 class="hero-subtitle">
+                Engineering Leader with Product Ownership Experience in
+                Developer Tools
+              </h2>
+            </div>
+
             <figure class="hero-portrait">
               <img
                 class="img-responsive"
@@ -546,13 +614,13 @@
                 fetchpriority="high"
               />
             </figure>
+
             <div class="hero-content">
-              <h1 id="hero-title" class="hero-title">George Holt</h1>
+              <h1 class="hero-title">George Holt</h1>
               <h2 class="hero-subtitle">
                 Engineering Leader with Product Ownership Experience in
                 Developer Tools
               </h2>
-
               <div class="cta-section">
                 <a
                   class="cta-button linkedin"
