@@ -1,7 +1,53 @@
-const { spawn, execSync } = require("child_process");
+const { spawn, spawnSync, execSync } = require("child_process");
 const fs = require("fs-extra");
 const path = require("path");
 const net = require("net");
+const os = require("os");
+
+function resolveLocalBin(binaryName) {
+  const isWindows = process.platform === "win32";
+  const executable = isWindows ? `${binaryName}.cmd` : binaryName;
+  const binPath = path.join(process.cwd(), "node_modules", ".bin", executable);
+  return binPath;
+}
+
+function resolveNodeScript(packageName, candidateSubpaths) {
+  for (const subpath of candidateSubpaths) {
+    try {
+      return require.resolve(path.join(packageName, subpath));
+    } catch (_) {
+      // try next
+    }
+  }
+  throw new Error(
+    `Could not resolve CLI for ${packageName}. Tried: ${candidateSubpaths.join(
+      ", "
+    )}`
+  );
+}
+
+function killProcessTreeCrossPlatform(childProcess) {
+  if (!childProcess) return;
+  try {
+    if (process.platform === "win32") {
+      // Best-effort kill of the full tree on Windows
+      try {
+        execSync(`taskkill /pid ${childProcess.pid} /T /F`);
+      } catch (_) {
+        try {
+          childProcess.kill();
+        } catch (_) {}
+      }
+    } else {
+      // POSIX: try SIGTERM first
+      try {
+        childProcess.kill("SIGTERM");
+      } catch (_) {}
+    }
+  } catch (_) {
+    // ignore
+  }
+}
 
 async function findAvailablePort(startPort = 3000) {
   for (let port = startPort; port < startPort + 100; port++) {
@@ -50,6 +96,11 @@ async function runLighthouseTests() {
   await fs.ensureDir(resultsBaseDir);
   let serverProcess = null;
   let selectedPort = null;
+  const httpServerScript = resolveNodeScript("http-server", [
+    "bin/http-server",
+    "bin/http-server.js",
+  ]);
+  const lighthouseScript = resolveNodeScript("lighthouse", ["cli/index.js"]);
 
   try {
     // Find an available port
@@ -58,20 +109,21 @@ async function runLighthouseTests() {
 
     // Start HTTP server bound to localhost and enable SPA mode (-s)
     serverProcess = spawn(
-      "npx",
+      process.execPath,
       [
-        "http-server",
+        httpServerScript,
         "dist",
         "-p",
         selectedPort.toString(),
         "-a",
         "127.0.0.1",
         "-s",
+        "--silent",
       ],
       {
         stdio: ["pipe", "pipe", "pipe"],
         detached: false,
-        shell: true,
+        shell: false,
         cwd: process.cwd(),
       }
     );
@@ -123,20 +175,67 @@ async function runLighthouseTests() {
         const slug = url.name.toLowerCase().replace(/\s+/g, "-");
         const resultFile = path.join(resultsBaseDir, `lighthouse-${slug}.json`);
 
-        const lighthouseCommand = [
-          "npx",
-          "lighthouse",
+        // Create an isolated Chrome user-data-dir to avoid LH cleanup races on Windows
+        const tempProfileDir = path.join(
+          os.tmpdir(),
+          `lh-tmp-${Date.now()}-${Math.random().toString(36).slice(2)}`
+        );
+        await fs.ensureDir(tempProfileDir);
+
+        // Quote and normalize path for Windows Chrome flags
+        const normalizedUserDataDir =
+          process.platform === "win32"
+            ? `"${tempProfileDir.replace(/\\/g, "/")}"`
+            : tempProfileDir;
+
+        const chromeFlags = [
+          "--headless",
+          "--no-sandbox",
+          "--disable-dev-shm-usage",
+          "--disable-gpu",
+          "--disable-web-security",
+          "--disable-features=VizDisplayCompositor",
+          "--no-first-run",
+          "--disable-extensions",
+          `--user-data-dir=${normalizedUserDataDir}`,
+        ].join(" ");
+
+        const lighthouseArgs = [
           testUrl,
           "--output=json",
           `--output-path=${resultFile}`,
-          "--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-web-security --disable-features=VizDisplayCompositor",
+          `--chrome-flags=${chromeFlags}`,
           "--only-categories=performance,accessibility,best-practices,seo",
         ];
 
-        execSync(lighthouseCommand.join(" "), {
-          stdio: "inherit",
-          timeout: 60000, // 60 second timeout
-        });
+        // Use spawnSync to avoid throwing; we'll read the result file even if exit code != 0
+        const env = { ...process.env };
+        if (process.platform === "win32") {
+          const sys32 = "C\\\\Windows\\\\System32";
+          const windowsDir = "C\\\\Windows";
+          const pathSep = ";";
+          const parts = (env.PATH || env.Path || "").split(pathSep);
+          if (!parts.some((p) => p.toLowerCase() === sys32.toLowerCase())) {
+            parts.unshift(sys32);
+          }
+          if (
+            !parts.some((p) => p.toLowerCase() === windowsDir.toLowerCase())
+          ) {
+            parts.unshift(windowsDir);
+          }
+          env.PATH = parts.join(pathSep);
+          env.Path = env.PATH;
+        }
+
+        const run = spawnSync(
+          process.execPath,
+          [lighthouseScript, ...lighthouseArgs],
+          {
+            stdio: "inherit",
+            timeout: 90000,
+            env,
+          }
+        );
 
         // Parse results (preserve JSON on disk)
         if (await fs.pathExists(resultFile)) {
@@ -157,7 +256,30 @@ async function runLighthouseTests() {
           });
 
           console.log(`📝 Saved Lighthouse JSON: ${resultFile}`);
+        } else if (run.error || run.status !== 0) {
+          throw new Error(
+            run.error?.message || `Lighthouse exited with code ${run.status}`
+          );
         }
+
+        // Attempt to clean up temp profile directory; ignore EBUSY
+        const tryRemove = async (attempts = 3) => {
+          for (let i = 0; i < attempts; i++) {
+            try {
+              await fs.remove(tempProfileDir);
+              return;
+            } catch (err) {
+              if (i === attempts - 1) {
+                console.warn(
+                  `  ⚠️  Could not remove temp profile dir (in use): ${tempProfileDir}`
+                );
+                return;
+              }
+              await new Promise((r) => setTimeout(r, 500));
+            }
+          }
+        };
+        await tryRemove();
       } catch (error) {
         console.log(`❌ Error testing ${url.name}:`, error.message);
       }
@@ -181,12 +303,8 @@ async function runLighthouseTests() {
   } finally {
     // Clean up server
     if (serverProcess) {
-      try {
-        serverProcess.kill("SIGTERM");
-        console.log("🛑 Server stopped");
-      } catch (error) {
-        // Ignore cleanup errors
-      }
+      killProcessTreeCrossPlatform(serverProcess);
+      console.log("🛑 Server stopped");
     }
   }
 
