@@ -19,8 +19,8 @@ const config = {
   cssFiles: ["css/**/*.css"],
   jsFiles: ["js/**/*.js"],
   excludeJsFiles: ["js/bootstrap.js", "js/bootstrap.min.js"], // Exclude Bootstrap JS
-  imageFiles: ["img/**/*.{webp,svg}"], // Only copy WebP and svg images
-  copyFiles: ["CNAME", "LICENSE", "README.md"], // Removed fonts, removed data directory
+  imageFiles: ["img/**/*.{webp,svg}"], // Copy WebP and SVG images
+  copyFiles: ["CNAME", "LICENSE", "README.md", "data/**/*"],
   excludePatterns: [
     "node_modules/**",
     "dist/**",
