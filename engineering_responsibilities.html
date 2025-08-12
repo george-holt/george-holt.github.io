@@ -104,6 +104,8 @@
         --chart-max-scale: 5;
         --chart-step-size: 1;
         --chart-font-size: 12;
+        /* Chart width on larger screens */
+        --chart-center-width: 60%;
       }
 
       body {
@@ -123,7 +125,7 @@
       }
       p,
       li {
-        font-size: var(--font-size-base);
+        font-size: var(--font-size-sm);
         line-height: var(--line-height-base);
       }
       /* Accessibility utilities */
@@ -161,16 +163,17 @@
         border-radius: 4px;
       }
       .lead {
-        font-size: var(--font-size-md);
+        font-size: var(--font-size-sm);
         line-height: var(--line-height-base);
       }
       .chart-container {
-        max-width: var(--chart-max-width);
+        max-width: 100%;
         margin: var(--spacing-lg) auto;
         padding: var(--spacing-sm);
         position: relative;
         height: auto;
-        min-height: var(--chart-min-height);
+        /* Remove fixed min-height so vertical spacing tracks width */
+        min-height: 0;
         opacity: 0;
         transition: opacity var(--transition-normal);
       }
@@ -186,10 +189,15 @@
 
       .chart-center {
         order: 1;
-        min-height: var(--chart-center-min-height);
+        /* Make chart height follow width to keep consistent spacing */
+        aspect-ratio: 1 / 1;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: var(--chart-center-width);
+        margin-left: auto;
+        margin-right: auto;
+        min-height: 0;
       }
 
       .company-details {
@@ -221,7 +229,7 @@
       }
 
       .company-description {
-        font-size: var(--font-size-base);
+        font-size: var(--font-size-sm);
         line-height: var(--line-height-base);
         color: var(--text-primary);
         margin: 0;
@@ -229,7 +237,7 @@
 
       .chart-container .well p,
       .chart-container .well li {
-        font-size: var(--font-size-base);
+        font-size: var(--font-size-sm);
         line-height: var(--line-height-base);
       }
       .company-selector {
@@ -256,6 +264,10 @@
         margin-bottom: var(--spacing-lg);
         flex-wrap: wrap;
         padding-top: var(--spacing-sm);
+        width: 100%;
+        max-width: var(--chart-max-width);
+        margin-left: auto;
+        margin-right: auto;
       }
       .vs-label {
         font-weight: bold;
@@ -265,17 +277,24 @@
         margin-bottom: var(--spacing-xs);
       }
       .company-dropdown {
-        min-width: calc(var(--spacing-sm) * 12.5);
+        /* Static width to fit current longest names */
+        width: 20ch;
+        min-width: 20ch;
+        max-width: 100%;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-base);
       }
       .dropdown-container {
         display: flex;
         align-items: center;
         gap: var(--spacing-sm);
+        flex: 0 1 auto;
+        white-space: nowrap;
       }
 
       /* Desktop: Company A legend on left, Company B legend on right */
       .company-a-legend {
-        order: -1; /* Move to left side */
+        order: -1;
       }
       .legend {
         display: flex;
@@ -296,6 +315,8 @@
         flex-shrink: 0;
       }
       canvas {
+        width: 100%;
+        height: 100%;
         max-width: 100%;
       }
 
@@ -317,6 +338,8 @@
           --chart-center-min-height: 300px;
           --section-padding: 30px;
           --content-padding: 15px;
+          /* On mobile, let the chart be full width */
+          --chart-center-width: 100%;
         }
 
         .container {
@@ -324,11 +347,10 @@
         }
 
         .chart-container {
-          min-height: var(--chart-min-height);
+          min-height: 0;
         }
-
         .chart-center {
-          min-height: var(--chart-center-min-height);
+          min-height: 0;
         }
 
         .comparison-controls {
@@ -345,6 +367,11 @@
         .dropdown-container {
           justify-content: center;
           margin: 0;
+        }
+
+        /* On mobile, make selects full-width for usability */
+        .company-dropdown {
+          width: 100%;
         }
 
         /* Mobile: Move Company A legend back to right side when stacked */
@@ -382,10 +409,6 @@
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
-    ></script>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"
     ></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -582,53 +605,73 @@
             <p>
               This radar chart shows the relative emphasis (1-5 scale) that
               different companies place on various engineering management
-              responsibilities. The data is based on my observations and
-              experience in the industry.
+              responsibilities. The data is based on data collected from open
+              job descriptions in the last 12 months, blogs, published articles,
+              and my own personal observations. I know each role varies over
+              time and from team to team, so please keep in mind that this is a
+              generalization.
+            </p>
+            <p>
+              If you think this is wrong, please correct me by taking this
+              <a href="https://forms.gle/opvPotKjoY26Hjj96">survey</a>
             </p>
             <p><strong>What each responsibility means in practice:</strong></p>
             <ul id="responsibility-list" role="list">
               <li role="listitem">
-                <strong>People Management:</strong> Hiring, performance reviews,
-                career development, team building, conflict resolution, and
-                organizational design. Higher scores mean more time spent on
-                people vs. technical work.
+                <strong>People Management:</strong> Hiring, coaching, team
+                morale, performance management, and career development. This
+                includes work like holding 1:1s or skip-levels, giving feedback,
+                writing promotion reviews, on-boarding new hires, developing
+                retention strategies, and resolving interpersonal issues.
               </li>
               <li role="listitem">
-                <strong>Tech Strategy:</strong> Architecture decisions,
+                <strong>Technical Strategy:</strong> Architecture decisions,
                 technology choices, technical roadmap planning, and setting
-                technical direction. Higher scores indicate more strategic
-                technical leadership.
+                technical direction.
               </li>
               <li role="listitem">
-                <strong>Execution:</strong> Project management, timeline
-                tracking, resource allocation, and delivery coordination. Higher
-                scores mean more hands-on project management.
+                <strong>Execution:</strong> Making sure the team ships work
+                predictably and meets deadlines. This includes estimating and
+                tracking work, managing scope and dependencies, unblocking
+                engineers, and handling timeline or risk escalations.
               </li>
               <li role="listitem">
-                <strong>Product:</strong> Product strategy, feature
-                prioritization, roadmap planning, and product-market fit
-                decisions. Higher scores indicate more product ownership
-                responsibilities.
+                <strong>Product:</strong> Working with product managers and
+                designers (or on your own) to define what gets built and why.
+                This includes aligning on goals and priorities, product/market
+                fit decisions, reviewing PRDs and design mocks, negotiating
+                tradeoffs, and defining the product roadmap.
               </li>
               <li role="listitem">
-                <strong>Customer:</strong> Direct customer interaction,
-                requirements gathering, user research, and customer success.
-                Higher scores mean more customer-facing responsibilities.
+                <strong>Customer:</strong> Understanding and representing the
+                needs of users. This includes analyzing customer feedback,
+                reviewing usage and satisfaction metrics, participating in user
+                research or interviews, and prioritizing work based on customer
+                impact.
               </li>
               <li role="listitem">
-                <strong>Quality:</strong> Code review processes, testing
-                strategies, reliability engineering, and quality assurance
-                oversight. Higher scores indicate stronger quality focus.
+                <strong>Quality and Operational Excellence:</strong> Ensuring
+                code quality, system reliability, and a smooth development
+                process and release process. This includes promoting test
+                coverage, driving on-call health and postmortems, addressing
+                technical debt, and improving build and deployment workflows.
+                Code review processes, testing strategies, reliability
+                engineering, and quality assurance oversight.
               </li>
               <li role="listitem">
-                <strong>Cross-functional:</strong> Working with design,
-                marketing, sales, legal, and other departments. Higher scores
-                mean more cross-team collaboration.
+                <strong>Cross-functional:</strong> Coordinating across
+                organizations, functions, and teams to get things done. This
+                includes working with Security, Legal, Infra, QA, Sales, or
+                other departments; running cross-team meetings; representing
+                your team in reviews; and leading org-wide initiatives.
               </li>
               <li role="listitem">
-                <strong>IC Work:</strong> Hands-on coding, debugging, and
-                technical implementation. Higher scores indicate more individual
-                contributor responsibilities alongside management.
+                <strong>IC Work:</strong>Direct technical involvement through
+                writing, reviewing, or debugging code. This includes reviewing
+                pull requests, writing code or prototypes, debugging hard
+                issues, or jumping into design sessions as a hands-on
+                contributor. There some engineering managers who still build
+                major features to stay connected to the craft.
               </li>
               <li role="listitem">
                 <strong>Tech Mentorship:</strong> Technical coaching, code
@@ -649,7 +692,7 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const csvPath = "./data/engineering_responsibilities_compact.csv";
+        // Build populates COMPANY_ROWS and COMPANY_DETAILS as inline consts
 
         const chartLabels = [
           "PeoplePri",
@@ -668,24 +711,35 @@
         let companyDetails = {};
         let responsibilityConfig = {};
 
-        // Load company details with error handling
-        const companyDetailsPath = "./data/company_details.json";
-        fetch(companyDetailsPath)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-          })
-          .then((data) => {
-            companyDetails = data;
-            // Don't update chart here - let populateSelectors handle it
-          })
-          .catch((error) => {
-            console.error("Error loading company details:", error);
-            // Continue without company details - chart will still work
-            companyDetails = {};
-          });
+        // Chart configuration constants (must be defined before first use)
+        const CHART_CONFIG = {
+          DEFAULT_VALUE: 0,
+          MAX_SCALE: 5,
+          STEP_SIZE: 1,
+          FONT_SIZE: 12,
+          COMPANY_A_COLOR: "rgba(54, 162, 235, 1)",
+          COMPANY_B_COLOR: "rgba(255, 99, 132, 1)",
+          COMPANY_A_FILL: "rgba(54, 162, 235, 0.2)",
+          COMPANY_B_FILL: "rgba(255, 99, 132, 0.2)",
+        };
+
+        // Load embedded data synchronously from script tags
+        try {
+          const detailsEl = document.getElementById("company-details-json");
+          if (detailsEl && detailsEl.textContent) {
+            companyDetails = JSON.parse(detailsEl.textContent);
+          }
+        } catch (_) {
+          companyDetails = {};
+        }
+        try {
+          const rowsEl = document.getElementById("company-rows-json");
+          if (rowsEl && rowsEl.textContent) {
+            allData = JSON.parse(rowsEl.textContent);
+          }
+        } catch (_) {
+          allData = [];
+        }
 
         // Parse responsibility config from CSV header
         function parseResponsibilityConfig(csvText) {
@@ -712,65 +766,13 @@
           return { config, chartLabels };
         }
 
-        // Load CSV with error handling
-        const cacheBuster = "?v=1.0";
-        const fullCsvPath = csvPath + cacheBuster;
-        fetch(fullCsvPath)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.text();
-          })
-          .then((csv) => {
-            Papa.parse(csv, {
-              header: true,
-              dynamicTyping: true,
-              complete: function (results) {
-                if (results.errors.length > 0) {
-                  console.error("CSV parsing errors:", results.errors);
-                }
-                if (!results.data || results.data.length === 0) {
-                  console.error("No data found in CSV");
-                  return;
-                }
-                allData = results.data;
-                responsibilityConfig = parseResponsibilityConfig(csv).config;
-                populateAboutSection();
-                populateSelectors(results.data);
-              },
-              error: function (error) {
-                console.error("PapaParse error:", error);
-              },
-            });
-          })
-          .catch((error) => {
-            console.error("Error loading CSV:", error);
-            // Try alternative path if first one fails
-            if (csvPath.startsWith("./")) {
-              const altPath = csvPath.substring(2) + cacheBuster;
-              fetch(altPath)
-                .then((response) => response.text())
-                .then((csv) => {
-                  Papa.parse(csv, {
-                    header: true,
-                    dynamicTyping: true,
-                    complete: function (results) {
-                      if (results.data && results.data.length > 0) {
-                        allData = results.data;
-                        responsibilityConfig =
-                          parseResponsibilityConfig(csv).config;
-                        populateAboutSection();
-                        populateSelectors(results.data);
-                      }
-                    },
-                  });
-                })
-                .catch((altError) => {
-                  console.error("Alternative path also failed:", altError);
-                });
-            }
-          });
+        // Parse embedded CSV for rows and header
+        if (allData && allData.length > 0) {
+          const header = Object.keys(allData[0]).join(",");
+          responsibilityConfig = parseResponsibilityConfig(header).config;
+          populateAboutSection();
+          populateSelectors(allData);
+        }
 
         // Fallback for older browsers that don't support fetch
         if (typeof fetch === "undefined") {
@@ -779,19 +781,26 @@
           );
         }
 
-        // Chart configuration constants
-        const CHART_CONFIG = {
-          DEFAULT_VALUE: 0,
-          MAX_SCALE: 5,
-          STEP_SIZE: 1,
-          FONT_SIZE: 12,
-          COMPANY_A_COLOR: "rgba(54, 162, 235, 1)",
-          COMPANY_B_COLOR: "rgba(255, 99, 132, 1)",
-          COMPANY_A_FILL: "rgba(54, 162, 235, 0.2)",
-          COMPANY_B_FILL: "rgba(255, 99, 132, 0.2)",
-        };
+        // (moved CHART_CONFIG earlier)
 
-        function renderChart(companyA, companyB) {
+        function ensureChartLoaded() {
+          return new Promise((resolve, reject) => {
+            if (window.Chart) return resolve();
+            const s = document.createElement("script");
+            s.src = "vendor/chart.min.js";
+            s.defer = true;
+            s.onload = () => resolve();
+            s.onerror = (e) => reject(e);
+            document.head.appendChild(s);
+          });
+        }
+
+        async function renderChart(companyA, companyB) {
+          try {
+            await ensureChartLoaded();
+          } catch (_) {
+            return;
+          }
           if (window.Chart && Chart.defaults) {
             Chart.defaults.animation = false;
           }
@@ -812,6 +821,23 @@
           }
 
           const datasets = [];
+
+          // Match axis label font size to body text size
+          let axisFontSizePx = 14; // fallback
+          try {
+            const samplePara = document.querySelector("p");
+            const computed = window.getComputedStyle(
+              samplePara || document.body
+            );
+            const sizeStr =
+              computed && computed.fontSize ? computed.fontSize : "14px";
+            const parsed = parseFloat(sizeStr);
+            if (!Number.isNaN(parsed) && parsed > 0) {
+              axisFontSizePx = parsed;
+            }
+          } catch (_) {
+            // keep fallback
+          }
 
           // Add Company A if selected
           if (companyA) {
@@ -878,14 +904,13 @@
                     beginAtZero: true,
                     ticks: {
                       stepSize: CHART_CONFIG.STEP_SIZE,
+                      font: { size: axisFontSizePx },
                       callback: function (value) {
                         return value;
                       },
                     },
                     pointLabels: {
-                      font: {
-                        size: CHART_CONFIG.FONT_SIZE,
-                      },
+                      font: { size: axisFontSizePx },
                       callback: function (value) {
                         // Split long labels into multiple lines
                         const words = value.split(" ");
@@ -999,6 +1024,40 @@
 
           // Single coordinated update: update chart and fade-in together
           updateChart();
+
+          // Size dropdowns to fit the longest company name (desktop/tablet only)
+          try {
+            if (
+              !window.matchMedia ||
+              !window.matchMedia("(max-width: 768px)").matches
+            ) {
+              const selectTexts = Array.from(validRows, (r) =>
+                String(r.Company || "")
+              );
+              const measureEl = document.createElement("span");
+              measureEl.style.visibility = "hidden";
+              measureEl.style.whiteSpace = "nowrap";
+              // Use same font as form controls
+              const sampleSelect = selectA || selectB;
+              if (sampleSelect) {
+                const cs = window.getComputedStyle(sampleSelect);
+                measureEl.style.font = `${cs.fontStyle} ${cs.fontVariant} ${cs.fontWeight} ${cs.fontSize} / ${cs.lineHeight} ${cs.fontFamily}`;
+              }
+              document.body.appendChild(measureEl);
+              let maxPx = 0;
+              for (const txt of selectTexts) {
+                measureEl.textContent = txt;
+                maxPx = Math.max(maxPx, measureEl.offsetWidth);
+              }
+              document.body.removeChild(measureEl);
+              // Add padding and arrow allowance, and cap to a reasonable width
+              const widthPx = Math.min(maxPx + 56, 480);
+              if (selectA) selectA.style.width = `${widthPx}px`;
+              if (selectB) selectB.style.width = `${widthPx}px`;
+            }
+          } catch (_) {
+            // Ignore sizing errors
+          }
 
           // Add loaded classes immediately after chart update
           const companyADetails = document.getElementById("companyA-details");

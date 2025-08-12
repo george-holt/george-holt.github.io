@@ -160,6 +160,21 @@
         background: #1e7e34;
       }
 
+      /* Outline variant for secondary CTA */
+      .cta-button.outline {
+        background: transparent;
+        color: #222;
+        border-color: #222;
+        border-width: 1px;
+        font-size: 14px;
+      }
+      .cta-button.outline:hover,
+      .cta-button.outline:focus {
+        background: #f2f2f2;
+        color: #000;
+        border-color: #000;
+      }
+
       .cta-icon {
         font-size: 18px;
         width: 18px;
@@ -170,6 +185,11 @@
         justify-content: center;
         vertical-align: middle;
         line-height: 1;
+      }
+      /* Prevent global img rounding from affecting small CTA icons */
+      img.cta-icon {
+        border-radius: 0 !important;
+        object-fit: contain;
       }
 
       .linkedin-icon {
@@ -663,6 +683,22 @@
                   </svg>
                   View my resume
                 </a>
+
+                <a
+                  class="cta-button outline"
+                  href="engineering_responsibilities.html"
+                  aria-label="View the Engineering Responsibilities radar chart"
+                >
+                  <img
+                    class="cta-icon"
+                    src="img/Scale_icon_no_background.svg"
+                    alt=""
+                    width="18"
+                    height="18"
+                    style="width: 18px; height: 18px"
+                  />
+                  EM Role Comparison
+                </a>
               </div>
 
               <ul class="hero-bullets">
@@ -784,7 +820,5 @@
         </p>
       </div>
     </footer>
-
-    <!-- No JavaScript needed - this is a static site -->
   </body>
 </html>

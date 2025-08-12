@@ -7,6 +7,7 @@ const HtmlMinifier = require("html-minifier");
 const CleanCSS = require("clean-css");
 const { minify } = require("terser");
 const { PurgeCSS } = require("purgecss");
+const esbuild = require("esbuild");
 
 const chokidar = require("chokidar");
 
@@ -18,8 +19,8 @@ const config = {
   cssFiles: ["css/**/*.css"],
   jsFiles: ["js/**/*.js"],
   excludeJsFiles: ["js/bootstrap.js", "js/bootstrap.min.js"], // Exclude Bootstrap JS
-  imageFiles: ["img/**/*.webp"], // Only copy WebP images
-  copyFiles: ["CNAME", "LICENSE", "README.md", "data/**/*"], // Removed fonts
+  imageFiles: ["img/**/*.{webp,svg}"], // Only copy WebP and svg images
+  copyFiles: ["CNAME", "LICENSE", "README.md"], // Removed fonts, removed data directory
   excludePatterns: [
     "node_modules/**",
     "dist/**",
@@ -41,7 +42,7 @@ const htmlMinifyOptions = {
   removeStyleLinkTypeAttributes: true,
   useShortDoctype: true,
   minifyCSS: true,
-  minifyJS: true,
+  minifyJS: false,
   minifyURLs: true,
   removeEmptyAttributes: true,
   removeOptionalTags: true,
@@ -71,6 +72,84 @@ const jsMinifyOptions = {
   },
 };
 
+function preprocessHtmlContent(filePath, htmlContent) {
+  try {
+    const fileName = path.basename(filePath);
+    if (fileName !== "engineering_responsibilities.html") {
+      return htmlContent;
+    }
+
+    const companyDetailsPath = path.join(
+      process.cwd(),
+      "data",
+      "company_details.json"
+    );
+    const csvPath = path.join(
+      process.cwd(),
+      "data",
+      "engineering_responsibilities_compact.csv"
+    );
+
+    let embeddedCompanyDetails = null;
+    let embeddedCsv = null;
+
+    try {
+      embeddedCompanyDetails = fs.readFileSync(companyDetailsPath, "utf8");
+    } catch (_) {}
+    try {
+      embeddedCsv = fs.readFileSync(csvPath, "utf8");
+    } catch (_) {}
+
+    if (!embeddedCompanyDetails && !embeddedCsv) {
+      return htmlContent;
+    }
+
+    // Convert CSV to JSON rows as well
+    const toRows = (csvText) => {
+      if (!csvText) return [];
+      const lines = csvText.replace(/\r/g, "\n").split(/\n+/).filter(Boolean);
+      if (lines.length === 0) return [];
+      const headers = lines[0].split(",").map((h) => h.trim());
+      const rows = [];
+      for (let i = 1; i < lines.length; i++) {
+        const cols = lines[i].split(",");
+        if (!cols[0]) continue;
+        const row = {};
+        for (let j = 0; j < headers.length; j++) {
+          const key = headers[j];
+          const raw = (cols[j] ?? "").trim();
+          const asNum = raw === "" ? raw : Number(raw);
+          row[key] = Number.isFinite(asNum) ? asNum : raw;
+        }
+        rows.push(row);
+      }
+      return rows;
+    };
+
+    const rowsJson = embeddedCsv ? JSON.stringify(toRows(embeddedCsv)) : "[]";
+
+    // Inject raw data as non-executable script tags for safe minification
+    const parts = [];
+    if (embeddedCompanyDetails) {
+      parts.push(
+        `<script type="application/json" id="company-details-json">${embeddedCompanyDetails}</script>`
+      );
+    }
+    parts.push(
+      `<script type="application/json" id="company-rows-json">${rowsJson}</script>`
+    );
+    const injection = parts.join("\n");
+
+    // Inject before </head> if present, otherwise prepend to content
+    if (htmlContent.includes("</head>")) {
+      return htmlContent.replace("</head>", `${injection}\n</head>`);
+    }
+    return injection + htmlContent;
+  } catch (_) {
+    return htmlContent;
+  }
+}
+
 class WebsiteBuilder {
   constructor() {
     this.isWatchMode = process.argv.includes("--watch");
@@ -91,6 +170,7 @@ class WebsiteBuilder {
       await this.processHtmlFiles();
       await this.processCssFiles();
       await this.processJsFiles();
+      await this.bundleChartModule();
       await this.copyImages();
       await this.copyStaticFiles();
 
@@ -161,7 +241,9 @@ class WebsiteBuilder {
       if (this.shouldExclude(file)) continue;
 
       const sourcePath = path.join(config.sourceDir, file);
-      const content = await fs.readFile(sourcePath, "utf8");
+      let content = await fs.readFile(sourcePath, "utf8");
+      // Preprocess to embed data for specific pages
+      content = preprocessHtmlContent(sourcePath, content);
       const minified = HtmlMinifier.minify(content, htmlMinifyOptions);
 
       const outputPath = path.join(config.outputDir, file);
@@ -259,6 +341,51 @@ class WebsiteBuilder {
     }
   }
 
+  async bundleChartModule() {
+    // Only for engineering_responsibilities page: build a minimal Chart.js bundle
+    try {
+      const entrySource = `
+        import { Chart, RadarController, RadialLinearScale, PointElement, LineElement, Filler } from 'chart.js';
+        Chart.register(RadarController, RadialLinearScale, PointElement, LineElement, Filler);
+        // Expose globally for existing page code
+        window.Chart = Chart;
+        export default Chart;
+      `;
+      const tmpEntry = path.join(
+        process.cwd(),
+        "node_modules",
+        ".cache-chart-entry.mjs"
+      );
+      await fs.ensureDir(path.dirname(tmpEntry));
+      await fs.writeFile(tmpEntry, entrySource);
+
+      const outFile = path.join(config.outputDir, "vendor", "chart.min.js");
+      await fs.ensureDir(path.dirname(outFile));
+
+      await esbuild.build({
+        entryPoints: [tmpEntry],
+        bundle: true,
+        minify: true,
+        format: "iife",
+        platform: "browser",
+        target: ["es2018"],
+        outfile: outFile,
+        globalName: "Chart",
+        define: { "process.env.NODE_ENV": '"production"' },
+        logLevel: "silent",
+      });
+
+      // Cleanup temp
+      await fs.remove(tmpEntry);
+      console.log("  ✓ Built minimal Chart.js bundle");
+    } catch (err) {
+      console.warn(
+        "  ⚠️  Could not build minimal Chart.js bundle:",
+        err.message
+      );
+    }
+  }
+
   async copyImages() {
     console.log("🖼️  Copying images...");
 
@@ -311,15 +438,31 @@ class WebsiteBuilder {
         return total + stats.size;
       }, 0);
 
-      const compressionRatio = ((1 - buildSize / originalSize) * 100).toFixed(
-        2
+      // Calculate vendor bytes shipped (files under dist/vendor/**)
+      const vendorFiles = buildFiles.filter((file) =>
+        file.replace(/\\/g, "/").startsWith("vendor/")
       );
+      const vendorSize = vendorFiles.reduce((total, file) => {
+        const stats = fs.statSync(path.join(config.outputDir, file));
+        return total + stats.size;
+      }, 0);
+
+      const effectiveBuild = Math.max(buildSize - vendorSize, 0);
+      const compressionRatio = (
+        (1 - effectiveBuild / originalSize) *
+        100
+      ).toFixed(2);
       const originalSizeKB = (originalSize / 1024).toFixed(2);
       const buildSizeKB = (buildSize / 1024).toFixed(2);
+      const effectiveBuildKB = (effectiveBuild / 1024).toFixed(2);
 
       console.log(`  Original size: ${originalSizeKB} KB`);
       console.log(`  Build size: ${buildSizeKB} KB`);
-      console.log(`  Compression: ${compressionRatio}%`);
+      console.log(`  Build size (excluding vendor): ${effectiveBuildKB} KB`);
+      console.log(
+        `  Vendor bytes shipped: ${(vendorSize / 1024).toFixed(2)} KB`
+      );
+      console.log(`  Compression (excluding vendor): ${compressionRatio}%`);
       console.log(`  Files processed: ${buildFiles.length}`);
     } catch (error) {
       console.warn(
