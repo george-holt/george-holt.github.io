@@ -74,500 +74,508 @@
         })(window, "ppms", ["tm", "cm"]);
       })(window, document, "dataLayer", "b6ca6764-4b6c-4bfe-b0a5-896cc9f6b48e");</script><header role="banner"><nav aria-label="Main navigation"role="navigation"><div class="container"><div class="back-link"><a href="index.html"class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Back to Home</a></div></div></nav></header><main id="main-content"role="main"><section aria-labelledby="page-title"class="introduction"><div class="container"><header><h1 id="page-title">What Engineering Managers Do In Different Companies</h1><p class="lead">Compare how different companies emphasize various engineering management responsibilities.</header></div></section><section aria-labelledby="chart-title"class="chart-section"><div class="container"><div class="company-selector"><p class="control-label"id="company-help">Select up to 2 companies:<div class="comparison-controls"><div class="dropdown-container"><div class="legend-item company-a-legend"><div class="legend-color"aria-hidden="true"style="background-color:#36a2eb"></div><span class="visually-hidden">Company A color</span></div><label class="visually-hidden"for="companyA">First company</label> <select aria-describedby="company-help companyA-description"class="company-dropdown form-control"id="companyA"></select></div><div class="vs-label"aria-hidden="true"role="separator">vs</div><div class="dropdown-container"><label class="visually-hidden"for="companyB">Second company</label> <select aria-describedby="company-help companyB-description"class="company-dropdown form-control"id="companyB"></select><div class="legend-item"><div class="legend-color"aria-hidden="true"style="background-color:#ff6384"></div><span class="visually-hidden">Company B color</span></div></div></div></div><div class="chart-container"role="region"aria-label="Engineering responsibilities comparison chart"><div class="chart-layout"><article class="company-details"aria-labelledby="companyA-title"aria-live="polite"id="companyA-details"><h2 id="companyA-title">Select a company to see details...</h2><p class="company-description"id="companyA-description">Choose a company from the dropdown above to view their engineering management focus areas.</article><div class="chart-center"><p class="visually-hidden"id="chart-desc"aria-live="polite">Radar chart comparing selected companies across engineering management responsibilities.</p><canvas aria-describedby="chart-desc"aria-label="Engineering responsibilities comparison chart"id="radarChart"role="img"></canvas></div><article class="company-details"aria-labelledby="companyB-title"aria-live="polite"id="companyB-details"><h2 id="companyB-title">Select a company to see details...</h2><p class="company-description"id="companyB-description">Choose a company from the dropdown above to view their engineering management focus areas.</article></div></div></div></section><section aria-labelledby="about-title"class="about-chart"><div class="container"><article class="well"><header><h2 id="about-title">About this chart:</h2></header><p>This radar chart shows the relative emphasis (1-5 scale) that different companies place on various engineering management responsibilities. The data is based on data collected from open job descriptions in the last 12 months, blogs, published articles, and my own personal observations. I know each role varies over time and from team to team, so please keep in mind that this is a generalization.<p>If you think this is wrong, please correct me by taking this <a href="https://forms.gle/opvPotKjoY26Hjj96">survey</a><p><strong>What each responsibility means in practice:</strong><ul id="responsibility-list"role="list"><li role="listitem"><strong>People Management:</strong> Hiring, coaching, team morale, performance management, and career development. This includes work like holding 1:1s or skip-levels, giving feedback, writing promotion reviews, on-boarding new hires, developing retention strategies, and resolving interpersonal issues.<li role="listitem"><strong>Technical Strategy:</strong> Architecture decisions, technology choices, technical roadmap planning, and setting technical direction.<li role="listitem"><strong>Execution:</strong> Making sure the team ships work predictably and meets deadlines. This includes estimating and tracking work, managing scope and dependencies, unblocking engineers, and handling timeline or risk escalations.<li role="listitem"><strong>Product:</strong> Working with product managers and designers (or on your own) to define what gets built and why. This includes aligning on goals and priorities, product/market fit decisions, reviewing PRDs and design mocks, negotiating tradeoffs, and defining the product roadmap.<li role="listitem"><strong>Customer:</strong> Understanding and representing the needs of users. This includes analyzing customer feedback, reviewing usage and satisfaction metrics, participating in user research or interviews, and prioritizing work based on customer impact.<li role="listitem"><strong>Quality and Operational Excellence:</strong> Ensuring code quality, system reliability, and a smooth development process and release process. This includes promoting test coverage, driving on-call health and postmortems, addressing technical debt, and improving build and deployment workflows. Code review processes, testing strategies, reliability engineering, and quality assurance oversight.<li role="listitem"><strong>Cross-functional:</strong> Coordinating across organizations, functions, and teams to get things done. This includes working with Security, Legal, Infra, QA, Sales, or other departments; running cross-team meetings; representing your team in reviews; and leading org-wide initiatives.<li role="listitem"><strong>IC Work:</strong>Direct technical involvement through writing, reviewing, or debugging code. This includes reviewing pull requests, writing code or prototypes, debugging hard issues, or jumping into design sessions as a hands-on contributor. There some engineering managers who still build major features to stay connected to the craft.<li role="listitem"><strong>Tech Mentorship:</strong> Technical coaching, code reviews, architecture guidance, and technical skill development. Higher scores mean more technical teaching and mentoring.</ul><p><strong>How to interpret the chart:</strong> A score of 1 means minimal emphasis, while 5 indicates heavy focus. Companies with higher scores in certain areas typically expect managers to spend more time on those responsibilities.</article></div></section></main><script>(function () {
         const onReady = function () {
-        // Build populates COMPANY_ROWS and COMPANY_DETAILS as inline consts
+          // Build populates COMPANY_ROWS and COMPANY_DETAILS as inline consts
 
-        const chartLabels = [
-          "PeoplePri",
-          "TechPri",
-          "ExecPri",
-          "ProductPri",
-          "CustomerPri",
-          "QualityPri",
-          "XFuncPri",
-          "TechConPri",
-          "MentorPri",
-        ];
+          const chartLabels = [
+            "PeoplePri",
+            "TechPri",
+            "ExecPri",
+            "ProductPri",
+            "CustomerPri",
+            "QualityPri",
+            "XFuncPri",
+            "TechConPri",
+            "MentorPri",
+          ];
 
-        let chart;
-        let allData = [];
-        let companyDetails = {};
-        let responsibilityConfig = {};
+          let chart;
+          let allData = [];
+          let companyDetails = {};
+          let responsibilityConfig = {};
 
-        // Chart configuration constants (must be defined before first use)
-        const CHART_CONFIG = {
-          DEFAULT_VALUE: 0,
-          MAX_SCALE: 5,
-          STEP_SIZE: 1,
-          FONT_SIZE: 12,
-          COMPANY_A_COLOR: "rgba(54, 162, 235, 1)",
-          COMPANY_B_COLOR: "rgba(255, 99, 132, 1)",
-          COMPANY_A_FILL: "rgba(54, 162, 235, 0.2)",
-          COMPANY_B_FILL: "rgba(255, 99, 132, 0.2)",
-        };
+          // Chart configuration constants (must be defined before first use)
+          const CHART_CONFIG = {
+            DEFAULT_VALUE: 0,
+            MAX_SCALE: 5,
+            STEP_SIZE: 1,
+            FONT_SIZE: 12,
+            COMPANY_A_COLOR: "rgba(54, 162, 235, 1)",
+            COMPANY_B_COLOR: "rgba(255, 99, 132, 1)",
+            COMPANY_A_FILL: "rgba(54, 162, 235, 0.2)",
+            COMPANY_B_FILL: "rgba(255, 99, 132, 0.2)",
+          };
 
-        // Load embedded data synchronously from script tags
-        try {
-          const detailsEl = document.getElementById("company-details-json");
-          if (detailsEl && detailsEl.textContent) {
-            companyDetails = JSON.parse(detailsEl.textContent);
-          }
-        } catch (_) {
-          companyDetails = {};
-        }
-        try {
-          const rowsEl = document.getElementById("company-rows-json");
-          if (rowsEl && rowsEl.textContent) {
-            allData = JSON.parse(rowsEl.textContent);
-          }
-        } catch (_) {
-          allData = [];
-        }
-
-        // Parse responsibility config from CSV header
-        function parseResponsibilityConfig(csvText) {
-          const lines = csvText.split("\n");
-          const header = lines[0];
-          const columns = header.split(",");
-
-          const config = {};
-          const chartLabels = [];
-
-          columns.forEach((column, index) => {
-            if (column !== "Company" && column.trim()) {
-              const displayName = column.trim();
-              const key = displayName.replace(/\s+/g, ""); // Remove spaces for key
-
-              config[key] = {
-                displayName: displayName,
-                description: `${displayName} responsibilities and focus areas`,
-              };
-              chartLabels.push(displayName);
-            }
-          });
-
-          return { config, chartLabels };
-        }
-
-        // Fallback CSV parser (no external lib needed)
-        function toRows(csvText) {
-          if (!csvText) return [];
-          const lines = csvText.replace(/\r/g, "\n").split(/\n+/).filter(Boolean);
-          if (lines.length === 0) return [];
-          const headers = lines[0].split(",").map((h) => h.trim());
-          const rows = [];
-          for (let i = 1; i < lines.length; i++) {
-            const cols = lines[i].split(",");
-            if (!cols[0]) continue;
-            const row = {};
-            for (let j = 0; j < headers.length; j++) {
-              const key = headers[j];
-              const raw = (cols[j] ?? "").trim();
-              const asNum = raw === "" ? raw : Number(raw);
-              row[key] = Number.isFinite(asNum) ? asNum : raw;
-            }
-            rows.push(row);
-          }
-          return rows;
-        }
-
-        // Use embedded data if present; otherwise fallback to files in dist/data
-        (async function initData() {
-          if (allData && allData.length > 0) {
-            const header = Object.keys(allData[0]).join(",");
-            responsibilityConfig = parseResponsibilityConfig(header).config;
-            populateAboutSection();
-            populateSelectors(allData);
-            return;
-          }
-
+          // Load embedded data synchronously from script tags
           try {
-            const [detailsResp, csvResp] = await Promise.all([
-              fetch("./data/company_details.json").catch(() => null),
-              fetch("./data/engineering_responsibilities_compact.csv").catch(() => null),
-            ]);
-
-            if (detailsResp && detailsResp.ok) {
-              companyDetails = await detailsResp.json();
+            const detailsEl = document.getElementById("company-details-json");
+            if (detailsEl && detailsEl.textContent) {
+              companyDetails = JSON.parse(detailsEl.textContent);
             }
-            if (csvResp && csvResp.ok) {
-              const csvText = await csvResp.text();
-              allData = toRows(csvText);
-              const header = csvText.split("\n")[0] || Object.keys(allData[0] || {}).join(",");
+          } catch (_) {
+            companyDetails = {};
+          }
+          try {
+            const rowsEl = document.getElementById("company-rows-json");
+            if (rowsEl && rowsEl.textContent) {
+              allData = JSON.parse(rowsEl.textContent);
+            }
+          } catch (_) {
+            allData = [];
+          }
+
+          // Parse responsibility config from CSV header
+          function parseResponsibilityConfig(csvText) {
+            const lines = csvText.split("\n");
+            const header = lines[0];
+            const columns = header.split(",");
+
+            const config = {};
+            const chartLabels = [];
+
+            columns.forEach((column, index) => {
+              if (column !== "Company" && column.trim()) {
+                const displayName = column.trim();
+                const key = displayName.replace(/\s+/g, ""); // Remove spaces for key
+
+                config[key] = {
+                  displayName: displayName,
+                  description: `${displayName} responsibilities and focus areas`,
+                };
+                chartLabels.push(displayName);
+              }
+            });
+
+            return { config, chartLabels };
+          }
+
+          // Fallback CSV parser (no external lib needed)
+          function toRows(csvText) {
+            if (!csvText) return [];
+            const lines = csvText
+              .replace(/\r/g, "\n")
+              .split(/\n+/)
+              .filter(Boolean);
+            if (lines.length === 0) return [];
+            const headers = lines[0].split(",").map((h) => h.trim());
+            const rows = [];
+            for (let i = 1; i < lines.length; i++) {
+              const cols = lines[i].split(",");
+              if (!cols[0]) continue;
+              const row = {};
+              for (let j = 0; j < headers.length; j++) {
+                const key = headers[j];
+                const raw = (cols[j] ?? "").trim();
+                const asNum = raw === "" ? raw : Number(raw);
+                row[key] = Number.isFinite(asNum) ? asNum : raw;
+              }
+              rows.push(row);
+            }
+            return rows;
+          }
+
+          // Use embedded data if present; otherwise fallback to files in dist/data
+          (async function initData() {
+            if (allData && allData.length > 0) {
+              const header = Object.keys(allData[0]).join(",");
               responsibilityConfig = parseResponsibilityConfig(header).config;
               populateAboutSection();
               populateSelectors(allData);
+              return;
             }
-          } catch (_) {
-            // Fail quietly
-          }
-        })();
 
-        // Fallback for older browsers that don't support fetch
-        if (typeof fetch === "undefined") {
-          console.error(
-            "Fetch API not supported - this browser may not work properly"
-          );
-        }
-
-        // (moved CHART_CONFIG earlier)
-
-        function ensureChartLoaded() {
-          return new Promise((resolve, reject) => {
-            if (window.Chart) return resolve();
-            const s = document.createElement("script");
-            s.src = "vendor/chart.min.js";
-            s.defer = true;
-            s.onload = () => resolve();
-            s.onerror = (e) => reject(e);
-            document.head.appendChild(s);
-          });
-        }
-
-        async function renderChart(companyA, companyB) {
-          try {
-            await ensureChartLoaded();
-          } catch (_) {
-            return;
-          }
-          if (window.Chart && Chart.defaults) {
-            Chart.defaults.animation = false;
-          }
-          const ctx = document.getElementById("radarChart");
-          if (!ctx) {
-            console.error("Canvas element not found");
-            return;
-          }
-
-          const context = ctx.getContext("2d");
-          if (!context) {
-            console.error("Could not get canvas context");
-            return;
-          }
-
-          if (chart) {
-            chart.destroy();
-          }
-
-          const datasets = [];
-
-          // Match axis label font size to body text size
-          let axisFontSizePx = 14; // fallback
-          try {
-            const samplePara = document.querySelector("p");
-            const computed = window.getComputedStyle(
-              samplePara || document.body
-            );
-            const sizeStr =
-              computed && computed.fontSize ? computed.fontSize : "14px";
-            const parsed = parseFloat(sizeStr);
-            if (!Number.isNaN(parsed) && parsed > 0) {
-              axisFontSizePx = parsed;
-            }
-          } catch (_) {
-            // keep fallback
-          }
-
-          // Add Company A if selected
-          if (companyA) {
-            const chartLabels = Object.keys(responsibilityConfig);
-            const dataA = chartLabels.map((label) => {
-              const displayName = responsibilityConfig[label].displayName;
-              return companyA[displayName] ?? CHART_CONFIG.DEFAULT_VALUE;
-            });
-            datasets.push({
-              label: companyA.Company,
-              data: dataA,
-              fill: true,
-              backgroundColor: CHART_CONFIG.COMPANY_A_FILL,
-              borderColor: CHART_CONFIG.COMPANY_A_COLOR,
-              pointBackgroundColor: CHART_CONFIG.COMPANY_A_COLOR,
-              pointBorderColor: "#fff",
-              pointHoverBackgroundColor: "#fff",
-              pointHoverBorderColor: CHART_CONFIG.COMPANY_A_COLOR,
-            });
-          }
-
-          // Add Company B if selected
-          if (companyB) {
-            const chartLabels = Object.keys(responsibilityConfig);
-            const dataB = chartLabels.map((label) => {
-              const displayName = responsibilityConfig[label].displayName;
-              return companyB[displayName] ?? CHART_CONFIG.DEFAULT_VALUE;
-            });
-            datasets.push({
-              label: companyB.Company,
-              data: dataB,
-              fill: true,
-              backgroundColor: CHART_CONFIG.COMPANY_B_FILL,
-              borderColor: CHART_CONFIG.COMPANY_B_COLOR,
-              pointBackgroundColor: CHART_CONFIG.COMPANY_B_COLOR,
-              pointBorderColor: "#fff",
-              pointHoverBackgroundColor: "#fff",
-              pointHoverBorderColor: CHART_CONFIG.COMPANY_B_COLOR,
-            });
-          }
-
-          try {
-            chart = new Chart(ctx, {
-              type: "radar",
-              data: {
-                labels: Object.values(responsibilityConfig).map(
-                  (r) => r.displayName
+            try {
+              const [detailsResp, csvResp] = await Promise.all([
+                fetch("./data/company_details.json").catch(() => null),
+                fetch("./data/engineering_responsibilities_compact.csv").catch(
+                  () => null
                 ),
-                datasets: datasets,
-              },
-              options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: false,
-                plugins: {
-                  legend: {
-                    display: false,
-                  },
+              ]);
+
+              if (detailsResp && detailsResp.ok) {
+                companyDetails = await detailsResp.json();
+              }
+              if (csvResp && csvResp.ok) {
+                const csvText = await csvResp.text();
+                allData = toRows(csvText);
+                const header =
+                  csvText.split("\n")[0] ||
+                  Object.keys(allData[0] || {}).join(",");
+                responsibilityConfig = parseResponsibilityConfig(header).config;
+                populateAboutSection();
+                populateSelectors(allData);
+              }
+            } catch (_) {
+              // Fail quietly
+            }
+          })();
+
+          // Fallback for older browsers that don't support fetch
+          if (typeof fetch === "undefined") {
+            console.error(
+              "Fetch API not supported - this browser may not work properly"
+            );
+          }
+
+          // (moved CHART_CONFIG earlier)
+
+          function ensureChartLoaded() {
+            return new Promise((resolve, reject) => {
+              if (window.Chart) return resolve();
+              const s = document.createElement("script");
+              s.src = "vendor/chart.min.js";
+              s.defer = true;
+              s.onload = () => resolve();
+              s.onerror = (e) => reject(e);
+              document.head.appendChild(s);
+            });
+          }
+
+          async function renderChart(companyA, companyB) {
+            try {
+              await ensureChartLoaded();
+            } catch (_) {
+              return;
+            }
+            if (window.Chart && Chart.defaults) {
+              Chart.defaults.animation = false;
+            }
+            const ctx = document.getElementById("radarChart");
+            if (!ctx) {
+              console.error("Canvas element not found");
+              return;
+            }
+
+            const context = ctx.getContext("2d");
+            if (!context) {
+              console.error("Could not get canvas context");
+              return;
+            }
+
+            if (chart) {
+              chart.destroy();
+            }
+
+            const datasets = [];
+
+            // Match axis label font size to body text size
+            let axisFontSizePx = 14; // fallback
+            try {
+              const samplePara = document.querySelector("p");
+              const computed = window.getComputedStyle(
+                samplePara || document.body
+              );
+              const sizeStr =
+                computed && computed.fontSize ? computed.fontSize : "14px";
+              const parsed = parseFloat(sizeStr);
+              if (!Number.isNaN(parsed) && parsed > 0) {
+                axisFontSizePx = parsed;
+              }
+            } catch (_) {
+              // keep fallback
+            }
+
+            // Add Company A if selected
+            if (companyA) {
+              const chartLabels = Object.keys(responsibilityConfig);
+              const dataA = chartLabels.map((label) => {
+                const displayName = responsibilityConfig[label].displayName;
+                return companyA[displayName] ?? CHART_CONFIG.DEFAULT_VALUE;
+              });
+              datasets.push({
+                label: companyA.Company,
+                data: dataA,
+                fill: true,
+                backgroundColor: CHART_CONFIG.COMPANY_A_FILL,
+                borderColor: CHART_CONFIG.COMPANY_A_COLOR,
+                pointBackgroundColor: CHART_CONFIG.COMPANY_A_COLOR,
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: CHART_CONFIG.COMPANY_A_COLOR,
+              });
+            }
+
+            // Add Company B if selected
+            if (companyB) {
+              const chartLabels = Object.keys(responsibilityConfig);
+              const dataB = chartLabels.map((label) => {
+                const displayName = responsibilityConfig[label].displayName;
+                return companyB[displayName] ?? CHART_CONFIG.DEFAULT_VALUE;
+              });
+              datasets.push({
+                label: companyB.Company,
+                data: dataB,
+                fill: true,
+                backgroundColor: CHART_CONFIG.COMPANY_B_FILL,
+                borderColor: CHART_CONFIG.COMPANY_B_COLOR,
+                pointBackgroundColor: CHART_CONFIG.COMPANY_B_COLOR,
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: CHART_CONFIG.COMPANY_B_COLOR,
+              });
+            }
+
+            try {
+              chart = new Chart(ctx, {
+                type: "radar",
+                data: {
+                  labels: Object.values(responsibilityConfig).map(
+                    (r) => r.displayName
+                  ),
+                  datasets: datasets,
                 },
-                scales: {
-                  r: {
-                    min: CHART_CONFIG.DEFAULT_VALUE,
-                    max: CHART_CONFIG.MAX_SCALE,
-                    beginAtZero: true,
-                    ticks: {
-                      stepSize: CHART_CONFIG.STEP_SIZE,
-                      font: { size: axisFontSizePx },
-                      callback: function (value) {
-                        return value;
+                options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  animation: false,
+                  plugins: {
+                    legend: {
+                      display: false,
+                    },
+                  },
+                  scales: {
+                    r: {
+                      min: CHART_CONFIG.DEFAULT_VALUE,
+                      max: CHART_CONFIG.MAX_SCALE,
+                      beginAtZero: true,
+                      ticks: {
+                        stepSize: CHART_CONFIG.STEP_SIZE,
+                        font: { size: axisFontSizePx },
+                        callback: function (value) {
+                          return value;
+                        },
+                      },
+                      pointLabels: {
+                        font: { size: axisFontSizePx },
+                        callback: function (value) {
+                          // Split long labels into multiple lines
+                          const words = value.split(" ");
+                          if (words.length > 1) {
+                            return words;
+                          }
+                          return value;
+                        },
                       },
                     },
-                    pointLabels: {
-                      font: { size: axisFontSizePx },
-                      callback: function (value) {
-                        // Split long labels into multiple lines
-                        const words = value.split(" ");
-                        if (words.length > 1) {
-                          return words;
-                        }
-                        return value;
-                      },
-                    },
                   },
                 },
-              },
+              });
+
+              // Add loaded class immediately after chart creation
+              const chartContainer = document.querySelector(".chart-container");
+              if (chartContainer) {
+                chartContainer.classList.add("loaded");
+              }
+            } catch (error) {
+              console.error("Error creating chart:", error);
+              // Fail quietly - just don't show the chart
+            }
+          }
+
+          function populateAboutSection() {
+            const list = document.getElementById("responsibility-list");
+            if (!list) return;
+
+            // Use improved descriptions instead of the repetitive ones from responsibilityConfig
+            const improvedDescriptions = {
+              "People Management":
+                "Hiring, performance reviews, career development, team building, conflict resolution, and organizational design. Higher scores mean more time spent on people vs. technical work.",
+              "Tech Strategy":
+                "Architecture decisions, technology choices, technical roadmap planning, and setting technical direction. Higher scores indicate more strategic technical leadership.",
+              Execution:
+                "Project management, timeline tracking, resource allocation, and delivery coordination. Higher scores mean more hands-on project management.",
+              Product:
+                "Product strategy, feature prioritization, roadmap planning, and product-market fit decisions. Higher scores indicate more product ownership responsibilities.",
+              Customer:
+                "Direct customer interaction, requirements gathering, user research, and customer success. Higher scores mean more customer-facing responsibilities.",
+              Quality:
+                "Code review processes, testing strategies, reliability engineering, and quality assurance oversight. Higher scores indicate stronger quality focus.",
+              "Cross-functional":
+                "Working with design, marketing, sales, legal, and other departments. Higher scores mean more cross-team collaboration.",
+              "IC Work":
+                "Hands-on coding, debugging, and technical implementation. Higher scores indicate more individual contributor responsibilities alongside management.",
+              "Tech Mentorship":
+                "Technical coaching, code reviews, architecture guidance, and technical skill development. Higher scores mean more technical teaching and mentoring.",
+            };
+
+            list.innerHTML = "";
+            Object.values(responsibilityConfig).forEach((responsibility) => {
+              const li = document.createElement("li");
+              const improvedDescription =
+                improvedDescriptions[responsibility.displayName] ||
+                responsibility.description;
+              li.innerHTML = `<strong>${responsibility.displayName}:</strong> ${improvedDescription}`;
+              list.appendChild(li);
+            });
+          }
+
+          function populateSelectors(data) {
+            const selectA = document.getElementById("companyA");
+            const selectB = document.getElementById("companyB");
+
+            if (!selectA || !selectB) {
+              console.error("Company selector elements not found");
+              return;
+            }
+
+            const validRows = data.filter((row) => row.Company);
+
+            if (validRows.length === 0) {
+              console.error("No valid company data found");
+              // Fail quietly - just leave dropdowns empty
+              return;
+            }
+
+            // Clear existing options
+            selectA.innerHTML = "";
+            selectB.innerHTML = "";
+
+            validRows.forEach((row) => {
+              const optA = document.createElement("option");
+              optA.value = row.Company;
+              optA.textContent = row.Company;
+              selectA.appendChild(optA);
+
+              const optB = document.createElement("option");
+              optB.value = row.Company;
+              optB.textContent = row.Company;
+              selectB.appendChild(optB);
             });
 
-            // Add loaded class immediately after chart creation
-            const chartContainer = document.querySelector(".chart-container");
-            if (chartContainer) {
-              chartContainer.classList.add("loaded");
+            // Set default selections
+            if (validRows.length >= 2) {
+              selectA.value = validRows[0].Company;
+              selectB.value = validRows[1].Company;
             }
-          } catch (error) {
-            console.error("Error creating chart:", error);
-            // Fail quietly - just don't show the chart
-          }
-        }
 
-        function populateAboutSection() {
-          const list = document.getElementById("responsibility-list");
-          if (!list) return;
+            // Add event listeners
+            selectA.addEventListener("change", updateChart);
+            selectB.addEventListener("change", updateChart);
 
-          // Use improved descriptions instead of the repetitive ones from responsibilityConfig
-          const improvedDescriptions = {
-            "People Management":
-              "Hiring, performance reviews, career development, team building, conflict resolution, and organizational design. Higher scores mean more time spent on people vs. technical work.",
-            "Tech Strategy":
-              "Architecture decisions, technology choices, technical roadmap planning, and setting technical direction. Higher scores indicate more strategic technical leadership.",
-            Execution:
-              "Project management, timeline tracking, resource allocation, and delivery coordination. Higher scores mean more hands-on project management.",
-            Product:
-              "Product strategy, feature prioritization, roadmap planning, and product-market fit decisions. Higher scores indicate more product ownership responsibilities.",
-            Customer:
-              "Direct customer interaction, requirements gathering, user research, and customer success. Higher scores mean more customer-facing responsibilities.",
-            Quality:
-              "Code review processes, testing strategies, reliability engineering, and quality assurance oversight. Higher scores indicate stronger quality focus.",
-            "Cross-functional":
-              "Working with design, marketing, sales, legal, and other departments. Higher scores mean more cross-team collaboration.",
-            "IC Work":
-              "Hands-on coding, debugging, and technical implementation. Higher scores indicate more individual contributor responsibilities alongside management.",
-            "Tech Mentorship":
-              "Technical coaching, code reviews, architecture guidance, and technical skill development. Higher scores mean more technical teaching and mentoring.",
-          };
-
-          list.innerHTML = "";
-          Object.values(responsibilityConfig).forEach((responsibility) => {
-            const li = document.createElement("li");
-            const improvedDescription =
-              improvedDescriptions[responsibility.displayName] ||
-              responsibility.description;
-            li.innerHTML = `<strong>${responsibility.displayName}:</strong> ${improvedDescription}`;
-            list.appendChild(li);
-          });
-        }
-
-        function populateSelectors(data) {
-          const selectA = document.getElementById("companyA");
-          const selectB = document.getElementById("companyB");
-
-          if (!selectA || !selectB) {
-            console.error("Company selector elements not found");
-            return;
-          }
-
-          const validRows = data.filter((row) => row.Company);
-
-          if (validRows.length === 0) {
-            console.error("No valid company data found");
-            // Fail quietly - just leave dropdowns empty
-            return;
-          }
-
-          // Clear existing options
-          selectA.innerHTML = "";
-          selectB.innerHTML = "";
-
-          validRows.forEach((row) => {
-            const optA = document.createElement("option");
-            optA.value = row.Company;
-            optA.textContent = row.Company;
-            selectA.appendChild(optA);
-
-            const optB = document.createElement("option");
-            optB.value = row.Company;
-            optB.textContent = row.Company;
-            selectB.appendChild(optB);
-          });
-
-          // Set default selections
-          if (validRows.length >= 2) {
-            selectA.value = validRows[0].Company;
-            selectB.value = validRows[1].Company;
-          }
-
-          // Add event listeners
-          selectA.addEventListener("change", updateChart);
-          selectB.addEventListener("change", updateChart);
-
-          // Add loaded class to company selector for fade-in
-          const companySelector = document.querySelector(".company-selector");
-          if (companySelector) {
-            companySelector.classList.add("loaded");
-          }
-
-          // Single coordinated update: update chart and fade-in together
-          updateChart();
-
-          // Size dropdowns to fit the longest company name (desktop/tablet only)
-          try {
-            if (
-              !window.matchMedia ||
-              !window.matchMedia("(max-width: 768px)").matches
-            ) {
-              const selectTexts = Array.from(validRows, (r) =>
-                String(r.Company || "")
-              );
-              const measureEl = document.createElement("span");
-              measureEl.style.visibility = "hidden";
-              measureEl.style.whiteSpace = "nowrap";
-              // Use same font as form controls
-              const sampleSelect = selectA || selectB;
-              if (sampleSelect) {
-                const cs = window.getComputedStyle(sampleSelect);
-                measureEl.style.font = `${cs.fontStyle} ${cs.fontVariant} ${cs.fontWeight} ${cs.fontSize} / ${cs.lineHeight} ${cs.fontFamily}`;
-              }
-              document.body.appendChild(measureEl);
-              let maxPx = 0;
-              for (const txt of selectTexts) {
-                measureEl.textContent = txt;
-                maxPx = Math.max(maxPx, measureEl.offsetWidth);
-              }
-              document.body.removeChild(measureEl);
-              // Add padding and arrow allowance, and cap to a reasonable width
-              const widthPx = Math.min(maxPx + 56, 480);
-              if (selectA) selectA.style.width = `${widthPx}px`;
-              if (selectB) selectB.style.width = `${widthPx}px`;
+            // Add loaded class to company selector for fade-in
+            const companySelector = document.querySelector(".company-selector");
+            if (companySelector) {
+              companySelector.classList.add("loaded");
             }
-          } catch (_) {
-            // Ignore sizing errors
+
+            // Single coordinated update: update chart and fade-in together
+            updateChart();
+
+            // Size dropdowns to fit the longest company name (desktop/tablet only)
+            try {
+              if (
+                !window.matchMedia ||
+                !window.matchMedia("(max-width: 768px)").matches
+              ) {
+                const selectTexts = Array.from(validRows, (r) =>
+                  String(r.Company || "")
+                );
+                const measureEl = document.createElement("span");
+                measureEl.style.visibility = "hidden";
+                measureEl.style.whiteSpace = "nowrap";
+                // Use same font as form controls
+                const sampleSelect = selectA || selectB;
+                if (sampleSelect) {
+                  const cs = window.getComputedStyle(sampleSelect);
+                  measureEl.style.font = `${cs.fontStyle} ${cs.fontVariant} ${cs.fontWeight} ${cs.fontSize} / ${cs.lineHeight} ${cs.fontFamily}`;
+                }
+                document.body.appendChild(measureEl);
+                let maxPx = 0;
+                for (const txt of selectTexts) {
+                  measureEl.textContent = txt;
+                  maxPx = Math.max(maxPx, measureEl.offsetWidth);
+                }
+                document.body.removeChild(measureEl);
+                // Add padding and arrow allowance, and cap to a reasonable width
+                const widthPx = Math.min(maxPx + 56, 480);
+                if (selectA) selectA.style.width = `${widthPx}px`;
+                if (selectB) selectB.style.width = `${widthPx}px`;
+              }
+            } catch (_) {
+              // Ignore sizing errors
+            }
+
+            // Add loaded classes immediately after chart update
+            const companyADetails = document.getElementById("companyA-details");
+            const companyBDetails = document.getElementById("companyB-details");
+            if (companyADetails) companyADetails.classList.add("loaded");
+            if (companyBDetails) companyBDetails.classList.add("loaded");
           }
 
-          // Add loaded classes immediately after chart update
-          const companyADetails = document.getElementById("companyA-details");
-          const companyBDetails = document.getElementById("companyB-details");
-          if (companyADetails) companyADetails.classList.add("loaded");
-          if (companyBDetails) companyBDetails.classList.add("loaded");
-        }
-
-        function scheduleRender(a, b) {
-          const runner = () => renderChart(a, b);
-          if ("requestIdleCallback" in window) {
-            requestIdleCallback(runner, { timeout: 2000 });
-          } else {
-            setTimeout(runner, 0);
-          }
-        }
-
-        function updateChart() {
-          const companyA = document.getElementById("companyA")?.value || "";
-          const companyB = document.getElementById("companyB")?.value || "";
-
-          const dataA = companyA
-            ? allData.find((d) => d.Company === companyA)
-            : null;
-          const dataB = companyB
-            ? allData.find((d) => d.Company === companyB)
-            : null;
-
-          // Update company details
-          updateCompanyDetails(
-            "companyA-details",
-            companyA,
-            CHART_CONFIG.COMPANY_A_COLOR
-          );
-          updateCompanyDetails(
-            "companyB-details",
-            companyB,
-            CHART_CONFIG.COMPANY_B_COLOR
-          );
-
-          // Render chart (scheduled to reduce main-thread contention)
-          scheduleRender(dataA, dataB);
-        }
-
-        function updateCompanyDetails(elementId, companyName, color) {
-          const element = document.getElementById(elementId);
-          if (!element) {
-            console.error(`Element ${elementId} not found`);
-            return;
+          function scheduleRender(a, b) {
+            const runner = () => renderChart(a, b);
+            if ("requestIdleCallback" in window) {
+              requestIdleCallback(runner, { timeout: 2000 });
+            } else {
+              setTimeout(runner, 0);
+            }
           }
 
-          const titleId =
-            elementId === "companyA-details"
-              ? "companyA-title"
-              : "companyB-title";
-          const titleElement = document.getElementById(titleId);
-          const descriptionElement = element.querySelector(
-            ".company-description"
-          );
+          function updateChart() {
+            const companyA = document.getElementById("companyA")?.value || "";
+            const companyB = document.getElementById("companyB")?.value || "";
 
-          if (!titleElement || !descriptionElement) {
-            console.error(`Required elements not found in ${elementId}`);
-            return;
+            const dataA = companyA
+              ? allData.find((d) => d.Company === companyA)
+              : null;
+            const dataB = companyB
+              ? allData.find((d) => d.Company === companyB)
+              : null;
+
+            // Update company details
+            updateCompanyDetails(
+              "companyA-details",
+              companyA,
+              CHART_CONFIG.COMPANY_A_COLOR
+            );
+            updateCompanyDetails(
+              "companyB-details",
+              companyB,
+              CHART_CONFIG.COMPANY_B_COLOR
+            );
+
+            // Render chart (scheduled to reduce main-thread contention)
+            scheduleRender(dataA, dataB);
           }
 
-          if (companyName && companyDetails[companyName]) {
-            titleElement.textContent = companyName;
-            titleElement.style.color = color;
-            descriptionElement.textContent = companyDetails[companyName];
-            element.style.borderLeftColor = color;
-          } else {
-            titleElement.textContent =
+          function updateCompanyDetails(elementId, companyName, color) {
+            const element = document.getElementById(elementId);
+            if (!element) {
+              console.error(`Element ${elementId} not found`);
+              return;
+            }
+
+            const titleId =
               elementId === "companyA-details"
-                ? "Company 1 Details"
-                : "Company 2 Details";
-            titleElement.style.color = "#495057";
-            descriptionElement.textContent = companyName
-              ? `No details available for "${companyName}"`
-              : "Select a company to see details...";
-            element.style.borderLeftColor = "transparent";
+                ? "companyA-title"
+                : "companyB-title";
+            const titleElement = document.getElementById(titleId);
+            const descriptionElement = element.querySelector(
+              ".company-description"
+            );
+
+            if (!titleElement || !descriptionElement) {
+              console.error(`Required elements not found in ${elementId}`);
+              return;
+            }
+
+            if (companyName && companyDetails[companyName]) {
+              titleElement.textContent = companyName;
+              titleElement.style.color = color;
+              descriptionElement.textContent = companyDetails[companyName];
+              element.style.borderLeftColor = color;
+            } else {
+              titleElement.textContent =
+                elementId === "companyA-details"
+                  ? "Company 1 Details"
+                  : "Company 2 Details";
+              titleElement.style.color = "#495057";
+              descriptionElement.textContent = companyName
+                ? `No details available for "${companyName}"`
+                : "Select a company to see details...";
+              element.style.borderLeftColor = "transparent";
+            }
           }
-        }
+        };
         if (document.readyState === "loading") {
           document.addEventListener("DOMContentLoaded", onReady);
         } else {
