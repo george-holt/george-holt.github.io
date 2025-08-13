@@ -691,7 +691,8 @@
     </main>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
+      (function () {
+        const onReady = function () {
         // Build populates COMPANY_ROWS and COMPANY_DETAILS as inline consts
 
         const chartLabels = [
@@ -766,13 +767,59 @@
           return { config, chartLabels };
         }
 
-        // Parse embedded CSV for rows and header
-        if (allData && allData.length > 0) {
-          const header = Object.keys(allData[0]).join(",");
-          responsibilityConfig = parseResponsibilityConfig(header).config;
-          populateAboutSection();
-          populateSelectors(allData);
+        // Fallback CSV parser (no external lib needed)
+        function toRows(csvText) {
+          if (!csvText) return [];
+          const lines = csvText.replace(/\r/g, "\n").split(/\n+/).filter(Boolean);
+          if (lines.length === 0) return [];
+          const headers = lines[0].split(",").map((h) => h.trim());
+          const rows = [];
+          for (let i = 1; i < lines.length; i++) {
+            const cols = lines[i].split(",");
+            if (!cols[0]) continue;
+            const row = {};
+            for (let j = 0; j < headers.length; j++) {
+              const key = headers[j];
+              const raw = (cols[j] ?? "").trim();
+              const asNum = raw === "" ? raw : Number(raw);
+              row[key] = Number.isFinite(asNum) ? asNum : raw;
+            }
+            rows.push(row);
+          }
+          return rows;
         }
+
+        // Use embedded data if present; otherwise fallback to files in dist/data
+        (async function initData() {
+          if (allData && allData.length > 0) {
+            const header = Object.keys(allData[0]).join(",");
+            responsibilityConfig = parseResponsibilityConfig(header).config;
+            populateAboutSection();
+            populateSelectors(allData);
+            return;
+          }
+
+          try {
+            const [detailsResp, csvResp] = await Promise.all([
+              fetch("./data/company_details.json").catch(() => null),
+              fetch("./data/engineering_responsibilities_compact.csv").catch(() => null),
+            ]);
+
+            if (detailsResp && detailsResp.ok) {
+              companyDetails = await detailsResp.json();
+            }
+            if (csvResp && csvResp.ok) {
+              const csvText = await csvResp.text();
+              allData = toRows(csvText);
+              const header = csvText.split("\n")[0] || Object.keys(allData[0] || {}).join(",");
+              responsibilityConfig = parseResponsibilityConfig(header).config;
+              populateAboutSection();
+              populateSelectors(allData);
+            }
+          } catch (_) {
+            // Fail quietly
+          }
+        })();
 
         // Fallback for older browsers that don't support fetch
         if (typeof fetch === "undefined") {
@@ -1140,7 +1187,12 @@
             element.style.borderLeftColor = "transparent";
           }
         }
-      });
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", onReady);
+        } else {
+          onReady();
+        }
+      })();
     </script>
 
     <!-- Chart.js and other dependencies are loaded in the head section -->
