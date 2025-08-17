@@ -19,8 +19,21 @@ const config = {
   cssFiles: ["css/**/*.css"],
   jsFiles: ["js/**/*.js"],
   excludeJsFiles: ["js/bootstrap.js", "js/bootstrap.min.js"], // Exclude Bootstrap JS
-  imageFiles: ["img/**/*.{webp,svg}"], // Copy WebP and SVG images
-  copyFiles: ["CNAME", "LICENSE", "README.md", "data/**/*"],
+  imageFiles: ["img/**/*.{webp,svg,png}"], // Copy WebP, SVG, and PNG images
+  copyFiles: [
+    "CNAME",
+    "LICENSE",
+    "README.md",
+    "data/**/*",
+    "favicon.ico",
+    "favicon.svg",
+    "favicon-*.png",
+    "apple-touch-icon*.png",
+    "android-chrome-*.png",
+    "site.webmanifest",
+    "browserconfig.xml",
+    "mstile-*.png",
+  ],
   excludePatterns: [
     "node_modules/**",
     "dist/**",

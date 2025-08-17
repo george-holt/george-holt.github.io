@@ -83,6 +83,7 @@ async function runLighthouseTests() {
       name: "Engineering Responsibilities",
       path: "engineering_responsibilities.html",
     },
+    { name: "Speaker Bio", path: "speaker-bio.html" },
   ];
 
   const results = [];
@@ -297,6 +298,9 @@ async function runLighthouseTests() {
       "   • Engineering Responsibilities: file://" +
         process.cwd() +
         "/dist/engineering_responsibilities.html"
+    );
+    console.log(
+      "   • Speaker Bio: file://" + process.cwd() + "/dist/speaker-bio.html"
     );
     console.log("\n2️⃣  Run Lighthouse audits in DevTools (F12)");
     console.log("\n3️⃣  Check scores (target 90%+ for all categories)");
