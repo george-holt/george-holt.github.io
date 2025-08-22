@@ -19,7 +19,7 @@ const config = {
   cssFiles: ["css/**/*.css"],
   jsFiles: ["js/**/*.js"],
   excludeJsFiles: ["js/bootstrap.js", "js/bootstrap.min.js"], // Exclude Bootstrap JS
-  imageFiles: ["img/**/*.{webp,svg,png}"], // Copy WebP, SVG, and PNG images
+  imageFiles: ["img/**/*.{webp,svg,png,pdf}"], // Copy WebP, SVG, PNG, and PDF files
   copyFiles: [
     "CNAME",
     "LICENSE",
