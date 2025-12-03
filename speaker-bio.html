@@ -385,10 +385,6 @@
         transform: scale(1.05);
       }
 
-      .image-preview.large {
-        width: 150px;
-        height: 150px;
-      }
 
       .image-details h3 {
         font-size: var(--font-size-base);
@@ -444,6 +440,19 @@
         transform: translateY(-2px);
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
         border-color: var(--accent-primary);
+      }
+
+      .download-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-xs);
+        justify-content: center;
+      }
+
+      .download-buttons .download-button {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
       }
 
       .back-link {
@@ -530,63 +539,10 @@
       }
     </style>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e5043fffbf454489ac93b23f0d8ec1cb"}'></script><!-- End Cloudflare Web Analytics -->
+    <!-- Umami Analytics --><script defer src="https://cloud.umami.is/script.js" data-website-id="799daa77-7f38-4e1b-b479-0cfdf852ced8"></script><!-- End Umami Analytics -->
   </head>
 
   <body>
-    <script type="text/javascript" defer>
-      (function (window, document, dataLayerName, id) {
-        (window[dataLayerName] = window[dataLayerName] || []),
-          window[dataLayerName].push({
-            start: new Date().getTime(),
-            event: "stg.start",
-          });
-        var scripts = document.getElementsByTagName("script")[0],
-          tags = document.createElement("script");
-        function stgCreateCookie(a, b, c) {
-          var d = "";
-          if (c) {
-            var e = new Date();
-            e.setTime(e.getTime() + 24 * c * 60 * 60 * 1e3),
-              (d = "; expires=" + e.toUTCString());
-          }
-          document.cookie = a + "=" + b + d + "; path=/";
-        }
-        var isStgDebug =
-          (window.location.href.match("stg_debug") ||
-            document.cookie.match("stg_debug")) &&
-          !window.location.href.match("stg_disable_debug");
-        stgCreateCookie("stg_debug", isStgDebug ? 1 : "", isStgDebug ? 14 : -1);
-        var qP = [];
-        dataLayerName !== "dataLayer" &&
-          qP.push("data_layer_name=" + dataLayerName),
-          isStgDebug && qP.push("stg_debug");
-        var qPString = qP.length > 0 ? "?" + qP.join("&") : "";
-        (tags.async = !0),
-          (tags.src =
-            "https://george-holt.containers.piwik.pro/" +
-            id +
-            ".js" +
-            qPString),
-          scripts.parentNode.insertBefore(tags, scripts);
-        !(function (a, n, i) {
-          a[n] = a[n] || {};
-          for (var c = 0; c < i.length; c++)
-            !(function (i) {
-              (a[n][i] = a[n][i] || {}),
-                (a[n][i].api =
-                  a[n][i].api ||
-                  function () {
-                    var a = [].slice.call(arguments, 0);
-                    "string" == typeof a[0] &&
-                      window[dataLayerName].push({
-                        event: n + "." + i + ":" + a[0],
-                        parameters: [].slice.call(arguments, 1),
-                      });
-                  });
-            })(i[c]);
-        })(window, "ppms", ["tm", "cm"]);
-      })(window, document, "dataLayer", "b6ca6764-4b6c-4bfe-b0a5-896cc9f6b48e");
-    </script>
     <div class="container">
       <header class="speaker-header">
         <div class="speaker-portrait">
@@ -711,63 +667,38 @@
             <div class="image-preview">
               <img
                 src="img/George Holt small.webp"
-                alt="George Holt compact headshot - Web optimized"
+                alt="George Holt professional headshot - Available in multiple formats"
                 loading="lazy"
               />
             </div>
             <div class="image-details">
-              <h3>Compact Headshot</h3>
+              <h3>Professional Headshot</h3>
               <p class="image-specs">
-                Small file size • Web optimized • Quick loading
+                Available in multiple formats and resolutions for different use cases
               </p>
-              <a
-                href="img/George Holt small.webp"
-                download="George-Holt-Compact.webp"
-                class="download-button"
-              >
-                Download WebP
-              </a>
-              <a
-                href="img/George Holt small.png"
-                download="George-Holt-Compact.png"
-                class="download-button secondary"
-              >
-                Download PNG
-              </a>
-            </div>
-          </div>
-          <div class="image-option">
-            <div class="image-preview large">
-              <img
-                src="./img/george headshot.png"
-                alt="George Holt full professional headshot - High resolution"
-                loading="eager"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-              />
-              <div
-                style="
-                  display: none;
-                  text-align: center;
-                  padding: 20px;
-                  background: #f5f5f5;
-                  border-radius: 50%;
-                "
-              >
-                <span style="color: #666">Image loading...</span>
+              <div class="download-buttons">
+                <a
+                  href="img/George Holt small.webp"
+                  download="George-Holt-Compact.webp"
+                  class="download-button"
+                >
+                  Download WebP
+                </a>
+                <a
+                  href="img/George Holt small.png"
+                  download="George-Holt-Compact.png"
+                  class="download-button"
+                >
+                  Download PNG
+                </a>
+                <a
+                  href="img/george headshot.png"
+                  download="George-Holt-Professional-Headshot.png"
+                  class="download-button"
+                >
+                  Download High-Res
+                </a>
               </div>
-            </div>
-            <div class="image-details">
-              <h3>Full Resolution Headshot</h3>
-              <p class="image-specs">
-                High resolution • Print quality • Professional marketing
-              </p>
-              <a
-                href="img/george headshot.png"
-                download="George-Holt-Professional-Headshot.png"
-                class="download-button"
-              >
-                Download PNG
-              </a>
             </div>
           </div>
         </div>
@@ -805,6 +736,86 @@
           });
         }
       })();
+    </script>
+
+    <script>
+      // Analytics utility with error handling
+      function trackEvent(eventName, properties = {}) {
+        try {
+          if (typeof umami !== 'undefined' && umami && typeof umami.track === 'function') {
+            // Validate and clean properties
+            const cleanProps = {};
+            Object.keys(properties).forEach(function(key) {
+              const value = properties[key];
+              if (value !== null && value !== undefined) {
+                cleanProps[key] = String(value).trim();
+              }
+            });
+            
+            umami.track(eventName, cleanProps);
+          }
+        } catch (error) {
+          // Fail silently - analytics should never break user experience
+          if (window.console && console.warn) {
+            console.warn('Analytics tracking failed:', error);
+          }
+        }
+      }
+
+      // Defer analytics binding to not block page load
+      function initializeAnalytics() {
+        setTimeout(function() {
+          // Track page visit to speaker bio
+          trackEvent('page-view', { 
+            page: 'speaker-bio',
+            feature: 'speaking-inquiries' 
+          });
+
+          // Speaker Bio Contact Buttons
+          document.querySelectorAll('.contact-button').forEach(function(button) {
+            button.addEventListener('click', function() {
+              const contactMethod = this.textContent.includes('LinkedIn') ? 'linkedin' : 'email';
+              trackEvent('speaker-inquiry', { 
+                source: 'speaker-bio',
+                contact_method: contactMethod,
+                button_text: this.textContent.trim()
+              });
+            });
+          });
+
+          // Headshot Downloads
+          document.querySelectorAll('.download-button').forEach(function(button) {
+            button.addEventListener('click', function() {
+              const format = this.textContent.includes('WebP') ? 'webp' : 'png';
+              const size = this.href.includes('small') ? 'compact' : 'full';
+              trackEvent('headshot-download', { 
+                format: format,
+                size: size,
+                source: 'speaker-bio'
+              });
+            });
+          });
+
+          // Back to Home Navigation
+          const backLink = document.querySelector('a[href="index.html"]');
+          if (backLink) {
+            backLink.addEventListener('click', function() {
+              trackEvent('navigation', { 
+                destination: 'homepage',
+                source: 'speaker-bio',
+                action: 'back-navigation' 
+              });
+            });
+          }
+        }, 0);
+      }
+
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeAnalytics);
+      } else {
+        initializeAnalytics();
+      }
     </script>
   </body>
 </html>

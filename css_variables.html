@@ -74,6 +74,7 @@
       }
     </style>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e5043fffbf454489ac93b23f0d8ec1cb"}'></script><!-- End Cloudflare Web Analytics -->
+    <!-- Umami Analytics --><script defer src="https://cloud.umami.is/script.js" data-website-id="799daa77-7f38-4e1b-b479-0cfdf852ced8"></script><!-- End Umami Analytics -->
   </head>
   <body>
     <div class="container">
@@ -220,6 +221,48 @@
 
         main();
       })();
+    </script>
+
+    <script>
+      // Analytics utility with error handling
+      function trackEvent(eventName, properties = {}) {
+        try {
+          if (typeof umami !== 'undefined' && umami && typeof umami.track === 'function') {
+            // Validate and clean properties
+            const cleanProps = {};
+            Object.keys(properties).forEach(function(key) {
+              const value = properties[key];
+              if (value !== null && value !== undefined) {
+                cleanProps[key] = String(value).trim();
+              }
+            });
+            
+            umami.track(eventName, cleanProps);
+          }
+        } catch (error) {
+          // Fail silently - analytics should never break user experience
+          if (window.console && console.warn) {
+            console.warn('Analytics tracking failed:', error);
+          }
+        }
+      }
+
+      // Defer analytics binding to not block page load
+      function initializeAnalytics() {
+        setTimeout(function() {
+          trackEvent('page-view', { 
+            page: 'css-variables',
+            feature: 'developer-reference' 
+          });
+        }, 0);
+      }
+
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeAnalytics);
+      } else {
+        initializeAnalytics();
+      }
     </script>
   </body>
 </html>

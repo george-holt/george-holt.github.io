@@ -137,6 +137,15 @@
         box-shadow: 0 6px 20px rgba(230, 126, 34, 0.3);
       }
 
+      .cta-button.mentorcruise {
+        background: linear-gradient(135deg, #20917E 0%, #26a68f 100%);
+      }
+
+      .cta-button.mentorcruise:hover {
+        background: linear-gradient(135deg, #187a6a 0%, #20917E 100%);
+        box-shadow: 0 6px 20px rgba(32, 145, 126, 0.3);
+      }
+
       /* Outline variant for secondary CTA */
       .cta-button.outline {
         background: transparent;
@@ -238,6 +247,7 @@
         color: var(--accent-primary);
         text-decoration: underline;
       }
+
 
       @media (max-width: 768px) {
         .cta-section {
@@ -419,6 +429,10 @@
         gap: calc(var(--spacing-sm) * 0.6);
       }
 
+      .hero-content > p:not(:last-child) {
+        margin-bottom: var(--spacing-md);
+      }
+
       .hero-title {
         margin-bottom: 0;
       }
@@ -540,63 +554,10 @@
       /* Responsive utilities */
     </style>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e5043fffbf454489ac93b23f0d8ec1cb"}'></script><!-- End Cloudflare Web Analytics -->
+    <!-- Umami Analytics --><script defer src="https://cloud.umami.is/script.js" data-website-id="799daa77-7f38-4e1b-b479-0cfdf852ced8"></script><!-- End Umami Analytics -->
   </head>
 
   <body>
-    <script type="text/javascript" defer>
-      (function (window, document, dataLayerName, id) {
-        (window[dataLayerName] = window[dataLayerName] || []),
-          window[dataLayerName].push({
-            start: new Date().getTime(),
-            event: "stg.start",
-          });
-        var scripts = document.getElementsByTagName("script")[0],
-          tags = document.createElement("script");
-        function stgCreateCookie(a, b, c) {
-          var d = "";
-          if (c) {
-            var e = new Date();
-            e.setTime(e.getTime() + 24 * c * 60 * 60 * 1e3),
-              (d = "; expires=" + e.toUTCString());
-          }
-          document.cookie = a + "=" + b + d + "; path=/";
-        }
-        var isStgDebug =
-          (window.location.href.match("stg_debug") ||
-            document.cookie.match("stg_debug")) &&
-          !window.location.href.match("stg_disable_debug");
-        stgCreateCookie("stg_debug", isStgDebug ? 1 : "", isStgDebug ? 14 : -1);
-        var qP = [];
-        dataLayerName !== "dataLayer" &&
-          qP.push("data_layer_name=" + dataLayerName),
-          isStgDebug && qP.push("stg_debug");
-        var qPString = qP.length > 0 ? "?" + qP.join("&") : "";
-        (tags.async = !0),
-          (tags.src =
-            "https://george-holt.containers.piwik.pro/" +
-            id +
-            ".js" +
-            qPString),
-          scripts.parentNode.insertBefore(tags, scripts);
-        !(function (a, n, i) {
-          a[n] = a[n] || {};
-          for (var c = 0; c < i.length; c++)
-            !(function (i) {
-              (a[n][i] = a[n][i] || {}),
-                (a[n][i].api =
-                  a[n][i].api ||
-                  function () {
-                    var a = [].slice.call(arguments, 0);
-                    "string" == typeof a[0] &&
-                      window[dataLayerName].push({
-                        event: n + "." + i + ":" + a[0],
-                        parameters: [].slice.call(arguments, 1),
-                      });
-                  });
-            })(i[c]);
-        })(window, "ppms", ["tm", "cm"]);
-      })(window, document, "dataLayer", "b6ca6764-4b6c-4bfe-b0a5-896cc9f6b48e");
-    </script>
 
     <main role="main">
       <section class="hero" aria-labelledby="hero-title">
@@ -638,6 +599,8 @@
                 Exploring senior leadership roles at the intersection of
                 engineering and product in developer platforms and tools.
               </p>
+              <p>Mentoring and coaching are among the most rewarding parts of my work. If you are a software engineer or engineering manager 
+                looking to sharpen your impact and focus on what truly matters, I would be glad to connect and see how I can help.</p>
               <div class="cta-section">
                 <a
                   class="cta-button linkedin"
@@ -680,21 +643,33 @@
                   </svg>
                   View Resume
                 </a>
-
                 <a
-                  class="cta-button outline"
-                  href="engineering_responsibilities.html"
-                  aria-label="View the Engineering Responsibilities radar chart"
+                  class="cta-button mentorcruise"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href="https://mentorcruise.com/mentor/georgeholt/"
+                  aria-label="Book time with me on MentorCruise"
                 >
-                  <img
+                  <svg
                     class="cta-icon"
-                    src="img/Scale_icon_no_background.svg"
-                    alt=""
-                    width="18"
-                    height="18"
-                    style="width: 18px; height: 18px"
-                  />
-                  EM Role Comparison
+                    viewBox="0 0 55 44"
+                    fill="none"
+                    aria-hidden="true"
+                    width="20"
+                    height="16"
+                    style="width: 20px; height: 16px"
+                  >
+                    <mask id="mentorcruise-mask" x="0" y="0" width="55" height="44" style="mask-type:luminance" maskUnits="userSpaceOnUse">
+                      <path d="M55 0H0V44H55V0Z" fill="#fff"></path>
+                    </mask>
+                    <g fill="currentColor" mask="url(#mentorcruise-mask)">
+                      <path d="m54.14 28.47h-53.457c-0.5029 0-0.8327 0.5269-0.6138 0.9807l2.8198 5.8442c0.0427 0.0885 0.1321 0.1447 0.2302 0.1447h48.585c0.0981 0 0.1875-0.0562 0.2302-0.1447l2.8198-5.8442c0.2189-0.4537-0.1109-0.9807-0.6138-0.9807z"></path>
+                      <path d="m4.006 37.61c1.8857 3.9083 5.8358 6.3913 10.167 6.3913h26.476c4.3317 0 8.2818-2.483 10.168-6.3913l0.1607-0.3331c0.0547-0.1134-0.0277-0.2452-0.1534-0.2452h-46.825c-0.1258 0-0.2082 0.1318-0.1535 0.2452l0.1607 0.3331z"></path>
+                      <path d="m25.971 0.21533-14.328 25.469c-0.2563 0.4555 0.0721 1.0188 0.5938 1.0188h13.986c0.2825 0 0.5114-0.2294 0.5114-0.5124v-25.773c0-0.42015-0.5562-0.56735-0.7632-0.20205z"></path>
+                      <path d="m43.304 25.685-14.328-25.469-0.0056-0.009921c-0.2056-0.36261-0.7576-0.21641-0.7576 0.20056v25.785c0 0.283 0.2289 0.5124 0.5113 0.5124h13.986c0.5217 0 0.8502-0.5634 0.594-1.0189z"></path>
+                    </g>
+                  </svg>
+                  Book Mentoring Session
                 </a>
               </div>
               <ul class="hero-bullets">
@@ -885,8 +860,114 @@
           emailButton.addEventListener("mouseenter", function () {
             this.setAttribute("title", emailAddress);
           });
+
+          // Track email contact clicks
+          emailButton.addEventListener("click", function () {
+            trackEvent('email-contact', { 
+              source: 'homepage-footer',
+              action: 'mailto-click' 
+            });
+          });
         }
       })();
+    </script>
+    <script>
+      // Analytics utility with error handling
+      function trackEvent(eventName, properties = {}) {
+        try {
+          if (typeof umami !== 'undefined' && umami && typeof umami.track === 'function') {
+            // Validate and clean properties
+            const cleanProps = {};
+            Object.keys(properties).forEach(function(key) {
+              const value = properties[key];
+              if (value !== null && value !== undefined) {
+                cleanProps[key] = String(value).trim();
+              }
+            });
+            
+            umami.track(eventName, cleanProps);
+          }
+        } catch (error) {
+          // Fail silently - analytics should never break user experience
+          if (window.console && console.warn) {
+            console.warn('Analytics tracking failed:', error);
+          }
+        }
+      }
+
+      // Defer analytics binding to not block page load
+      function initializeAnalytics() {
+        setTimeout(function() {
+          const linkedinButton = document.querySelector('.cta-button.linkedin');
+          if (linkedinButton) {
+            linkedinButton.addEventListener('click', function() {
+              trackEvent('linkedin-click', { 
+                source: 'homepage-cta',
+                button_text: 'View Profile' 
+              });
+            });
+          }
+
+          const resumeButton = document.querySelector('.cta-button.resume');
+          if (resumeButton) {
+            resumeButton.addEventListener('click', function() {
+              trackEvent('resume-download', { 
+                source: 'homepage-cta',
+                file: 'George Holt Resume.pdf' 
+              });
+            });
+          }
+
+          const mentorcruiseButton = document.querySelector('.cta-button.mentorcruise');
+          if (mentorcruiseButton) {
+            mentorcruiseButton.addEventListener('click', function() {
+              trackEvent('mentorcruise-click', { 
+                source: 'homepage-cta',
+                button_text: 'Book Mentoring Session' 
+              });
+            });
+          }
+
+          document.querySelectorAll('a[href*="youtube.com"], a[href*="microsoft.com"]').forEach(function(link) {
+            link.addEventListener('click', function() {
+              const destination = this.href.includes('youtube') ? 'aws-summit-video' : 'microsoft-build';
+              trackEvent('external-link', { 
+                destination: destination,
+                source: 'homepage-bullets',
+                url: this.href 
+              });
+            });
+          });
+
+          const speakerBioLink = document.querySelector('a[href="speaker-bio.html"]');
+          if (speakerBioLink) {
+            speakerBioLink.addEventListener('click', function() {
+              trackEvent('navigation', { 
+                destination: 'speaker-bio',
+                source: 'homepage-footer' 
+              });
+            });
+          }
+
+          const githubLink = document.querySelector('a[href*="github.com"]');
+          if (githubLink) {
+            githubLink.addEventListener('click', function() {
+              trackEvent('external-link', { 
+                destination: 'github-repository',
+                source: 'homepage-footer',
+                action: 'view-source' 
+              });
+            });
+          }
+        }, 0);
+      }
+
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeAnalytics);
+      } else {
+        initializeAnalytics();
+      }
     </script>
   </body>
 </html>

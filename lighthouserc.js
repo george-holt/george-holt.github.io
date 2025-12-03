@@ -2,9 +2,9 @@ module.exports = {
   ci: {
     collect: {
       url: [
-        "http://localhost:3001/dist/index.html",
-        "http://localhost:3001/dist/engineering_responsibilities.html",
-        "http://localhost:3001/dist/speaker-bio.html",
+        "http://localhost:3001/index.html",
+        "http://localhost:3001/engineering_responsibilities.html",
+        "http://localhost:3001/speaker-bio.html",
       ],
       startServerCommand: "npx http-server dist -p 3001",
       startServerReadyPattern: "Available on:",

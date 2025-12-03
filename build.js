@@ -55,7 +55,7 @@ const htmlMinifyOptions = {
   removeStyleLinkTypeAttributes: true,
   useShortDoctype: true,
   minifyCSS: true,
-  minifyJS: false,
+  minifyJS: true,
   minifyURLs: true,
   removeEmptyAttributes: true,
   removeOptionalTags: true,
@@ -360,9 +360,10 @@ class WebsiteBuilder {
       const entrySource = `
         import { Chart, RadarController, RadialLinearScale, PointElement, LineElement, Filler } from 'chart.js';
         Chart.register(RadarController, RadialLinearScale, PointElement, LineElement, Filler);
-        // Expose globally for existing page code
-        window.Chart = Chart;
-        export default Chart;
+        // Expose Chart globally for existing page code
+        if (typeof window !== 'undefined') {
+          window.Chart = Chart;
+        }
       `;
       const tmpEntry = path.join(
         process.cwd(),
@@ -383,7 +384,6 @@ class WebsiteBuilder {
         platform: "browser",
         target: ["es2018"],
         outfile: outFile,
-        globalName: "Chart",
         define: { "process.env.NODE_ENV": '"production"' },
         logLevel: "silent",
       });

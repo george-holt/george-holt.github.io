@@ -405,76 +405,15 @@
 
     <!-- No external CSS needed - all styles are inlined for optimal performance -->
 
-    <!-- Chart.js and PapaParse for CSV handling (deferred to avoid render blocking) -->
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
-    ></script>
+    <!-- Chart.js bundled locally (deferred to avoid render blocking) -->
+    <script defer src="vendor/chart.min.js"></script>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e5043fffbf454489ac93b23f0d8ec1cb"}'></script><!-- End Cloudflare Web Analytics -->
+    <!-- Umami Analytics --><script defer src="https://cloud.umami.is/script.js" data-website-id="799daa77-7f38-4e1b-b479-0cfdf852ced8"></script><!-- End Umami Analytics -->
   </head>
 
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <script type="text/javascript" defer>
-      (function (window, document, dataLayerName, id) {
-        (window[dataLayerName] = window[dataLayerName] || []),
-          window[dataLayerName].push({
-            start: new Date().getTime(),
-            event: "stg.start",
-          });
-        var scripts = document.getElementsByTagName("script")[0],
-          tags = document.createElement("script");
-        function stgCreateCookie(a, b, c) {
-          var d = "";
-          if (c) {
-            var e = new Date();
-            e.setTime(e.getTime() + 24 * c * 60 * 60 * 1e3),
-              (d = "; expires=" + e.toUTCString());
-          }
-          document.cookie = a + "=" + b + d + "; path=/";
-        }
-        var isStgDebug =
-          (window.location.href.match("stg_debug") ||
-            document.cookie.match("stg_debug")) &&
-          !window.location.href.match("stg_disable_debug");
-        stgCreateCookie("stg_debug", isStgDebug ? 1 : "", isStgDebug ? 14 : -1);
-        var qP = [];
-        dataLayerName !== "dataLayer" &&
-          qP.push("data_layer_name=" + dataLayerName),
-          isStgDebug && qP.push("stg_debug");
-        var qPString = qP.length > 0 ? "?" + qP.join("&") : "";
-        (tags.async = !0),
-          (tags.src =
-            "https://george-holt.containers.piwik.pro/" +
-            id +
-            ".js" +
-            qPString),
-          scripts.parentNode.insertBefore(tags, scripts);
-        !(function (a, n, i) {
-          a[n] = a[n] || {};
-          for (var c = 0; c < i.length; c++)
-            !(function (i) {
-              (a[n][i] = a[n][i] || {}),
-                (a[n][i].api =
-                  a[n][i].api ||
-                  function () {
-                    var a = [].slice.call(arguments, 0);
-                    "string" == typeof a[0] &&
-                      window[dataLayerName].push({
-                        event: n + "." + i + ":" + a[0],
-                        parameters: [].slice.call(arguments, 1),
-                      });
-                  });
-            })(i[c]);
-        })(window, "ppms", ["tm", "cm"]);
-      })(window, document, "dataLayer", "b6ca6764-4b6c-4bfe-b0a5-896cc9f6b48e");
-    </script>
 
     <header role="banner">
       <nav role="navigation" aria-label="Main navigation">
@@ -1068,8 +1007,22 @@
             }
 
             // Add event listeners
-            selectA.addEventListener("change", updateChart);
-            selectB.addEventListener("change", updateChart);
+            selectA.addEventListener("change", function() {
+              updateChart();
+              trackEvent('chart-interaction', { 
+                action: 'company-select',
+                position: 'company-a',
+                company: this.value 
+              });
+            });
+            selectB.addEventListener("change", function() {
+              updateChart();
+              trackEvent('chart-interaction', { 
+                action: 'company-select',
+                position: 'company-b',
+                company: this.value 
+              });
+            });
 
             // Add loaded class to company selector for fade-in
             const companySelector = document.querySelector(".company-selector");
@@ -1202,6 +1155,70 @@
           onReady();
         }
       })();
+    </script>
+
+    <script>
+      // Analytics utility with error handling
+      function trackEvent(eventName, properties = {}) {
+        try {
+          if (typeof umami !== 'undefined' && umami && typeof umami.track === 'function') {
+            // Validate and clean properties
+            const cleanProps = {};
+            Object.keys(properties).forEach(function(key) {
+              const value = properties[key];
+              if (value !== null && value !== undefined) {
+                cleanProps[key] = String(value).trim();
+              }
+            });
+            
+            umami.track(eventName, cleanProps);
+          }
+        } catch (error) {
+          // Fail silently - analytics should never break user experience
+          if (window.console && console.warn) {
+            console.warn('Analytics tracking failed:', error);
+          }
+        }
+      }
+
+      // Defer analytics binding to not block page load
+      function initializeAnalytics() {
+        setTimeout(function() {
+          trackEvent('page-view', { 
+            page: 'engineering-responsibilities',
+            feature: 'radar-chart' 
+          });
+
+          const surveyLink = document.querySelector('a[href*="forms.gle"]');
+          if (surveyLink) {
+            surveyLink.addEventListener('click', function() {
+              trackEvent('external-link', { 
+                destination: 'feedback-survey',
+                source: 'engineering-responsibilities',
+                action: 'survey-click' 
+              });
+            });
+          }
+
+          const backLink = document.querySelector('a[href="index.html"]');
+          if (backLink) {
+            backLink.addEventListener('click', function() {
+              trackEvent('navigation', { 
+                destination: 'homepage',
+                source: 'engineering-responsibilities',
+                action: 'back-navigation' 
+              });
+            });
+          }
+        }, 0);
+      }
+
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeAnalytics);
+      } else {
+        initializeAnalytics();
+      }
     </script>
 
     <!-- Chart.js and other dependencies are loaded in the head section -->
