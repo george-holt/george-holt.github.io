@@ -77,7 +77,7 @@ george-holt.github.io/
 │   ├── engineering_responsibilities_compact.csv  # Chart data
 │   └── company_details.json            # Company information
 ├── img/
-│   └── George Holt small.webp          # Profile image
+│   └── George Holt Small.webp          # Profile image
 ├── js/                                 # JavaScript libraries
 ├── dist/                               # Built/minified files (generated)
 ├── .vscode/
