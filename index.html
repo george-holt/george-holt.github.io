@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
@@ -17,6 +16,37 @@
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#ffffff" />
 
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://george-holt.com/" />
+
+    <!-- Open Graph (LinkedIn, Facebook, Slack) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://george-holt.com/" />
+    <meta property="og:title" content="George Holt — Product and Engineering Leader" />
+    <meta
+      property="og:description"
+      content="Professional resume of George Holt, an experienced software engineering manager, technical product manager and leader."
+    />
+    <meta
+      property="og:image"
+      content="https://george-holt.com/img/George%20Holt%20square.jpg"
+    />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <meta property="og:image:alt" content="George Holt" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="George Holt — Product and Engineering Leader" />
+    <meta
+      name="twitter:description"
+      content="Professional resume of George Holt, an experienced software engineering manager, technical product manager and leader."
+    />
+    <meta
+      name="twitter:image"
+      content="https://george-holt.com/img/George%20Holt%20square.jpg"
+    />
+
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -30,9 +60,9 @@
     <!-- Preload critical image to prevent layout shift -->
     <link
       rel="preload"
-      href="img/George Holt Small.webp"
+      href="img/George Holt medium.jpg"
       as="image"
-      type="image/webp"
+      type="image/jpeg"
     />
 
     <!-- Critical CSS Inlined -->
@@ -44,7 +74,7 @@
         padding-bottom: var(--footer-spacing);
       }
       h1 {
-        font-size: calc(var(--font-size-2xl) * 1.3);
+        font-size: var(--font-size-2xl);
         font-weight: 800;
         font-family: "Charter", "Bitstream Charter", "Sitka Text", Georgia,
           serif;
@@ -52,8 +82,8 @@
       h2 {
         font-size: var(--font-size-md);
         font-weight: 500;
-        margin-top: var(--spacing-sm);
-        margin-bottom: calc(var(--spacing-sm) * 0.3);
+        margin-top: 0.75em;
+        margin-bottom: 0.25em;
       }
       p,
       li {
@@ -64,27 +94,14 @@
       .hero-content > * {
         margin: 0;
       }
-      /* Only add spacing between major sections */
-      .hero-content > header {
-        margin-top: var(--spacing-lg);
-      }
       /* Style headings */
       main h2 {
         font-weight: 700;
+        font-size: var(--font-size-lg);
       }
       main h3 {
-        font-size: var(--font-size-base);
+        font-size: var(--font-size-md);
         font-weight: 600;
-      }
-
-      #testimonials {
-        padding: var(--section-padding) 0;
-        margin-top: var(--section-margin);
-      }
-      #testimonials h2 {
-        font-size: var(--font-size-2xl);
-        color: var(--text-dark);
-        margin-bottom: var(--heading-margin);
       }
 
       /* CTA Button Styles - Critical for immediate rendering */
@@ -104,7 +121,8 @@
         text-decoration: none;
         font-weight: 600;
         font-size: var(--font-size-base);
-        transition: all 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease,
+          background 0.2s ease;
         border: 2px solid transparent;
         color: white;
         background: #0077b5;
@@ -146,26 +164,6 @@
         box-shadow: 0 6px 20px rgba(32, 145, 126, 0.3);
       }
 
-      /* Outline variant for secondary CTA */
-      .cta-button.outline {
-        background: transparent;
-        color: var(--accent-tertiary);
-        border-color: var(--accent-tertiary);
-        border-width: 1px;
-        font-size: var(--font-size-sm);
-      }
-      .cta-button.outline:hover,
-      .cta-button.outline:focus {
-        background: linear-gradient(
-          135deg,
-          var(--accent-tertiary) 0%,
-          #34495e 100%
-        );
-        color: white;
-        border-color: var(--accent-tertiary);
-        box-shadow: 0 4px 12px rgba(44, 62, 80, 0.25);
-      }
-
       .cta-icon {
         font-size: var(--font-size-lg);
         width: 18px;
@@ -192,7 +190,7 @@
       .site-footer {
         margin-top: var(--spacing-xl);
         padding-top: var(--spacing-lg);
-        border-top: 1px solid var(--border-light);
+        border-top: 1px solid var(--border-color);
         text-align: center;
       }
 
@@ -210,7 +208,9 @@
         font-weight: 500;
         padding: var(--spacing-xs) var(--spacing-sm);
         border-radius: 6px;
-        transition: all var(--transition-normal);
+        transition: color var(--transition-normal),
+          background-color var(--transition-normal),
+          transform var(--transition-normal);
         font-size: var(--font-size-base);
       }
 
@@ -221,7 +221,7 @@
       }
 
       .footer-link.primary {
-        color: var(--accent-primary);
+        color: var(--accent-color);
         font-weight: 600;
       }
 
@@ -244,7 +244,7 @@
       }
 
       .email-link:hover {
-        color: var(--accent-primary);
+        color: var(--accent-color);
         text-decoration: underline;
       }
 
@@ -275,30 +275,21 @@
         /* Typography */
         --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           "Helvetica Neue", Arial, sans-serif;
-        --font-size-base: 1.4rem;
-        --font-size-sm: 1rem;
-        --font-size-md: 1.5rem;
-        --font-size-lg: 1.8rem;
-        --font-size-xl: 2.25rem;
-        --font-size-2xl: 2.5rem;
+        --font-size-sm: 0.8rem;
+        --font-size-base: clamp(0.8rem, 1.5vw, 1rem);
+        --font-size-md: clamp(1rem, 2vw, 1.2rem);
+        --font-size-lg: clamp(1.3rem, 2.5vw, 1.6rem);
+        --font-size-xl: clamp(1.8rem, 3.2vw, 2.4rem);
+        --font-size-2xl: clamp(2rem, 4vw, 3.2rem);
         --line-height-base: 1.6;
-        --line-height-tight: 1.3;
 
         /* Layout Constants */
         --navbar-height: 70px;
         --footer-spacing: 30px;
-        --section-padding: 50px;
-        --section-margin: 32px;
-        --heading-margin: 40px;
-        --content-padding: 20px;
-        --micro-spacing: 10px;
-        --hover-offset: 5px;
 
         /* Component Dimensions */
-        --hero-portrait-size: 200px;
-        --hero-min-height: 600px;
-        --hero-bullets-min-height: 400px;
-        --quotes-max-width: 900px;
+        --hero-portrait-size: 200px; /* portrait width */
+        --hero-portrait-ratio: 2 / 3; /* width / height — matches 600×899 source */
 
         /* Spacing */
         --spacing-xs: 0.5rem;
@@ -323,97 +314,72 @@
         /* Transitions */
         --transition-fast: 150ms ease-in-out;
         --transition-normal: 0.3s ease-in-out;
-
-        /* Media Query Breakpoints */
-        --breakpoint-mobile: 480px;
-        --breakpoint-tablet: 768px;
-        --breakpoint-desktop: 992px;
-        --breakpoint-large: 1200px;
       }
-      .quotes {
-        max-width: var(--quotes-max-width);
-        margin: 0 auto;
-        padding: var(--section-padding) var(--content-padding);
-        margin-top: var(--section-margin);
-        width: 100%;
-        box-sizing: border-box;
+      /* Impact stat strip */
+      .stat-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-lg);
+        margin: 1.5em 0;
+        padding: 1.1em 0;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
       }
-
-      .quote-list {
-        list-style: none;
-        padding: 0;
-        margin: calc(var(--spacing-sm) * 0.5) 0 var(--spacing-md) 0;
+      .stat {
+        display: flex;
+        flex-direction: column;
       }
-      .quote-card {
-        background: linear-gradient(
-          135deg,
-          var(--background-secondary) 0%,
-          #fafbfc 100%
-        );
-        border-left: 3px solid var(--accent-color);
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08),
-          0 1px 3px rgba(0, 0, 0, 0.06);
-        border-radius: var(--border-radius);
-        padding: calc(var(--spacing-sm) * 0.75) var(--spacing-sm);
-        margin-bottom: calc(var(--spacing-sm) * 0.75);
-        font-style: italic;
-        max-width: 100%;
-        box-sizing: border-box;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        line-height: var(--line-height-tight);
-        transition: all var(--transition-normal);
+      .stat-number {
+        font-family: "Charter", "Bitstream Charter", "Sitka Text", Georgia,
+          serif;
+        font-size: var(--font-size-xl);
+        font-weight: 800;
+        line-height: 1.05;
+        color: var(--accent-color);
       }
-      .quote-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12),
-          0 2px 6px rgba(0, 0, 0, 0.08);
-      }
-
-      .quote-card cite {
-        display: block;
-        margin-top: calc(var(--spacing-sm) * 0.75);
-        margin-bottom: calc(var(--spacing-sm) * 0.75);
-        font-style: normal;
-        color: var(--text-secondary);
+      .stat-label {
+        margin-top: 0.35em;
         font-size: var(--font-size-sm);
-        font-weight: 500;
-        margin-left: calc(
-          var(--spacing-sm) + 3px
-        ); /* Align with quote text: padding + border width */
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        line-height: 1.2;
+      }
+      @media (max-width: 768px) {
+        .stat-strip {
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--spacing-md);
+        }
       }
       .hero-section {
-        display: flex;
-        align-items: flex-start;
-        gap: var(--spacing-xl);
-        margin-bottom: var(--spacing-sm);
-        min-height: var(--hero-min-height);
+        display: grid;
+        grid-template-columns: var(--hero-portrait-size) 1fr;
+        grid-template-areas: "portrait header";
+        align-items: center;
+        column-gap: var(--spacing-xl);
+        margin-bottom: var(--spacing-lg);
       }
       .hero-header {
-        display: none; /* Hidden on desktop - will show on mobile */
+        grid-area: header;
       }
       .hero-portrait {
-        flex: 0 0 var(--hero-portrait-size);
+        grid-area: portrait;
         width: var(--hero-portrait-size);
-        height: var(--hero-portrait-size);
         display: flex;
         align-items: center;
         justify-content: center;
+        margin: 0;
       }
 
       .hero-portrait img {
         width: var(--hero-portrait-size);
-        height: var(--hero-portrait-size);
+        height: auto;
+        /* Rectangular portrait; cover crops to fill. Prevents layout shift. */
+        aspect-ratio: var(--hero-portrait-ratio);
         object-fit: cover;
         border-radius: var(--border-radius-lg);
-        /* Prevent layout shift */
-        aspect-ratio: 1 / 1;
-        /* Optimize rendering */
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
-        /* Improve loading performance */
-        will-change: transform;
-        transition: all var(--transition-normal);
+        transition: transform var(--transition-normal),
+          box-shadow var(--transition-normal);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12),
           0 2px 8px rgba(0, 0, 0, 0.08);
         border: 2px solid rgba(255, 255, 255, 0.8);
@@ -423,24 +389,34 @@
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
       }
       .hero-content {
-        flex: 1;
         display: flex;
         flex-direction: column;
         gap: calc(var(--spacing-sm) * 0.6);
       }
 
       .hero-content > p:not(:last-child) {
-        margin-bottom: var(--spacing-md);
+        margin-bottom: 1em;
       }
 
-      .hero-title {
+      .hero-header h1 {
+        margin-top: 0;
         margin-bottom: 0;
       }
       .hero-subtitle {
-        margin-bottom: var(--spacing-sm);
+        font-size: var(--font-size-lg);
+        margin-top: 0;
+        margin-bottom: 0.2em;
         color: var(--text-secondary);
         font-weight: 400;
-        opacity: 0.8;
+        opacity: 0.85;
+      }
+      .hero-tagline {
+        font-size: var(--font-size-md);
+      }
+      .hero-pullquote {
+        font-size: var(--font-size-md);
+        color: var(--text-secondary);
+        font-style: italic;
       }
       .hero-bullets {
         padding-left: calc(var(--spacing-sm) * 1.2);
@@ -448,16 +424,7 @@
       }
       .hero-bullets li {
         line-height: 1.2;
-        margin-bottom: calc(var(--spacing-sm) * 0.75);
-      }
-
-      @media (max-width: var(--breakpoint-mobile)) {
-        .quotes {
-          padding: var(--section-padding) calc(var(--content-padding) * 0.5);
-        }
-        .quote-card {
-          padding: var(--spacing-sm) calc(var(--spacing-sm) * 1.25);
-        }
+        margin-bottom: 0.6em;
       }
 
       /* Additional styles from external CSS files */
@@ -486,13 +453,7 @@
       /* Mobile-specific adjustments */
       @media (max-width: 768px) {
         :root {
-          --font-size-base: 1.1rem;
-          --font-size-md: 1.3rem;
-          --font-size-xl: 1.8rem;
-          --font-size-2xl: 2rem;
           --hero-portrait-size: 150px;
-          --section-padding: 30px;
-          --content-padding: 15px;
         }
 
         .container {
@@ -500,33 +461,24 @@
         }
 
         .hero-section {
-          flex-direction: column;
+          grid-template-columns: 1fr;
+          grid-template-areas:
+            "portrait"
+            "header";
           gap: var(--spacing-md);
-          align-items: center;
-          min-height: auto;
+          justify-items: center;
         }
 
         .hero-header {
-          display: block;
           text-align: center;
           margin-bottom: var(--spacing-md);
-          order: 1;
-        }
-
-        .hero-content .hero-title,
-        .hero-content .hero-subtitle {
-          display: none; /* Hide the desktop version */
         }
 
         .hero-portrait {
-          flex: none;
-          text-align: center;
-          order: 2; /* Move photo after header */
           margin-bottom: var(--spacing-md);
         }
 
         .hero-content {
-          order: 3; /* Move content after photo */
           width: 100%;
         }
 
@@ -537,13 +489,7 @@
 
       @media (max-width: 480px) {
         :root {
-          --font-size-base: 1rem;
-          --font-size-md: 1.2rem;
-          --font-size-xl: 1.6rem;
-          --font-size-2xl: 1.8rem;
           --hero-portrait-size: 120px;
-          --section-padding: 20px;
-          --content-padding: 10px;
         }
 
         .container {
@@ -564,43 +510,93 @@
         <div class="container">
           <div class="hero-section">
             <div class="hero-header">
-              <h1 id="hero-title" class="hero-title">George Holt</h1>
-              <h2 class="hero-subtitle">
-                Engineering Leader with Product Ownership Experience in
-                Developer Tools
-              </h2>
+              <h1 id="hero-title">George Holt</h1>
+              <p class="hero-subtitle">Product and Engineering Leader</p>
+              <p class="hero-tagline">Building Developer Tools, Engineering Systems, and AI Coding Assistants</p>
+              <p class="hero-pullquote">
+                I build high-trust teams, set clear technical direction, and deliver experiences developers love and adopt. I'm exploring senior leadership roles at the intersection of engineering and product.
+              </p>
             </div>
 
             <figure class="hero-portrait">
               <img
                 class="img-responsive"
-                src="img/George Holt Medium.webp"
-                alt="George Holt, Engineering Leader with Product Ownership Experience in Developer Tools"
-                width="200"
-                height="200"
+                src="img/George Holt medium.jpg"
+                alt="George Holt, Product and Engineering Leader in Developer Tools"
                 decoding="async"
                 fetchpriority="high"
               />
             </figure>
+          </div>
 
-            <div class="hero-content">
-              <h1 class="hero-title">George Holt</h1>
-              <h2 class="hero-subtitle">
-                Engineering Leader with Product Ownership Experience in
-                Developer Tools
-              </h2>
-              <p>
-                <em>
-                  I build high-trust engineering orgs that deliver experiences
-                  developers love and adopt.
-                </em>
-              </p>
-              <p>
-                Exploring senior leadership roles at the intersection of
-                engineering and product in developer platforms and tools.
-              </p>
-              <p>Mentoring and coaching are among the most rewarding parts of my work. If you are a software engineer or engineering manager 
-                looking to sharpen your impact and focus on what truly matters, I would be glad to connect and see how I can help.</p>
+          <div class="hero-content">
+            <div class="stat-strip">
+              <div class="stat">
+                <span class="stat-number">17&times;</span>
+                <span class="stat-label">adoption growth</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">~200k</span>
+                <span class="stat-label">monthly active users</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">25+</span>
+                <span class="stat-label">engineers led</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">25+ yrs</span>
+                <span class="stat-label">experience</span>
+              </div>
+            </div>
+              <ul class="hero-bullets">
+                <li>
+                  <strong>Org scale:</strong> Managed managers (4 SDMs);
+                  multi-team planning and execution.
+                </li>
+                <li>
+                  <strong>Launches:</strong> Shipped CodeWhisperer / Amazon Q in
+                  IDEs.
+                </li>
+                <li>
+                  <strong>Cross-discipline experience:</strong> Manager of
+                  Managers (3 yrs), Engineering Manager (10), Product (7),
+                  Software Engineer (3), SDET (3).
+                </li>
+                <li>
+                  <strong>Cross-company model:</strong> Enabled multiple service
+                  teams to contribute reliably to shared toolkits.
+                </li>
+                <li>
+                  <strong>Engineering systems:</strong> delivered productivity
+                  gains and cost savings in multiple companies.
+                </li>
+                <li>
+                  <strong>Culture:</strong> High-trust, high-accountability
+                  teams; predictable delivery, sustainable pace - yet capable of
+                  delivering in high-pressure situations.
+                </li>
+                <li>
+                  <strong>Public speaking & thought leadership:</strong> A
+                  speaker at major industry events including
+                  <a
+                    href="https://www.youtube.com/watch?v=9Wl1b3LNTEc"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    aria-label="2019 AWS New York Summit"
+                    >2019 AWS New York Summit</a
+                  >
+                  (18,000+ attendees) and
+                  <a
+                    href="https://learn.microsoft.com/en-us/events/build-build2011/hw-118t"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    aria-label="2011 Microsoft Build"
+                    >2011 Microsoft Build</a
+                  >.
+                </li>
+              </ul>
+              <p>Mentoring and coaching are among the most rewarding parts of my work. If you are a software engineer or engineering manager
+                looking to sharpen your impact I would be glad to help.</p>
               <div class="cta-section">
                 <a
                   class="cta-button linkedin"
@@ -672,73 +668,27 @@
                   Book Mentoring Session
                 </a>
               </div>
-              <ul class="hero-bullets">
-                <li>
-                  <strong>Org scale:</strong> Managed managers (4 SDMs), 25+
-                  engineers; multi-team planning and execution.
-                </li>
-                <li>
-                  <strong>Adoption & launches:</strong> ~17x growth to ~200k
-                  MAU; shipped CodeWhisperer / Amazon Q in IDEs.
-                </li>
-                <li>
-                  <strong>Cross-discipline experience:</strong> Manager of
-                  Managers - 3 years, Engineering Manager - 10 years, Product
-                  management - 7 years, Software Engineer - 3 years, SDET - 3
-                  years.
-                </li>
-                <li>
-                  <strong>Cross-company model:</strong> Enabled multiple service
-                  teams to contribute reliably to shared toolkits.
-                </li>
-                <li>
-                  <strong>Engineering systems:</strong> delivered productivity
-                  gains and cost savings in multiple companies.
-                </li>
-                <li>
-                  <strong>Culture:</strong> High-trust, high-accountability
-                  teams; predictable delivery, sustainable pace - yet capable of
-                  delivering in high-pressure situations.
-                </li>
-                <li>
-                  <strong>Public speaking & thought leadership:</strong> A
-                  speaker at major industry events including
-                  <a
-                    href="https://www.youtube.com/watch?v=9Wl1b3LNTEc"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    aria-label="2019 AWS New York Summit"
-                    >2019 AWS New York Summit</a
-                  >
-                  (18,000+ attendees) and
-                  <a
-                    href="https://learn.microsoft.com/en-us/events/build-build2011/hw-118t"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    aria-label="2011 Microsoft Build"
-                    >2011 Microsoft Build</a
-                  >, sharing best practices in developer tools and engineering
-                  systems.
-                </li>
-              </ul>
 
               <h2>About Me</h2>
               <p>
                 I'm an engineering leader with more than 25 years of experience
-                at companies like Amazon, Microsoft, and Snowflake, where I've
-                built and scaled high-performing teams and delivered developer
+                at companies including Amazon, Microsoft, and Snowflake, where
+                I've built high-performing teams and delivered developer
                 platforms at scale. My work includes AWS's IDE extensions;
                 launching CodeWhisperer and Amazon Q; driving 17x adoption
                 growth for AWS IDE Toolkits; saving millions annually through
                 build system strategy at Snowflake; and contributing to five
-                major Windows releases (XP-10). Throughout my career, I've
-                gravitated toward challenges that require fixing what's broken,
-                scaling what works, and building healthy organizations around
-                both. From being the second leadership hire on a new Microsoft
-                team that grew to 60 people, to leading multi-team organizations
-                at Amazon and Microsoft, I've gained a unique perspective on
-                growing teams and products responsibly — with a focus not only
-                on outcomes, but on how those outcomes are achieved.
+                major Windows releases (XP-10).
+              </p>
+              <p>
+                Throughout my career, I've gravitated toward challenges that
+                require fixing what's broken, scaling what works, and building
+                healthy organizations around both. From being the second
+                leadership hire on a new Microsoft team that grew to 60 people,
+                to leading multi-team organizations at Amazon and Microsoft,
+                I've gained a unique perspective on growing teams and products
+                responsibly — with a focus not only on outcomes, but on how
+                those outcomes are achieved.
               </p>
               <h2>I focus on:</h2>
               <ul class="hero-bullets">
@@ -748,9 +698,8 @@
                   performance standards are clear and consistent.
                 </li>
                 <li>
-                  Coaching engineers and managers into leadership roles,
-                  developing a pipeline of future leaders who extend impact
-                  beyond my own span of control.
+                  Coaching engineers and managers into leadership roles and 
+                  developing a pipeline of future leaders.
                 </li>
                 <li>
                   Driving cultural transformations — shifting teams from
@@ -758,55 +707,7 @@
                   sustainable engineering practices.
                 </li>
               </ul>
-              <header>
-                <h2>
-                  What Colleagues Say About Me - Direct Quotes from Annual
-                  Reviews
-                </h2>
-              </header>
-              <ul class="quote-list" role="list">
-                <li class="quote-card" role="listitem">
-                  <blockquote cite="Direct Report, 2023">
-                    "George trusts team members to make decisions and provides
-                    inspiration and guidance when we need it. I especially
-                    appreciate when I can bring George into a tough conversation
-                    because I know he'll be on my side and help find a
-                    solution."
-                  </blockquote>
-                  <cite>— Direct Report, 2023</cite>
-                </li>
-                <li class="quote-card" role="listitem">
-                  <blockquote cite="Peer, 2023">
-                    "George has hired some very skilled managers"
-                  </blockquote>
-                  <cite>— Peer, 2023</cite>
-                </li>
-                <li class="quote-card" role="listitem">
-                  <blockquote cite="Manager, 2024">
-                    "Under George's leadership, the Toolkits team managed to
-                    deliver more results than anyone expected."
-                  </blockquote>
-                  <cite>— Manager, 2024</cite>
-                </li>
-                <li class="quote-card" role="listitem">
-                  <blockquote cite="Direct Report, 2021">
-                    "I was surprised to see myself venturing into new,
-                    challenging roles as a result of George's encouragement and
-                    guidance. George is unfailingly considerate and attentive to
-                    his team."
-                  </blockquote>
-                  <cite>— Direct Report, 2021</cite>
-                </li>
-                <li class="quote-card" role="listitem">
-                  <blockquote cite="Peer, 2021">
-                    "I really liked how under his leadership the IDE Toolkits
-                    was able to release smaller and bigger features on a
-                    consistent cadence"
-                  </blockquote>
-                  <cite>— Peer, 2021</cite>
-                </li>
-              </ul>
-
+             
               <footer class="site-footer">
                 <div class="footer-links">
                   <a href="speaker-bio.html" class="footer-link primary"
@@ -829,7 +730,6 @@
                   >
                 </div>
               </footer>
-            </div>
           </div>
         </div>
       </section>

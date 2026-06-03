@@ -5,16 +5,19 @@
       "type": "firefox",
       "request": "launch",
       "name": "Firefox index.html",
-      "file": "${workspaceFolder}/dist/index.html"
+      "file": "${workspaceFolder}/dist/index.html",
+      "preLaunchTask": "build"
     },
     {
       "type": "chrome",
       "request": "launch",
       "name": "Chrome - index.html",
       "file": "${workspaceFolder}/dist/index.html",
+      "preLaunchTask": "build",
       "runtimeArgs": [
         "--auto-open-devtools-for-tabs",
-        "--disable-features=VizDisplayCompositor"
+        "--disk-cache-size=1",
+        "--disable-application-cache"
       ],
       "userDataDir": "${workspaceFolder}/.vscode/chrome-profile"
     }
