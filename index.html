@@ -595,7 +595,7 @@
                   >.
                 </li>
               </ul>
-              <p>Mentoring and coaching are among the most rewarding parts of my work. If you are a software engineer or engineering manager
+              <p>Mentoring and coaching are among the most rewarding parts of my work. If you are a product manager, software engineer or engineering manager
                 looking to sharpen your impact I would be glad to help.</p>
               <div class="cta-section">
                 <a
@@ -726,7 +726,7 @@
       </section>
     </main>
 
-    <!-- Contact links: the address is assembled at runtime, only after a real interaction -->
+    <!-- Contact CTA: address is assembled at runtime, only after a real interaction -->
     <script>
       (function () {
         // Shifted char codes - the address never appears as text in the source.
@@ -747,60 +747,76 @@
           return address;
         }
 
-        function getMailto(link) {
+        function getMailto() {
           return (
-            "mailto:" +
-            getAddress() +
-            "?subject=" +
-            link.subject +
-            "&body=" +
-            link.body
+            "mailto:" + getAddress() + "?subject=Hello&body=Hi%20George%2C%0A%0A"
           );
         }
 
-        // Every element that should open a pre-filled message.
-        const links = [
-          {
-            id: "contact-cta",
-            subject: "Hello",
-            body: "Hi%20George%2C%0A%0A",
-            event: "contact-email",
-            source: "homepage-cta",
-          },
-          {
-            id: "email-contact",
-            subject: "Hello",
-            body: "Hi%20George%2C%0A%0A",
-            event: "email-contact",
-            source: "homepage-footer",
-          },
-        ];
-
-        links.forEach(function (link) {
-          const el = document.getElementById(link.id);
-          if (!el) return;
-
-          // Only materialise the address once a human hovers, focuses or taps.
+        const contactButton = document.getElementById("contact-cta");
+        if (contactButton) {
+          // Only materialize the address once a human hovers, focuses or taps.
           function reveal() {
-            el.href = getMailto(link);
-            el.setAttribute("title", getAddress());
-            el.setAttribute("aria-label", "Send email to " + getAddress());
+            contactButton.href = getMailto();
+            contactButton.setAttribute("title", getAddress());
+            contactButton.setAttribute(
+              "aria-label",
+              "Send email to " + getAddress()
+            );
           }
           ["pointerenter", "focus", "touchstart"].forEach(function (evt) {
-            el.addEventListener(evt, reveal, { once: true, passive: true });
+            contactButton.addEventListener(evt, reveal, {
+              once: true,
+              passive: true,
+            });
           });
 
-          el.addEventListener("click", function (event) {
+          contactButton.addEventListener("click", function (event) {
             event.preventDefault();
-            if (link.event) {
-              trackEvent(link.event, {
-                source: link.source,
-                action: "mailto-click",
-              });
-            }
-            window.location.href = getMailto(link);
+            trackEvent("contact-email", {
+              source: "homepage-cta",
+              action: "mailto-click",
+            });
+            window.location.href = getMailto();
           });
-        });
+        }
+      })();
+    </script>
+
+    <!-- Email obfuscation script -->
+    <script>
+      (function () {
+        // Obfuscated email components
+        const emailParts = ["george.holt", "@", "outlook", ".", "com"];
+
+        // Construct email address
+        const emailAddress = emailParts.join("");
+
+        // Update the email contact link
+        const emailButton = document.getElementById("email-contact");
+        if (emailButton) {
+          emailButton.href =
+            "mailto:" +
+            emailAddress +
+            "?subject=Hello&body=Hi%20George%2C%0A%0A";
+          emailButton.setAttribute(
+            "aria-label",
+            "Send email to " + emailAddress
+          );
+
+          // Optional: Show email address on hover/focus
+          emailButton.addEventListener("mouseenter", function () {
+            this.setAttribute("title", emailAddress);
+          });
+
+          // Track email contact clicks
+          emailButton.addEventListener("click", function () {
+            trackEvent('email-contact', { 
+              source: 'homepage-footer',
+              action: 'mailto-click' 
+            });
+          });
+        }
       })();
     </script>
     <script>
