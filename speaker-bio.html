@@ -26,11 +26,11 @@
     />
     <meta
       property="og:image"
-      content="https://george-holt.github.io/img/George%20Holt%20square%20small.jpg"
+      content="https://george-holt.com/img/George-Holt-Wide.webp"
     />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:card" content="summary" />
     <meta
       property="twitter:url"
       content="https://george-holt.github.io/speaker-bio.html"
@@ -42,7 +42,7 @@
     />
     <meta
       property="twitter:image"
-      content="https://george-holt.github.io/img/George%20Holt%20square%20small.jpg"
+      content="https://george-holt.com/img/George-Holt-Small.webp"
     />
 
     <!-- Favicons -->
@@ -547,7 +547,7 @@
       <header class="speaker-header">
         <div class="speaker-portrait">
           <img
-            src="img/George Holt square medium.jpg"
+            src="img/George-Holt.webp"
             alt="George Holt professional portrait"
             loading="eager"
           />
@@ -666,7 +666,7 @@
           <div class="image-option">
             <div class="image-preview">
               <img
-                src="img/George Holt square medium.jpg"
+                src="img/George-Holt.webp"
                 alt="George Holt professional headshot - Available in multiple formats"
                 loading="lazy"
               />
@@ -702,32 +702,72 @@
       </div>
     </div>
 
-    <!-- Email obfuscation script -->
+    <!-- Contact links: the address is assembled at runtime, only after a real interaction -->
     <script>
       (function () {
-        // Obfuscated email components
-        const emailParts = ["george.holt", "@", "outlook", ".", "com"];
+        // Shifted char codes - the address never appears as text in the source.
+        const shifted = [
+          110, 108, 118, 121, 110, 108, 71, 110, 108, 118, 121, 110, 108, 52,
+          111, 118, 115, 123, 53, 106, 118, 116,
+        ];
+        let address = null;
 
-        // Construct email address
-        const emailAddress = emailParts.join("");
-
-        // Update the email contact button
-        const emailButton = document.getElementById("email-contact");
-        if (emailButton) {
-          emailButton.href =
-            "mailto:" +
-            emailAddress +
-            "?subject=Speaking%20Inquiry&body=Hi%20George%2C%0A%0AI%27d%20like%20to%20discuss%20a%20speaking%20opportunity...";
-          emailButton.setAttribute(
-            "aria-label",
-            "Send email to " + emailAddress
-          );
-
-          // Optional: Show email address on hover/focus
-          emailButton.addEventListener("mouseenter", function () {
-            this.setAttribute("title", emailAddress);
-          });
+        function getAddress() {
+          if (!address) {
+            address = shifted
+              .map(function (c) {
+                return String.fromCharCode(c - 7);
+              })
+              .join("");
+          }
+          return address;
         }
+
+        function getMailto(link) {
+          return (
+            "mailto:" +
+            getAddress() +
+            "?subject=" +
+            link.subject +
+            "&body=" +
+            link.body
+          );
+        }
+
+        // Every element that should open a pre-filled message.
+        const links = [
+          {
+            id: "email-contact",
+            subject: "Speaking%20Inquiry",
+            body: "Hi%20George%2C%0A%0AI%27d%20like%20to%20discuss%20a%20speaking%20opportunity...",
+          },
+        ];
+
+        links.forEach(function (link) {
+          const el = document.getElementById(link.id);
+          if (!el) return;
+
+          // Only materialise the address once a human hovers, focuses or taps.
+          function reveal() {
+            el.href = getMailto(link);
+            el.setAttribute("title", getAddress());
+            el.setAttribute("aria-label", "Send email to " + getAddress());
+          }
+          ["pointerenter", "focus", "touchstart"].forEach(function (evt) {
+            el.addEventListener(evt, reveal, { once: true, passive: true });
+          });
+
+          el.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (link.event) {
+              trackEvent(link.event, {
+                source: link.source,
+                action: "mailto-click",
+              });
+            }
+            window.location.href = getMailto(link);
+          });
+        });
       })();
     </script>
 

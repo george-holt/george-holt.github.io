@@ -29,7 +29,7 @@
     />
     <meta
       property="og:image"
-      content="https://george-holt.com/img/George%20Holt%20square.jpg"
+      content="https://george-holt.com/img/George-Holt-Wide.webp"
     />
     <meta property="og:image:width" content="400" />
     <meta property="og:image:height" content="400" />
@@ -44,7 +44,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://george-holt.com/img/George%20Holt%20square.jpg"
+      content="https://george-holt.com/img/George-Holt-Small.webp"
     />
 
     <!-- Favicons -->
@@ -60,9 +60,9 @@
     <!-- Preload critical image to prevent layout shift -->
     <link
       rel="preload"
-      href="img/George Holt medium.jpg"
+      href="img/George-Holt.webp"
       as="image"
-      type="image/jpeg"
+      type="image/webp"
     />
 
     <!-- Critical CSS Inlined -->
@@ -155,11 +155,11 @@
         box-shadow: 0 6px 20px rgba(230, 126, 34, 0.3);
       }
 
-      .cta-button.mentorcruise {
+      .cta-button.contact {
         background: linear-gradient(135deg, #20917E 0%, #26a68f 100%);
       }
 
-      .cta-button.mentorcruise:hover {
+      .cta-button.contact:hover {
         background: linear-gradient(135deg, #187a6a 0%, #20917E 100%);
         box-shadow: 0 6px 20px rgba(32, 145, 126, 0.3);
       }
@@ -521,7 +521,7 @@
             <figure class="hero-portrait">
               <img
                 class="img-responsive"
-                src="img/George Holt medium.jpg"
+                src="img/George-Holt.webp"
                 alt="George Holt, Product and Engineering Leader in Developer Tools"
                 decoding="async"
                 fetchpriority="high"
@@ -639,33 +639,24 @@
                   </svg>
                   View Resume
                 </a>
+                <!-- href is assembled by JS on first interaction; no address in the markup -->
                 <a
-                  class="cta-button mentorcruise"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  href="https://mentorcruise.com/mentor/georgeholt/"
-                  aria-label="Book time with me on MentorCruise"
+                  class="cta-button contact"
+                  id="contact-cta"
+                  href="#"
+                  aria-label="Send me an email"
                 >
                   <svg
                     class="cta-icon"
-                    viewBox="0 0 55 44"
-                    fill="none"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
                     aria-hidden="true"
-                    width="20"
-                    height="16"
-                    style="width: 20px; height: 16px"
                   >
-                    <mask id="mentorcruise-mask" x="0" y="0" width="55" height="44" style="mask-type:luminance" maskUnits="userSpaceOnUse">
-                      <path d="M55 0H0V44H55V0Z" fill="#fff"></path>
-                    </mask>
-                    <g fill="currentColor" mask="url(#mentorcruise-mask)">
-                      <path d="m54.14 28.47h-53.457c-0.5029 0-0.8327 0.5269-0.6138 0.9807l2.8198 5.8442c0.0427 0.0885 0.1321 0.1447 0.2302 0.1447h48.585c0.0981 0 0.1875-0.0562 0.2302-0.1447l2.8198-5.8442c0.2189-0.4537-0.1109-0.9807-0.6138-0.9807z"></path>
-                      <path d="m4.006 37.61c1.8857 3.9083 5.8358 6.3913 10.167 6.3913h26.476c4.3317 0 8.2818-2.483 10.168-6.3913l0.1607-0.3331c0.0547-0.1134-0.0277-0.2452-0.1534-0.2452h-46.825c-0.1258 0-0.2082 0.1318-0.1535 0.2452l0.1607 0.3331z"></path>
-                      <path d="m25.971 0.21533-14.328 25.469c-0.2563 0.4555 0.0721 1.0188 0.5938 1.0188h13.986c0.2825 0 0.5114-0.2294 0.5114-0.5124v-25.773c0-0.42015-0.5562-0.56735-0.7632-0.20205z"></path>
-                      <path d="m43.304 25.685-14.328-25.469-0.0056-0.009921c-0.2056-0.36261-0.7576-0.21641-0.7576 0.20056v25.785c0 0.283 0.2289 0.5124 0.5113 0.5124h13.986c0.5217 0 0.8502-0.5634 0.594-1.0189z"></path>
-                    </g>
+                    <path
+                      d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"
+                    />
                   </svg>
-                  Book Mentoring Session
+                  Get in Touch
                 </a>
               </div>
 
@@ -735,40 +726,81 @@
       </section>
     </main>
 
-    <!-- Email obfuscation script -->
+    <!-- Contact links: the address is assembled at runtime, only after a real interaction -->
     <script>
       (function () {
-        // Obfuscated email components
-        const emailParts = ["george.holt", "@", "outlook", ".", "com"];
+        // Shifted char codes - the address never appears as text in the source.
+        const shifted = [
+          110, 108, 118, 121, 110, 108, 71, 110, 108, 118, 121, 110, 108, 52,
+          111, 118, 115, 123, 53, 106, 118, 116,
+        ];
+        let address = null;
 
-        // Construct email address
-        const emailAddress = emailParts.join("");
-
-        // Update the email contact link
-        const emailButton = document.getElementById("email-contact");
-        if (emailButton) {
-          emailButton.href =
-            "mailto:" +
-            emailAddress +
-            "?subject=Hello&body=Hi%20George%2C%0A%0A";
-          emailButton.setAttribute(
-            "aria-label",
-            "Send email to " + emailAddress
-          );
-
-          // Optional: Show email address on hover/focus
-          emailButton.addEventListener("mouseenter", function () {
-            this.setAttribute("title", emailAddress);
-          });
-
-          // Track email contact clicks
-          emailButton.addEventListener("click", function () {
-            trackEvent('email-contact', { 
-              source: 'homepage-footer',
-              action: 'mailto-click' 
-            });
-          });
+        function getAddress() {
+          if (!address) {
+            address = shifted
+              .map(function (c) {
+                return String.fromCharCode(c - 7);
+              })
+              .join("");
+          }
+          return address;
         }
+
+        function getMailto(link) {
+          return (
+            "mailto:" +
+            getAddress() +
+            "?subject=" +
+            link.subject +
+            "&body=" +
+            link.body
+          );
+        }
+
+        // Every element that should open a pre-filled message.
+        const links = [
+          {
+            id: "contact-cta",
+            subject: "Hello",
+            body: "Hi%20George%2C%0A%0A",
+            event: "contact-email",
+            source: "homepage-cta",
+          },
+          {
+            id: "email-contact",
+            subject: "Hello",
+            body: "Hi%20George%2C%0A%0A",
+            event: "email-contact",
+            source: "homepage-footer",
+          },
+        ];
+
+        links.forEach(function (link) {
+          const el = document.getElementById(link.id);
+          if (!el) return;
+
+          // Only materialise the address once a human hovers, focuses or taps.
+          function reveal() {
+            el.href = getMailto(link);
+            el.setAttribute("title", getAddress());
+            el.setAttribute("aria-label", "Send email to " + getAddress());
+          }
+          ["pointerenter", "focus", "touchstart"].forEach(function (evt) {
+            el.addEventListener(evt, reveal, { once: true, passive: true });
+          });
+
+          el.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (link.event) {
+              trackEvent(link.event, {
+                source: link.source,
+                action: "mailto-click",
+              });
+            }
+            window.location.href = getMailto(link);
+          });
+        });
       })();
     </script>
     <script>
@@ -814,16 +846,6 @@
               trackEvent('resume-download', { 
                 source: 'homepage-cta',
                 file: 'George Holt Resume.pdf' 
-              });
-            });
-          }
-
-          const mentorcruiseButton = document.querySelector('.cta-button.mentorcruise');
-          if (mentorcruiseButton) {
-            mentorcruiseButton.addEventListener('click', function() {
-              trackEvent('mentorcruise-click', { 
-                source: 'homepage-cta',
-                button_text: 'Book Mentoring Session' 
               });
             });
           }
