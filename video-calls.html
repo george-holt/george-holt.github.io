@@ -1,0 +1,2596 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A tiered guide to better video calls: what to upgrade first across headphones, lighting, microphones, eye contact, room, interface, and camera, with rough prices."
+    />
+    <meta
+      name="keywords"
+      content="video calls, Zoom, webcam, microphone, lighting, teleprompter, home office, George Holt"
+    />
+    <meta name="author" content="George Holt" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://george-holt.github.io/video-calls.html"
+    />
+    <meta property="og:title" content="Toward Better Video Calls" />
+    <meta
+      property="og:description"
+      content="What to upgrade first for better video calls, from free fixes to a studio setup. Headphones, light, and mic come before the camera."
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary" />
+    <meta
+      property="twitter:url"
+      content="https://george-holt.github.io/video-calls.html"
+    />
+    <meta property="twitter:title" content="Toward Better Video Calls" />
+    <meta
+      property="twitter:description"
+      content="What to upgrade first for better video calls, from free fixes to a studio setup. Headphones, light, and mic come before the camera."
+    />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <title>Toward Better Video Calls - George Holt</title>
+
+    <style>
+      :root {
+        /* Typography */
+        --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        --font-serif: "Charter", "Bitstream Charter", "Sitka Text", Georgia,
+          serif;
+        --font-size-base: 1.15rem;
+        --font-size-sm: 1rem;
+        --font-size-md: 1.3rem;
+        --font-size-lg: 1.6rem;
+        --font-size-xl: 2.25rem;
+        --line-height-base: 1.6;
+        --line-height-tight: 1.3;
+
+        /* Colors */
+        --text-primary: #2c3e50;
+        --text-secondary: #5f6b6d;
+        --background-primary: #ffffff;
+        --background-secondary: #f8f9fa;
+        --border-light: #e9ecef;
+        --accent-primary: #2b7bb9;
+        --accent-secondary: #c0641a;
+        --highlight-bg: #eaf4fb;
+
+        /* Spacing */
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 1.5rem;
+        --spacing-lg: 2rem;
+        --spacing-xl: 3rem;
+
+        /* Effects */
+        --transition-normal: 0.3s ease;
+        --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-family);
+        line-height: var(--line-height-base);
+        color: var(--text-primary);
+        background-color: var(--background-primary);
+        font-size: var(--font-size-base);
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: var(--spacing-xl) var(--spacing-lg);
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: var(--spacing-xl);
+        padding-bottom: var(--spacing-lg);
+        border-bottom: 2px solid var(--border-light);
+      }
+
+      h1 {
+        font-family: var(--font-serif);
+        font-size: var(--font-size-xl);
+        font-weight: 800;
+        line-height: var(--line-height-tight);
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .byline {
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+      }
+
+      h2 {
+        font-family: var(--font-serif);
+        font-size: var(--font-size-lg);
+        font-weight: 700;
+        line-height: var(--line-height-tight);
+        margin-bottom: var(--spacing-md);
+      }
+
+      h3 {
+        font-size: var(--font-size-md);
+        font-weight: 700;
+        margin: var(--spacing-lg) 0 var(--spacing-sm);
+      }
+
+      section {
+        background: var(--background-secondary);
+        padding: var(--spacing-lg);
+        border-radius: 12px;
+        margin-bottom: var(--spacing-xl);
+        box-shadow: var(--shadow-subtle);
+        scroll-margin-top: var(--spacing-sm);
+      }
+
+      p,
+      ul,
+      ol {
+        margin-bottom: var(--spacing-sm);
+      }
+
+      ul,
+      ol {
+        padding-left: var(--spacing-md);
+      }
+
+      li {
+        margin-bottom: var(--spacing-xs);
+      }
+
+      a {
+        color: var(--accent-primary);
+      }
+
+      a:hover {
+        color: var(--accent-secondary);
+      }
+
+      /* Callouts: info (good to know), watch (watch out), skip (skip if) */
+      .callout {
+        --callout: var(--accent-primary);
+        background: var(--background-primary);
+        border: 1px solid var(--border-light);
+        border-left: 4px solid var(--callout);
+        border-radius: 0 8px 8px 0;
+        padding: 0.75rem var(--spacing-md);
+        margin-bottom: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+      }
+
+      .callout-watch {
+        --callout: var(--accent-secondary);
+      }
+
+      .callout-skip {
+        --callout: #8a959c;
+      }
+
+      .callout-title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--callout);
+        margin-bottom: 0.3rem;
+      }
+
+      .callout-skip .callout-title {
+        color: var(--text-secondary);
+      }
+
+      .callout p:last-child,
+      .callout ul:last-child {
+        margin-bottom: 0;
+      }
+
+      .callout ul {
+        padding-left: var(--spacing-sm);
+      }
+
+      .callout li {
+        margin-bottom: 0.25rem;
+      }
+
+      .intro {
+        margin-bottom: var(--spacing-xl);
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-base);
+      }
+
+      .intro p {
+        margin-bottom: var(--spacing-md);
+      }
+
+      /* Unnumbered so it can't disagree with the numbered area headings */
+      nav.toc ol {
+        columns: 2;
+        column-gap: var(--spacing-lg);
+        list-style: none;
+        padding-left: 0;
+      }
+
+      /* Tables scroll inside their own box on narrow screens */
+      .table-wrap {
+        overflow-x: auto;
+        margin-bottom: var(--spacing-md);
+        border-radius: 8px;
+        border: 1px solid var(--border-light);
+        background: var(--background-primary);
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: var(--font-size-sm);
+        min-width: 600px;
+      }
+
+      th,
+      td {
+        text-align: left;
+        vertical-align: top;
+        padding: 0.6rem 0.8rem;
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      th {
+        background: var(--background-secondary);
+        font-weight: 700;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      td:first-child,
+      td.cost {
+        white-space: nowrap;
+      }
+
+      tr.pick td {
+        background: var(--highlight-bg);
+      }
+
+      tr.pick td:first-child {
+        box-shadow: inset 4px 0 0 var(--accent-primary);
+        font-weight: 700;
+      }
+
+      .legend {
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+      }
+
+      .badge {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        line-height: 1.3;
+        padding: 0.18rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid currentColor;
+        vertical-align: 0.1em;
+        white-space: nowrap;
+        margin-right: 0.15rem;
+      }
+
+      .badge-my {
+        background: var(--accent-primary);
+        border-color: var(--accent-primary);
+        color: #fff;
+      }
+
+      .badge-budget {
+        color: #2e7d4f;
+      }
+
+      .badge-upgrade {
+        color: var(--accent-secondary);
+      }
+
+      .badge-free {
+        color: var(--text-secondary);
+      }
+
+      /* block + fit-content, not display:table: a table box inherits
+         border-collapse:collapse, which drops padding and border-radius */
+      td .badge {
+        display: block;
+        width: fit-content;
+        margin-bottom: 0.25rem;
+      }
+
+
+      /* Decision flow: questions on a vertical spine ("No" continues down),
+         answers branch off as outcome cards. */
+      .flow {
+        --node: 2.25rem;
+        --gutter: 3.25rem;
+        list-style: none;
+        padding: 0 0 0 var(--gutter);
+        margin: var(--spacing-md) 0 0;
+        counter-reset: step;
+      }
+
+      .flow > li {
+        position: relative;
+        padding-bottom: 2.75rem;
+        margin: 0;
+      }
+
+      .flow > li::before {
+        counter-increment: step;
+        content: counter(step);
+        position: absolute;
+        left: calc(-1 * var(--gutter));
+        top: 0;
+        width: var(--node);
+        height: var(--node);
+        border-radius: 50%;
+        background: var(--accent-primary);
+        color: #fff;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+      }
+
+      /* Spine segment down to the next question */
+      .flow > li::after {
+        content: "";
+        position: absolute;
+        left: calc(-1 * var(--gutter) + var(--node) / 2 - 1px);
+        top: var(--node);
+        bottom: 0;
+        width: 2px;
+        background: var(--accent-primary);
+        opacity: 0.35;
+      }
+
+      .flow .no {
+        position: absolute;
+        left: calc(-1 * var(--gutter) + var(--node) / 2);
+        bottom: 0.85rem;
+        transform: translateX(-50%);
+        z-index: 1;
+        background: var(--background-secondary);
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 0 0.3rem;
+        line-height: 1.2;
+      }
+
+      .flow .q {
+        font-weight: 700;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-tight);
+        min-height: var(--node);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .flow .q small {
+        font-weight: 400;
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+        margin-top: 0.2rem;
+      }
+
+      .outcomes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: var(--spacing-sm);
+      }
+
+      .outcome {
+        background: var(--background-primary);
+        border: 1px solid var(--border-light);
+        border-left: 4px solid var(--accent-secondary);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        font-size: var(--font-size-sm);
+        box-shadow: var(--shadow-subtle);
+      }
+
+      .outcome .ans {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--accent-secondary);
+        margin-bottom: 0.2rem;
+      }
+
+      .outcome .ans::after {
+        content: " →";
+      }
+
+      .outcome strong {
+        display: block;
+        color: var(--text-primary);
+      }
+
+      .outcome .sub-q {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .outcome .fork {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .outcome .fork > div {
+        border-left: 2px solid var(--border-light);
+        padding-left: 0.6rem;
+      }
+
+      .flow > li.end {
+        padding-bottom: 0;
+      }
+
+      .flow > li.end::before {
+        content: "✓";
+        background: #2e8b57;
+      }
+
+      .flow > li.end::after {
+        display: none;
+      }
+
+      .flow > li.end .q {
+        color: #23704a;
+      }
+
+      .flow .why {
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .flow .why p {
+        margin-bottom: var(--spacing-xs);
+      }
+
+      /* Decision map + detail panel (built by script from #tree-list).
+         Desktop: map left, sticky panel right. Phones: details expand inline. */
+      .tree-app {
+        display: grid;
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-md);
+      }
+
+      @media (min-width: 900px) {
+        .tree-app {
+          grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+          align-items: start;
+        }
+      }
+
+      .tree-map {
+        --node: 1.9rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .tree-map > li {
+        position: relative;
+        margin: 0;
+        padding: 0 0 1.1rem calc(var(--node) + 0.75rem);
+      }
+
+      /* spine */
+      .tree-map > li::after {
+        content: "";
+        position: absolute;
+        left: calc(var(--node) / 2 - 1px);
+        top: var(--node);
+        bottom: 0;
+        width: 2px;
+        background: var(--accent-primary);
+        opacity: 0.3;
+      }
+
+      .tree-map > li:last-child::after {
+        display: none;
+      }
+
+      .tm-num {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: var(--node);
+        height: var(--node);
+        border-radius: 50%;
+        background: var(--accent-primary);
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background var(--transition-normal),
+          transform var(--transition-normal);
+      }
+
+      .tree-map > li.end .tm-num {
+        background: #2e8b57;
+      }
+
+      .tm-q {
+        display: block;
+        width: 100%;
+        text-align: left;
+        font: inherit;
+        font-weight: 700;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-tight);
+        color: var(--text-primary);
+        background: var(--background-primary);
+        border: 1px solid #cfd6dc;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        padding: 0.4rem 2rem 0.4rem 0.7rem;
+        position: relative;
+        min-height: var(--node);
+        cursor: pointer;
+        transition: border-color var(--transition-normal),
+          box-shadow var(--transition-normal),
+          transform var(--transition-normal);
+      }
+
+      .tm-q:hover {
+        border-color: var(--accent-primary);
+        box-shadow: var(--shadow-subtle);
+        transform: translateY(-1px);
+      }
+
+      .tm-q:focus-visible {
+        outline: 2px solid var(--accent-primary);
+        outline-offset: 2px;
+      }
+
+      .tm-q::after {
+        content: "›";
+        position: absolute;
+        right: 0.7rem;
+        top: 50%;
+        transform: translateY(-52%);
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1;
+        color: var(--accent-primary);
+      }
+
+      .tree-map > li.is-active .tm-q {
+        border: 2px solid var(--accent-secondary);
+        padding: calc(0.4rem - 1px) calc(2rem - 1px) calc(0.4rem - 1px)
+          calc(0.7rem - 1px);
+        box-shadow: var(--shadow-subtle);
+      }
+
+      .tree-map > li.is-active .tm-q::after {
+        color: var(--accent-secondary);
+      }
+
+      .tree-map > li.is-active .tm-num {
+        background: var(--accent-secondary);
+        transform: scale(1.1);
+      }
+
+      .tm-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-top: 0.35rem;
+      }
+
+      .tm-chip {
+        font-size: 0.8rem;
+        line-height: 1.3;
+        background: var(--background-primary);
+        border: 1px solid #cfd6dc;
+        border-left: 3px solid var(--accent-secondary);
+        border-radius: 6px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06);
+        padding: 0.15rem 0.5rem;
+      }
+
+      .tm-chip b {
+        color: var(--accent-secondary);
+        font-weight: 700;
+      }
+
+      .tm-chip.next b {
+        color: var(--text-secondary);
+      }
+
+      /* The tapped question is already visible above its inline detail */
+      .tm-detail .td-step,
+      .tm-detail .td-q {
+        display: none;
+      }
+
+      .tm-chip.next {
+        border-left-color: var(--border-light);
+        color: var(--text-secondary);
+      }
+
+      .tree-panel {
+        background: var(--background-primary);
+        border: 1px solid var(--border-light);
+        border-top: 4px solid var(--accent-secondary);
+        border-radius: 8px;
+        padding: var(--spacing-md);
+        box-shadow: var(--shadow-subtle);
+        position: sticky;
+        top: var(--spacing-sm);
+        max-height: calc(100vh - 2 * var(--spacing-sm));
+        overflow-y: auto;
+      }
+
+      @media (max-width: 899px) {
+        .tree-panel {
+          display: none;
+        }
+      }
+
+      /* Inline details on phones */
+      .tm-detail {
+        background: var(--background-primary);
+        border: 1px solid var(--border-light);
+        border-left: 4px solid var(--accent-secondary);
+        border-radius: 8px;
+        padding: var(--spacing-sm);
+        margin-top: var(--spacing-xs);
+      }
+
+      .td-step {
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-secondary);
+        margin-bottom: 0.25rem;
+      }
+
+      .td-q {
+        font-family: var(--font-serif);
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-tight);
+        margin: 0 0 var(--spacing-sm);
+      }
+
+      .td-why {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .td-why p {
+        margin-bottom: var(--spacing-xs);
+      }
+
+      .td-outcome {
+        border-top: 1px solid var(--border-light);
+        padding-top: var(--spacing-sm);
+        margin-top: var(--spacing-sm);
+      }
+
+      .td-ans {
+        font-weight: 700;
+        margin-bottom: var(--spacing-xs);
+      }
+
+      .td-ans .ans {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--accent-secondary);
+        margin-right: 0.35rem;
+      }
+
+      .td-sub {
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-xs);
+      }
+
+      .td-fork {
+        border-left: 2px solid var(--border-light);
+        padding-left: var(--spacing-sm);
+        margin: var(--spacing-xs) 0;
+      }
+
+      .td-row {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 0.25rem 0.75rem;
+        font-size: 0.9rem;
+        background: var(--highlight-bg);
+        border-radius: 6px;
+        padding: 0.5rem 0.75rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .td-tier {
+        font-weight: 700;
+        color: var(--accent-primary);
+      }
+
+      .td-cost {
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .td-get {
+        grid-column: 2 / 4;
+        color: var(--text-secondary);
+      }
+
+      .td-link {
+        font-size: var(--font-size-sm);
+        display: inline-block;
+        margin-bottom: var(--spacing-xs);
+      }
+
+      .td-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem;
+        border-top: 1px solid var(--border-light);
+        padding-top: var(--spacing-sm);
+        margin-top: var(--spacing-sm);
+      }
+
+      .td-nav button {
+        font: inherit;
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        min-height: 40px;
+        padding: 0.3rem 1rem;
+        border-radius: 999px;
+        border: 2px solid var(--accent-primary);
+        background: var(--background-primary);
+        color: var(--accent-primary);
+        cursor: pointer;
+      }
+
+      .td-nav button:hover,
+      .td-nav button:focus-visible {
+        background: var(--accent-primary);
+        color: #fff;
+      }
+
+      /* Answer state */
+      .tree-summary {
+        grid-column: 1 / -1;
+        background: var(--background-primary);
+        border: 1px solid var(--border-light);
+        border-left: 4px solid var(--accent-secondary);
+        border-radius: 8px;
+        padding: 0.75rem var(--spacing-md);
+      }
+
+      .ts-line {
+        margin-bottom: 0;
+      }
+
+      .ts-line strong {
+        color: var(--accent-secondary);
+        font-size: var(--font-size-md);
+      }
+
+      .ts-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem var(--spacing-md);
+        margin-top: 0.25rem;
+      }
+
+      .ts-link {
+        font: inherit;
+        font-size: var(--font-size-sm);
+        background: none;
+        border: none;
+        padding: 0.25rem 0;
+        color: var(--accent-primary);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      .ts-link:hover {
+        color: var(--accent-secondary);
+      }
+
+      button.tm-chip {
+        font: inherit;
+        font-size: 0.8rem;
+        line-height: 1.3;
+        color: var(--text-primary);
+        text-align: left;
+        cursor: pointer;
+        min-height: 28px;
+        transition: background var(--transition-normal),
+          color var(--transition-normal);
+      }
+
+      button.tm-chip:hover {
+        border-color: var(--accent-secondary);
+      }
+
+      button.tm-chip:focus-visible {
+        outline: 2px solid var(--accent-primary);
+        outline-offset: 2px;
+      }
+
+      button.tm-chip[aria-pressed="true"] {
+        background: var(--accent-secondary);
+        border-color: var(--accent-secondary);
+        color: #fff;
+      }
+
+      button.tm-chip.next[aria-pressed="true"] {
+        background: var(--text-secondary);
+        border-color: var(--text-secondary);
+      }
+
+      button.tm-chip[aria-pressed="true"] b {
+        color: #fff;
+      }
+
+      .tree-map > li.is-answered .tm-num {
+        background: var(--text-secondary);
+      }
+
+      .tree-map > li.is-active .tm-num {
+        background: var(--accent-secondary);
+      }
+
+      .tree-map > li.is-after {
+        opacity: 0.5;
+      }
+
+      .tree-map > li.is-after:hover,
+      .tree-map > li.is-after:focus-within,
+      .tree-map > li.is-after.is-active {
+        opacity: 1;
+      }
+
+      .td-answers {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.4rem;
+        margin: var(--spacing-sm) 0;
+      }
+
+      .td-answers-label {
+        font-weight: 700;
+        font-size: var(--font-size-sm);
+        margin-right: 0.25rem;
+      }
+
+      .td-answers button {
+        font: inherit;
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        min-height: 40px;
+        padding: 0.3rem 1rem;
+        border-radius: 999px;
+        border: 2px solid var(--accent-secondary);
+        background: var(--background-primary);
+        color: var(--accent-secondary);
+        cursor: pointer;
+      }
+
+      .td-answers button:hover {
+        background: #fbefe5;
+      }
+
+      .td-answers button[aria-pressed="true"] {
+        background: var(--accent-secondary);
+        color: #fff;
+      }
+
+      .td-answers button[aria-pressed="true"]::before {
+        content: "✓ ";
+      }
+
+      .td-outcome.is-dimmed,
+      .td-fork.is-dimmed {
+        opacity: 0.45;
+      }
+
+      .td-outcome.is-chosen {
+        border-top-color: var(--accent-secondary);
+        border-top-width: 2px;
+      }
+
+      .td-fork.is-chosen {
+        border-left-color: var(--accent-secondary);
+      }
+
+      /* Tables become stacked cards on phones */
+      @media (max-width: 600px) {
+        .table-wrap {
+          overflow: visible;
+          border: none;
+          background: none;
+        }
+
+        .table-wrap table {
+          min-width: 0;
+        }
+
+        .table-wrap thead {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          clip: rect(0 0 0 0);
+        }
+
+        .table-wrap table,
+        .table-wrap tbody,
+        .table-wrap tr,
+        .table-wrap td {
+          display: block;
+        }
+
+        .table-wrap tr {
+          background: var(--background-primary);
+          border: 1px solid var(--border-light);
+          border-radius: 8px;
+          padding: 0.6rem 0.8rem;
+          margin-bottom: 0.6rem;
+        }
+
+        .table-wrap tr.pick {
+          background: var(--highlight-bg);
+          border-left: 4px solid var(--accent-primary);
+        }
+
+        .table-wrap tr.pick td,
+        .table-wrap tr.pick td:first-child {
+          background: none;
+          box-shadow: none;
+        }
+
+        .table-wrap td {
+          border: none;
+          padding: 0.2rem 0;
+          white-space: normal;
+        }
+
+        .table-wrap td:first-child {
+          font-weight: 700;
+          color: var(--accent-primary);
+        }
+
+        .table-wrap td:not(:first-child)::before {
+          content: attr(data-label);
+          display: block;
+          font-size: 0.7rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--text-secondary);
+        }
+      }
+
+      /* Side contents (wide screens only) */
+      .side-toc {
+        display: none;
+      }
+
+      @media (min-width: 1400px) {
+        .side-toc {
+          display: block;
+          position: fixed;
+          top: var(--spacing-lg);
+          left: max(16px, calc((100vw - 960px) / 2 - 215px));
+          width: 190px;
+          max-height: calc(100vh - 2 * var(--spacing-lg));
+          overflow-y: auto;
+          font-size: 0.85rem;
+        }
+
+        .side-toc-title {
+          font-size: 0.75rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--text-secondary);
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .side-toc ol {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          border-left: 2px solid var(--border-light);
+        }
+
+        .side-toc li {
+          margin: 0;
+        }
+
+        .side-toc a {
+          display: block;
+          padding: 0.3rem 0 0.3rem 0.75rem;
+          margin-left: -2px;
+          border-left: 2px solid transparent;
+          color: var(--text-secondary);
+          text-decoration: none;
+          line-height: 1.3;
+        }
+
+        .side-toc a:hover {
+          color: var(--accent-primary);
+        }
+
+        .side-toc a[aria-current="true"] {
+          color: var(--accent-secondary);
+          border-left-color: var(--accent-secondary);
+          font-weight: 700;
+        }
+      }
+
+      @media print {
+        .side-toc {
+          display: none;
+        }
+      }
+
+      /* Numbered steps (network section) */
+      ol.steps {
+        list-style: none;
+        padding: 0;
+        counter-reset: step;
+      }
+
+      ol.steps > li {
+        counter-increment: step;
+        position: relative;
+        padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm)
+          calc(var(--spacing-md) + 2.25rem);
+        background: var(--background-primary);
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      ol.steps > li::before {
+        content: counter(step);
+        position: absolute;
+        left: var(--spacing-sm);
+        top: var(--spacing-sm);
+        width: 1.9rem;
+        height: 1.9rem;
+        border-radius: 50%;
+        background: var(--accent-primary);
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Quick picks */
+      .picks {
+        border-top: 4px solid var(--accent-secondary);
+      }
+
+      .pick-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: var(--spacing-sm);
+      }
+
+      .pick-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        background: var(--background-primary);
+        border: 1px solid #cfd6dc;
+        border-radius: 8px;
+        padding: var(--spacing-sm);
+        color: var(--text-primary);
+        text-decoration: none;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        transition: border-color var(--transition-normal),
+          transform var(--transition-normal);
+      }
+
+      .pick-card:hover {
+        border-color: var(--accent-primary);
+        color: var(--text-primary);
+        transform: translateY(-1px);
+      }
+
+      .pick-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--accent-secondary);
+      }
+
+      .pick-name {
+        font-weight: 700;
+        line-height: var(--line-height-tight);
+      }
+
+      .pick-why {
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+        flex: 1;
+      }
+
+      .pick-price {
+        font-weight: 700;
+        color: var(--accent-primary);
+      }
+
+      /* Photos */
+      .photo {
+        margin: var(--spacing-md) 0;
+      }
+
+      .photo img,
+      .path-figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      .intro {
+        display: flow-root;
+      }
+
+      @media (min-width: 769px) {
+        .photo-side {
+          float: right;
+          width: 44%;
+          margin: 0.35rem 0 var(--spacing-sm) var(--spacing-lg);
+        }
+      }
+
+      /* Detail shots: crop to a wide frame so they don't dominate a section */
+      .photo-crop img {
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        object-position: 50% 55%;
+      }
+
+      .photo figcaption {
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+        margin-top: var(--spacing-xs);
+      }
+
+      /* Upgrade path tabs (CSS-only radio tabs) */
+      .path-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .path-tabs input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .path-tabs label {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 0.45rem 0.9rem;
+        border: 1px solid #cfd6dc;
+        border-radius: 8px;
+        background: var(--background-primary);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        line-height: 1.25;
+        transition: border-color var(--transition-normal);
+      }
+
+      .path-tabs label:hover {
+        border-color: var(--accent-primary);
+      }
+
+      .pt-name {
+        font-weight: 700;
+        font-size: var(--font-size-sm);
+      }
+
+      .pt-total {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+      }
+
+      .path-tabs input:checked + label {
+        border: 2px solid var(--accent-secondary);
+        padding: calc(0.45rem - 1px) calc(0.9rem - 1px);
+      }
+
+      .path-tabs input:checked + label .pt-total {
+        color: var(--accent-secondary);
+        font-weight: 600;
+      }
+
+      .path-tabs input:focus-visible + label {
+        outline: 2px solid var(--accent-primary);
+        outline-offset: 2px;
+      }
+
+      .path-panel {
+        display: none;
+        background: var(--background-primary);
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        padding: var(--spacing-sm);
+      }
+
+      .paths:has(#path-fix:checked) #panel-fix,
+      .paths:has(#path-budget:checked) #panel-budget,
+      .paths:has(#path-daily:checked) #panel-daily,
+      .paths:has(#path-presenter:checked) #panel-presenter,
+      .paths:has(#path-studio:checked) #panel-studio {
+        display: block;
+      }
+
+      .path-figure {
+        display: block;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .path-facts {
+        display: grid;
+        gap: 0.5rem;
+        font-size: var(--font-size-sm);
+        margin: 0;
+      }
+
+      .path-facts div {
+        display: grid;
+        grid-template-columns: 7.5rem 1fr;
+        gap: var(--spacing-sm);
+      }
+
+      .path-facts dt {
+        font-weight: 700;
+        color: var(--text-secondary);
+      }
+
+      .path-facts dd {
+        margin: 0;
+      }
+
+      .path-note {
+        color: var(--accent-secondary);
+        font-weight: 600;
+      }
+
+      @media (max-width: 480px) {
+        .path-facts div {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+      }
+
+      @media print {
+        .path-panel {
+          display: block;
+          break-inside: avoid-page;
+          margin-bottom: var(--spacing-sm);
+        }
+
+        .path-tabs {
+          display: none;
+        }
+      }
+
+      .back-link {
+        text-align: center;
+        margin-top: var(--spacing-lg);
+      }
+
+      .back-link a {
+        text-decoration: none;
+        font-weight: 500;
+        font-size: var(--font-size-sm);
+      }
+
+      @media (max-width: 768px) {
+        :root {
+          --font-size-base: 1.05rem;
+          --font-size-md: 1.2rem;
+          --font-size-lg: 1.4rem;
+          --font-size-xl: 1.8rem;
+        }
+
+        .container {
+          padding: var(--spacing-lg) 16px;
+        }
+
+        section {
+          padding: var(--spacing-md) 16px;
+        }
+
+        nav.toc ol {
+          columns: 1;
+        }
+      }
+
+      @media print {
+        .back-link {
+          display: none;
+        }
+
+        section {
+          box-shadow: none;
+          border: 1px solid var(--border-light);
+          break-inside: avoid-page;
+        }
+
+        .table-wrap {
+          overflow: visible;
+        }
+
+        table {
+          min-width: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Toward Better Video Calls</h1>
+        <p class="byline">
+          By George Holt
+        </p>
+      </header>
+
+      <div class="intro">
+        <p>
+          Over the years, a lot of people have commented on how I look and
+          sound on video calls from my home office. Sometimes they are just 
+          curious, but often they're considering upgrading their own setup.
+          It's surprisingly hard to give a good answer quickly, and it really
+          depends on the problems you're having. The right solution will depend
+          on your needs, how much gear you want on your desk and how much you
+          want to spend. So I've tried to write the whole answer down here, as 
+          completely as I can.
+        </p>
+        <figure class="photo photo-side">
+          <img
+            src="img/office-full-setup.webp"
+            width="1600"
+            height="1200"
+            alt="A desk with a large dome key light and a softbox on stands, a shotgun mic on a boom arm, a studio teleprompter in the middle with a camera behind it, a monitor and a laptop, and a pair of studio speakers."
+          />
+          <figcaption>
+            My own setup, well past the point of diminishing returns.
+          </figcaption>
+        </figure>
+        <p>
+          The good news is that the least expensive upgrades make the biggest
+          difference. Earbuds, a decent light, and a mic close to your mouth
+          will do more for your calls than any camera. Beyond that, each upgrade
+          costs more and does less. I'll admit I had a lot of fun going well
+          past that point: my own setup has a studio teleprompter, a mirrorless
+          camera, three lights, an off-camera shotgun mic, and acoustic panels
+          on the walls. You don't need any of that to look and sound great.
+        </p>
+      </div>
+
+      <section id="picks" class="picks">
+        <h2>Quick picks</h2>
+        <p>If you only read one part of this page, read this.</p>
+        <div class="pick-grid">
+          <a class="pick-card" href="#lighting">
+            <span class="pick-label">Free, today</span>
+            <span class="pick-name">Face a window, raise the laptop</span>
+            <span class="pick-why">Turn off the overhead light, sit facing the window, and put the camera at eye level on a stack of books.</span>
+            <span class="pick-price">$0</span>
+          </a>
+          <a class="pick-card" href="#listening">
+            <span class="pick-label">If you buy one thing</span>
+            <span class="pick-name">Wired earbuds or a headset</span>
+            <span class="pick-why">Ends echo for everyone else on the call. The single most noticeable fix.</span>
+            <span class="pick-price">$20–60</span>
+          </a>
+          <a class="pick-card" href="#lighting">
+            <span class="pick-label">Best light for most desks</span>
+            <span class="pick-name">Elgato Key Light Air MK.2</span>
+            <span class="pick-why">Clamps to the desk, dims, and adjusts color. No floor stand.</span>
+            <span class="pick-price">$140</span>
+          </a>
+          <a class="pick-card" href="#microphone">
+            <span class="pick-label">Best first mic</span>
+            <span class="pick-name">Samson Q2U on a boom arm</span>
+            <span class="pick-why">Close to your mouth, it sounds like a podcast and plugs straight into USB.</span>
+            <span class="pick-price">~$70</span>
+          </a>
+          <a class="pick-card" href="#eye-contact">
+            <span class="pick-label">If you present or lead</span>
+            <span class="pick-name">Elgato Prompter + Insta360 Link 2C Pro</span>
+            <span class="pick-why">Puts people's faces over the lens, so you finally make eye contact.</span>
+            <span class="pick-price">~$450–500</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="how-to-read">
+        <h2>How to read this</h2>
+        <p>
+          Each <strong>area</strong> below is upgraded on its own track. Tiers
+          run from <strong>T0 (free)</strong> to <strong>T4 (studio)</strong>.
+          You don't need to keep every area at the same tier. The common
+          mistake is spending on cameras before fixing audio or light.
+        </p>
+
+
+        <aside class="callout callout-info">
+          <p class="callout-title">Know where Zoom limits you</p>
+          <p>Most Zoom accounts send 720p, and full 1080p is limited to Business and Enterprise plans. Gallery view receives 720p or less. Past a decent webcam, a better camera gets you <strong>background blur, low-light performance and color, not more detail</strong>.</p>
+        </aside>
+
+        <aside class="callout callout-info">
+          <p class="callout-title">How I picked these</p>
+          <p>
+            The studio gear is what I use every day: a Prompter People
+            prompter, a Sony a6000 with a Sigma zoom, Amaran lights with a
+            Light Dome, a PreSonus Revelator io24, a Synco Mic-02 shotgun mic, a
+            Rolls MS111 mute switch and PreSonus monitors. Everything else comes
+            from reviews, specs and other people's setups rather than my own
+            testing.
+          </p>
+        </aside>
+
+        <p class="legend">
+          Each table marks a <span class="badge badge-my">My pick</span> for most people (also highlighted), plus
+          <span class="badge badge-free">Free fix</span>, <span class="badge badge-budget">Budget pick</span> and
+          <span class="badge badge-upgrade">Upgrade pick</span> where they apply. The tier codes (T0 free to T4 studio) are there if you want the detail.
+        </p>
+        <p class="legend">
+          Prices are rough US street prices, last checked November 2026.
+        </p>
+
+        <nav class="toc" aria-label="Sections">
+          <h3>Contents</h3>
+          <ol>
+            <li><a href="#paths">Common upgrade paths</a></li>
+            <li><a href="#decision-tree">Decision tree: what to upgrade next</a></li>
+            <li><a href="#listening">Listening (headphones and speakers)</a></li>
+            <li><a href="#microphone">Microphone</a></li>
+            <li><a href="#interface">Audio interface and controls</a></li>
+            <li><a href="#lighting">Lighting</a></li>
+            <li><a href="#eye-contact">Eye contact (teleprompter)</a></li>
+            <li><a href="#camera">Camera</a></li>
+            <li><a href="#room">Room (sound and background)</a></li>
+            <li><a href="#computer">Computer</a></li>
+            <li><a href="#network">Network</a></li>
+          </ol>
+        </nav>
+      </section>
+
+      <section id="paths">
+        <h2>Common upgrade paths</h2>
+        <p>The same desk, five ways. Pick a path to see how much gear and floor space it takes.</p>
+        <div class="paths">
+          <div class="path-tabs" role="radiogroup" aria-label="Upgrade path">
+            <input type="radio" name="path" id="path-fix" checked />
+            <label for="path-fix"><span class="pt-name">The $100 fix</span><span class="pt-total">~$80</span></label>
+            <input type="radio" name="path" id="path-budget" />
+            <label for="path-budget"><span class="pt-name">The budget kit</span><span class="pt-total">~$200</span></label>
+            <input type="radio" name="path" id="path-daily" />
+            <label for="path-daily"><span class="pt-name">The daily-calls pro</span><span class="pt-total">~$900</span></label>
+            <input type="radio" name="path" id="path-presenter" />
+            <label for="path-presenter"><span class="pt-name">The presenter/creator</span><span class="pt-total">~$2,000</span></label>
+            <input type="radio" name="path" id="path-studio" />
+            <label for="path-studio"><span class="pt-name">The studio</span><span class="pt-total">$3,000+</span></label>
+          </div>
+          <div class="path-panel" id="panel-fix">
+            <a class="path-figure" href="img/setup-100-fix.svg" title="Open the full-size drawing">
+              <img src="img/setup-100-fix.svg" width="1200" height="944" loading="lazy" alt="Drawing of the same 60 by 30 inch desk set up as the $100 fix." />
+            </a>
+            <dl class="path-facts">
+              <div><dt>What you add</dt><dd>Earbuds → face a window → laptop stand → Room T0</dd></div>
+              <div><dt>~Total</dt><dd>~$80</dd></div>
+              <div><dt>Space</dt><dd>Desk only (60 × 30 in)</dd></div>
+            </dl>
+          </div>
+          <div class="path-panel" id="panel-budget">
+            <a class="path-figure" href="img/setup-budget-kit.svg" title="Open the full-size drawing">
+              <img src="img/setup-budget-kit.svg" width="1200" height="944" loading="lazy" alt="Drawing of the same 60 by 30 inch desk set up as the budget kit." />
+            </a>
+            <dl class="path-facts">
+              <div><dt>What you add</dt><dd>Earbuds (Listening T1) + bulb softbox (Lighting T1) + USB mic on a boom arm (Mic T2a)</dd></div>
+              <div><dt>~Total</dt><dd>~$200</dd></div>
+              <div><dt>Space</dt><dd>Desk + ~2 ft of floor beside it for the softbox stand</dd></div>
+            </dl>
+          </div>
+          <div class="path-panel" id="panel-daily">
+            <a class="path-figure" href="img/setup-daily-calls.svg" title="Open the full-size drawing">
+              <img src="img/setup-daily-calls.svg" width="1200" height="944" loading="lazy" alt="Drawing of the same 60 by 30 inch desk set up as the daily-calls pro." />
+            </a>
+            <dl class="path-facts">
+              <div><dt>What you add</dt><dd>The $100 fix + Key Light Air MK.2 + USB mic + Elgato Prompter + Link 2C Pro</dd></div>
+              <div><dt>~Total</dt><dd>~$900</dd></div>
+              <div><dt>Space</dt><dd>Desk only. Light, mic and prompter clamp to the desk</dd></div>
+            </dl>
+          </div>
+          <div class="path-panel" id="panel-presenter">
+            <a class="path-figure" href="img/setup-presenter.svg" title="Open the full-size drawing">
+              <img src="img/setup-presenter.svg" width="1200" height="944" loading="lazy" alt="Drawing of the same 60 by 30 inch desk set up as the presenter/creator." />
+            </a>
+            <dl class="path-facts">
+              <div><dt>What you add</dt><dd>The daily-calls pro + Amaran 60x S and softbox + used ZV-E10 + Room T2</dd></div>
+              <div><dt>~Total</dt><dd>~$2,000</dd></div>
+              <div><dt>Space</dt><dd>Desk + ~1.5 ft of floor beside it for the softbox stand</dd></div>
+            </dl>
+          </div>
+          <div class="path-panel" id="panel-studio">
+            <a class="path-figure" href="img/setup-studio.svg" title="Open the full-size drawing">
+              <img src="img/setup-studio.svg" width="1200" height="944" loading="lazy" alt="Drawing of the same 60 by 30 inch desk set up as the studio." />
+            </a>
+            <dl class="path-facts">
+              <div><dt>What you add</dt><dd>Prompter People prompter on a heavy arm, Sony a6000 + Sigma zoom, 2× Amaran 100x (Light Dome key, rim light) + fill, Revelator io24, Synco Mic-02 shotgun, Rolls MS111 mute switch, PreSonus monitors, room treatment</dd></div>
+              <div><dt>~Total</dt><dd>$3,000+ <span class="path-note">· My setup</span></dd></div>
+              <div><dt>Space</dt><dd>~7.5 × 7.5 ft corner: key light stand beside the desk, rim light behind your chair</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section id="decision-tree">
+        <h2>Decision tree: what to upgrade next</h2>
+        <aside class="callout callout-info">
+          <p class="callout-title">Start here: record yourself</p>
+          <p>
+            Before you buy anything, start a meeting with just yourself, record
+            a few minutes of talking the way you normally do, and play it back
+            on headphones. Watch it the way other people on your calls see you.
+          </p>
+          <ul>
+            <li>Is your face evenly lit, or dark, shadowed or backlit?</li>
+            <li>Are you looking at the camera, or down and away at the screen?</li>
+            <li>Does your voice sound close and clear, or distant and hollow?</li>
+            <li>Can you hear typing, fans, traffic or the room itself?</li>
+            <li>Does the picture or sound ever freeze or break up?</li>
+          </ul>
+          <p>
+            Write down the two or three things that bother you most. Those are
+            your upgrades, roughly in order, and the questions below point to
+            the fix. Record again after each change so you can see and hear the
+            difference.
+          </p>
+        </aside>
+        <p id="tree-intro">
+          Start at the top and do the first upgrade whose answer is "yes". Then
+          start over.
+        </p>
+        <div class="tree-app" id="tree-app" hidden>
+          <ol class="tree-map" id="tree-map"></ol>
+          <aside class="tree-panel" id="tree-panel" aria-label="Details for the selected question"></aside>
+        </div>
+        <ol class="flow" id="tree-list">
+          <li>
+            <p class="q">Do people hear echo, or ask you to repeat yourself?</p>
+            <div class="why"><p>Audio problems are the ones other people notice first. Echo means your speakers are leaking back into your mic. Being asked to repeat yourself means the mic is too far from your mouth or the room is too loud.</p><p><strong>How to check:</strong> Ask a colleague, or record a short Zoom meeting with yourself and play it back on headphones.</p></div>
+            <div class="outcomes">
+              <div class="outcome"><span class="ans">Echo</span><strong>Listening T1</strong>Wired earbuds</div>
+              <div class="outcome"><span class="ans">Repeat</span><strong>Mic T2a</strong>Budget USB mic on a boom arm</div>
+            </div>
+            <span class="no">No</span>
+          </li>
+          <li>
+            <p class="q">Is your face dark, uneven, or backlit?</p>
+            <div class="why"><p>Cameras need light far more than they need resolution. A dark or backlit face looks bad on any camera, and fixing it costs little.</p><p><strong>How to check:</strong> Look at your Zoom preview. You should see both eyes clearly, with no bright window or lamp behind you.</p></div>
+            <div class="outcomes">
+              <div class="outcome">
+                <span class="ans">Yes</span>
+                <p class="sub-q">Can you face a window for most calls?</p>
+                <div class="fork">
+                  <div><span class="ans">Yes</span><strong>Lighting T0</strong>Move the desk</div>
+                  <div><span class="ans">No</span><strong>Lighting T2</strong>Key Light Air MK.2</div>
+                </div>
+              </div>
+            </div>
+            <span class="no">No</span>
+          </li>
+          <li>
+            <p class="q">Is the camera below eye level?</p>
+            <div class="why"><p>A low camera looks up at your chin and makes you seem to look down at people. It is the cheapest fix on this page.</p><p><strong>How to check:</strong> The lens should be level with your eyes, or slightly above them.</p></div>
+            <div class="outcomes">
+              <div class="outcome"><span class="ans">Yes</span><strong>Computer T1</strong>Laptop stand</div>
+            </div>
+            <span class="no">No</span>
+          </li>
+          <li>
+            <p class="q">Does eye contact matter?<small>Presenting, selling, leading, reading notes</small></p>
+            <div class="why"><p>When you look at people's faces on screen, you look away from the lens, so they see you looking down. A prompter puts their faces over the lens.</p><p><strong>How to check:</strong> It matters most if you present, sell, lead meetings, or read notes on calls.</p></div>
+            <div class="outcomes">
+              <div class="outcome"><span class="ans">Yes</span><strong>Eye contact T2 + Camera T2</strong>Elgato Prompter + Link 2C Pro</div>
+            </div>
+            <span class="no">No</span>
+          </li>
+          <li>
+            <p class="q">Does the clap test ring?</p>
+            <div class="why"><p>Hard walls and floors make every mic sound distant and hollow. Fixing the room improves every mic you will ever own.</p><p><strong>How to check:</strong> Clap once. If you hear a ring or flutter afterward, the room is adding echo.</p></div>
+            <div class="outcomes">
+              <div class="outcome"><span class="ans">Yes</span><strong>Room T0, then T2</strong>Soft furnishings first, then panels</div>
+            </div>
+            <span class="no">No</span>
+          </li>
+          <li>
+            <p class="q">Is the image still noisy or flat with good light?</p>
+            <div class="why"><p>Once the light is fixed, remaining grain or a flat look comes from a small camera sensor. This is where a camera upgrade finally pays off.</p><p><strong>How to check:</strong> Check your preview with your lighting on. Grainy shadows or a muddy background point to the camera.</p></div>
+            <div class="outcomes">
+              <div class="outcome">
+                <span class="ans">Yes</span>
+                <p class="sub-q">Do you also record video?</p>
+                <div class="fork">
+                  <div><span class="ans">Yes</span><strong>Camera T3</strong>Used mirrorless with USB webcam mode</div>
+                  <div><span class="ans">No</span><strong>Camera T2</strong>Large-sensor webcam</div>
+                </div>
+              </div>
+            </div>
+            <span class="no">No</span>
+          </li>
+          <li>
+            <p class="q">Do you hate a mic in the shot, or headphones on your head?</p>
+            <div class="why"><p>This is about comfort and looks, not sound quality. Getting gear out of the picture costs more, because it has to work from farther away.</p><p><strong>How to check:</strong> If neither bothers you, skip it.</p></div>
+            <div class="outcomes">
+              <div class="outcome"><span class="ans">Mic in shot</span><strong>Mic T3b + Interface T2–T3</strong>Off-camera shotgun</div>
+              <div class="outcome"><span class="ans">Headphones</span><strong>Listening T4</strong>Speakers + shotgun + mute switch, after Room T2</div>
+            </div>
+            <span class="no">Neither</span>
+          </li>
+          <li>
+            <p class="q">Do you also record a podcast or voiceover?</p>
+            <div class="why"><p>Broadcast mics matter more for recordings than for Zoom, where compression hides most of the difference.</p><p><strong>How to check:</strong> Only worth it if you also record.</p></div>
+            <div class="outcomes">
+              <div class="outcome"><span class="ans">Yes</span><strong>Mic T3a + Interface T2</strong>SM7B/SM7dB or RE20</div>
+            </div>
+            <span class="no">No</span>
+          </li>
+          <li class="end">
+            <p class="q">You're done.<small>Go to Lighting T4 and a bigger prompter for polish.</small></p>
+            <div class="why"><p>Everything that makes a real difference on calls is handled. What's left is polish.</p></div>
+          </li>
+        </ol>
+      </section>
+
+      <section id="listening">
+        <h2>1. Listening (headphones and speakers)</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Tier</th><th scope="col">What you buy</th><th scope="col">~Cost</th><th scope="col">What you get</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Tier">T0</td><td data-label="What you buy">Laptop speakers</td><td class="cost" data-label="~Cost">$0</td><td data-label="What you get">Echo and feedback for everyone else. This is the #1 problem people notice on calls.</td></tr>
+              <tr class="pick"><td data-label="Tier">T1</td><td data-label="What you buy"><span class="badge badge-my">My pick</span> <strong>Wired earbuds or a headset</strong></td><td class="cost" data-label="~Cost">$20–60</td><td data-label="What you get"><strong>No echo, ever.</strong> The best $20 you'll spend on calls.</td></tr>
+              <tr><td data-label="Tier">T2</td><td data-label="What you buy"><span class="badge badge-upgrade">Upgrade pick</span> Comfortable in-ear monitors or open-back headphones</td><td class="cost" data-label="~Cost">$80–200</td><td data-label="What you get">All-day comfort. You hear yourself accurately.</td></tr>
+              <tr><td data-label="Tier">T4</td><td data-label="What you buy">Small active monitor speakers + an off-camera shotgun mic + a mute switch</td><td class="cost" data-label="~Cost">$250–600</td><td data-label="What you get">Nothing in your ears or on your head. Only works after the mic and room tiers below, because otherwise the speakers leak into the mic.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout-skip">
+          <p class="callout-title">Skip if</p>
+          <p>You never take calls longer than 30 minutes and nobody has complained about echo.</p>
+        </aside>
+      </section>
+
+      <section id="microphone">
+        <h2>2. Microphone</h2>
+        <p>
+          Room noise depends on <strong>how close the mic is to your mouth and
+          how narrow its pickup pattern is</strong>. Whether a mic is dynamic
+          or condenser doesn't matter much. Pick based on whether you mind the
+          mic being in the shot.
+        </p>
+        <p>
+          There are two paths: <strong>on-camera</strong> (an end-address mic
+          close to your mouth, visible in the shot) and
+          <strong>off-camera</strong> (a shotgun mic just outside the frame).
+          Prices here are for the mic only. What you plug it into is covered in
+          the next section.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Tier</th><th scope="col">What you buy</th><th scope="col">~Cost</th><th scope="col">What you get</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Tier">T0</td><td data-label="What you buy">Laptop mic, with noise suppression turned on</td><td class="cost" data-label="~Cost">$0</td><td data-label="What you get">Usable for short calls. Sounds distant and roomy.</td></tr>
+              <tr><td data-label="Tier">T1</td><td data-label="What you buy">Headset mic (comes with T1 listening)</td><td class="cost" data-label="~Cost">—</td><td data-label="What you get">Close to your mouth, so it's clear. It looks like a call center.</td></tr>
+              <tr class="pick"><td data-label="Tier">T2a</td><td data-label="What you buy"><span class="badge badge-my">My pick</span> <strong>Budget USB mic on a boom arm</strong>, 4–8" from your mouth: <strong>Samson Q2U</strong> (~$70, USB + XLR), alternatives Audio-Technica ATR2100x-USB (USB + XLR) or RØDE PodMic USB (~$99)</td><td class="cost" data-label="~Cost">$70–100</td><td data-label="What you get">Sounds like a podcast and plugs straight into USB. The Q2U is podcast experts' most-recommended starter mic.</td></tr>
+              <tr><td data-label="Tier">T2b</td><td data-label="What you buy"><span class="badge badge-upgrade">Upgrade pick</span> <strong>Premium USB/XLR mic:</strong> <strong>Shure MV7+</strong> (~$279), or the Elgato Wave:3 (~$150, a condenser that suits a quieter room)</td><td class="cost" data-label="~Cost">$150–280</td><td data-label="What you get">Built-in processing (auto-level, noise reduction) and a tap-to-mute panel. The "one mic for everything" pick.</td></tr>
+              <tr><td data-label="Tier">T3a</td><td data-label="What you buy"><strong>Broadcast mic, XLR, on camera:</strong> <strong>Shure SM7B</strong> (~$399–439), its built-in-preamp twin the <strong>SM7dB</strong> (~$499), the talk-radio classic <strong>Electro-Voice RE20</strong>, or its cheaper sibling the EV RE320 (~$299). Also the RØDE Procaster. <strong>Requires Interface T2</strong> (a high-gain interface).</td><td class="cost" data-label="~Cost">$150–550 + interface</td><td data-label="What you get">The classic radio and podcast sound and look. Very forgiving of untreated rooms when you're close. These are big mics, and they <em>are</em> the shot.</td></tr>
+              <tr><td data-label="Tier">T3b</td><td data-label="What you buy"><strong>Shotgun, off camera:</strong> e.g. Synco Mic-02 on a boom just outside the frame</td><td class="cost" data-label="~Cost">$50–300</td><td data-label="What you get">Nothing in the shot. The narrow pattern rejects the room. Needs a decent room (Room T2) to sound its best.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout-info">
+          <p class="callout-title">Good to know: the SM7B</p>
+          <p>It needs about 60 dB of clean gain for normal speech, so budget for a high-gain interface (Interface T2), not just the mic. Mic plus interface comes to roughly $550–800, against about $279 all-in for an MV7+. Skip the Cloudlifter-style inline boosters: at ~$149 they only add gain, while a good interface gives you the gain plus a headphone output and inputs you'll keep using.</p>
+        </aside>
+        <aside class="callout callout-info">
+          <p class="callout-title">Good to know: the RE20</p>
+          <p>It's the classic talk-radio mic, found in radio studios for decades.</p>
+        </aside>
+        <aside class="callout callout-skip">
+          <p class="callout-title">Skip T3 if</p>
+          <p>A T2 mic close to your mouth already sounds great on Zoom. The jump from T2 to T3 is real but small after Zoom's compression. It matters more for recording.</p>
+        </aside>
+      </section>
+
+      <section id="interface">
+        <h2>3. Audio interface and controls</h2>
+        <p>Skip this whole section if you use a USB mic (Mic T2a or T2b).</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Tier</th><th scope="col">What you buy</th><th scope="col">~Cost</th><th scope="col">What you get</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Tier">T0</td><td data-label="What you buy">None (USB mic)</td><td class="cost" data-label="~Cost">$0</td><td data-label="What you get">Simplest. The mic's own preamp and DSP do the work.</td></tr>
+              <tr><td data-label="Tier">T1</td><td data-label="What you buy"><strong>XLR-to-USB adapter</strong>, e.g. Shure MVX2U</td><td class="cost" data-label="~Cost">~$100</td><td data-label="What you get">The cheapest way to run an XLR mic.</td></tr>
+              <tr><td data-label="Tier">T2</td><td data-label="What you buy"><span class="badge badge-budget">Budget pick</span> <strong>2-channel USB interface with 60 dB+ of clean gain</strong> (Focusrite Scarlett 2i2 class). The gain is what matters: it drives an SM7B, RE20 or Procaster without an inline booster.</td><td class="cost" data-label="~Cost">$150–350</td><td data-label="What you get">Proper preamps, a headphone output, and room for a second mic or a guest.</td></tr>
+              <tr class="pick"><td data-label="Tier">T3</td><td data-label="What you buy"><span class="badge badge-my">My pick</span> <strong>Interface with built-in processing and loopback</strong> (PreSonus Revelator io24 class) + a <strong>hardware mute switch</strong> (Rolls MS111)</td><td class="cost" data-label="~Cost">$250–400</td><td data-label="What you get">Compression, EQ and noise gate in hardware, so you sound the same in every app. Loopback lets you play audio into the call. A physical mute you can trust.</td></tr>
+              <tr><td data-label="Tier">T4</td><td data-label="What you buy">Podcast/broadcast mixer (RØDECaster or GoXLR class)</td><td class="cost" data-label="~Cost">$500+</td><td data-label="What you get">Faders, pads for sound effects, multiple mics. Overkill for calls, but great if you also produce a show.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Pairing guide</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Mic</th><th scope="col">Minimum interface</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Mic">USB mics (Q2U, ATR2100x-USB, PodMic USB, MV7+, Wave:3)</td><td data-label="Minimum interface">None (USB)</td></tr>
+              <tr><td data-label="Mic">Shotgun (Synco Mic-02 etc.)</td><td data-label="Minimum interface">Any interface with phantom power (T1 adapter or T2)</td></tr>
+              <tr><td data-label="Mic">SM7dB</td><td data-label="Minimum interface">T2 interface</td></tr>
+              <tr><td data-label="Mic">SM7B, RE20, RE320, Procaster</td><td data-label="Minimum interface">T2 interface (60 dB+ clean gain)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="lighting">
+        <h2>4. Lighting</h2>
+        <p>
+          Soft light comes from a <strong>large source relative to its distance
+          from your face</strong>. It should also be dimmable, with adjustable
+          color temperature and a CRI of 95 or higher.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Tier</th><th scope="col">What you buy</th><th scope="col">~Cost</th><th scope="col">What you get</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Tier">T0</td><td data-label="What you buy"><span class="badge badge-free">Free fix</span> Face a window. Turn off the overhead light. Never sit with a window behind you.</td><td class="cost" data-label="~Cost">$0</td><td data-label="What you get">Often beautiful light, but only during the day and it changes with the weather.</td></tr>
+              <tr><td data-label="Tier">T1</td><td data-label="What you buy"><span class="badge badge-budget">Budget pick</span> One bulb softbox (24", E26 LED bulb)</td><td class="cost" data-label="~Cost">$60</td><td data-label="What you get">A big, soft key light. Not dimmable, fixed daylight color, needs a floor stand.</td></tr>
+              <tr class="pick"><td data-label="Tier">T2</td><td data-label="What you buy"><span class="badge badge-my">My pick</span> <strong>Elgato Key Light Air MK.2</strong> (desk clamp, 15" panel)</td><td class="cost" data-label="~Cost">$140</td><td data-label="What you get">Dimmable, adjustable color, no floor stand. <strong>The default pick for most desks.</strong></td></tr>
+              <tr><td data-label="Tier">T3</td><td data-label="What you buy"><span class="badge badge-upgrade">Upgrade pick</span> COB light + softbox (Amaran 60x S + 60cm softbox or lantern)</td><td class="cost" data-label="~Cost">$210–260</td><td data-label="What you get">The best quality per dollar. Soft, accurate skin tones. Uses Bowens-mount accessories you can keep.</td></tr>
+              <tr><td data-label="Tier">T4</td><td data-label="What you buy">Three-point lighting: key in a large dome, a rim light behind you, plus a fill light (e.g. 2× Amaran 100x + Light Dome)</td><td class="cost" data-label="~Cost">$500+</td><td data-label="What you get">Separation from the background. The "studio" look.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout-skip">
+          <p class="callout-title">Skip if</p>
+          <p>You have a north-facing window and only take daytime calls.</p>
+        </aside>
+        <aside class="callout callout-watch">
+          <p class="callout-title">Watch out</p>
+          <ul>
+            <li>Ring lights. They leave round reflections in glasses and make your face look flat.</li>
+            <li>Bare LED panels without diffusion.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="eye-contact">
+        <h2>5. Eye contact (teleprompter)</h2>
+        <p>
+          A prompter puts the call window directly over the lens, so
+          <strong>looking at people means looking at the camera</strong>.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Tier</th><th scope="col">What you buy</th><th scope="col">~Cost</th><th scope="col">What you get</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Tier">T0</td><td data-label="What you buy"><span class="badge badge-free">Free fix</span> Shrink the Zoom window and drag it right under the camera</td><td class="cost" data-label="~Cost">$0</td><td data-label="What you get">Gets you about 70% of the way.</td></tr>
+              <tr><td data-label="Tier">T1</td><td data-label="What you buy">Phone in a prompter's universal bracket, or a phone/tablet prompter for scripts only</td><td class="cost" data-label="~Cost">$0–100</td><td data-label="What you get">Eye contact while reading a script. Too small to show a call.</td></tr>
+              <tr class="pick"><td data-label="Tier">T2</td><td data-label="What you buy"><span class="badge badge-my">My pick</span> <strong>Elgato Prompter (9")</strong> + a matched webcam (see Camera T2)</td><td class="cost" data-label="~Cost">$300 + cam</td><td data-label="What you get">Real eye contact on every call. The prompter doubles as a monitor.</td></tr>
+              <tr><td data-label="Tier">T3</td><td data-label="What you buy"><span class="badge badge-upgrade">Upgrade pick</span> Elgato Prompter XL (15.6")</td><td class="cost" data-label="~Cost">$600</td><td data-label="What you get">A larger gallery view and more readable notes. Fits mirrorless cameras.</td></tr>
+              <tr><td data-label="Tier">T4</td><td data-label="What you buy">Studio prompter (19–24", e.g. Prompter People) on a heavy-duty monitor arm</td><td class="cost" data-label="~Cost">$1,000+</td><td data-label="What you get">A full-size meeting window at eye level. You can also present from it.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figure class="photo photo-crop">
+          <img
+            src="img/office-prompter-camera.webp"
+            width="1600"
+            height="1200"
+            loading="lazy"
+            alt="Close-up of a mirrorless camera whose lens sits inside the cloth hood at the back of a studio teleprompter."
+          />
+          <figcaption>
+            The camera sits behind the prompter glass, with a hood around the
+            lens. The call window is reflected on the glass right in front of
+            it, so looking at people means looking into the lens.
+          </figcaption>
+        </figure>
+        <aside class="callout callout-watch">
+          <p class="callout-title">Watch out</p>
+          <ul>
+            <li>The glass costs some light, so plan on at least Lighting T2.</li>
+            <li>The hood blocks the spot directly in front of you, so the key light goes 30–45° to one side.</li>
+            <li>Glasses wearers should dim the prompter screen and raise the key light.</li>
+          </ul>
+        </aside>
+        <aside class="callout callout-skip">
+          <p class="callout-title">Skip if</p>
+          <p>You mostly listen on calls, or you're always sharing your screen.</p>
+        </aside>
+      </section>
+
+      <section id="camera">
+        <h2>6. Camera</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Tier</th><th scope="col">What you buy</th><th scope="col">~Cost</th><th scope="col">What you get</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Tier">T0</td><td data-label="What you buy">Laptop camera raised to eye level, or a phone as webcam (Continuity Camera on Mac, Phone Link on Windows)</td><td class="cost" data-label="~Cost">$0</td><td data-label="What you get">Phones are surprisingly good. Laptop cameras range from fine (M4/M5 MacBook Air 12MP) to poor.</td></tr>
+              <tr><td data-label="Tier">T1</td><td data-label="What you buy">Basic 1080p webcam</td><td class="cost" data-label="~Cost">$50–100</td><td data-label="What you get">A modest step up from a weak laptop camera. Fixes the angle.</td></tr>
+              <tr class="pick"><td data-label="Tier">T2</td><td data-label="What you buy"><span class="badge badge-my">My pick</span> <strong>Large-sensor webcam without a gimbal: Insta360 Link 2C Pro (1/1.3"), or Elgato Facecam MK.2 for the simplest prompter setup</strong></td><td class="cost" data-label="~Cost">$150–200</td><td data-label="What you get">Clean image in normal room light. Fits behind the Elgato Prompter.</td></tr>
+              <tr><td data-label="Tier">T3</td><td data-label="What you buy"><span class="badge badge-upgrade">Upgrade pick</span> Used mirrorless camera with USB webcam mode (Sony ZV-E10 / ZV-E10 II, Canon R50) + a fast lens</td><td class="cost" data-label="~Cost">$500–900</td><td data-label="What you get">Background blur, low-light performance, rich color. No capture card needed.</td></tr>
+              <tr><td data-label="Tier">T4</td><td data-label="What you buy">Mirrorless with HDMI → capture card, a dummy battery, and a zoom lens such as the Sigma 18-50mm f/2.8</td><td class="cost" data-label="~Cost">$800–1,500</td><td data-label="What you get">Full control and reliable all-day operation. Mostly matters if you also record video.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout-skip">
+          <p class="callout-title">Skip T3+ if</p>
+          <p>You only do live calls. Zoom's compression hides most of the difference compared with T2. Pick T3+ if you also record course videos or social clips.</p>
+        </aside>
+        <aside class="callout callout-watch">
+          <p class="callout-title">Watch out</p>
+          <ul>
+            <li>4K webcams bought for the resolution.</li>
+            <li>Gimbal or pan-tilt webcams if you use a prompter. Behind glass, the tracking is wasted.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="room">
+        <h2>7. Room (sound and background)</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Tier</th><th scope="col">What you buy</th><th scope="col">~Cost</th><th scope="col">What you get</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Tier">T0</td><td data-label="What you buy"><span class="badge badge-free">Free fix</span> A rug, curtains, a bookshelf or couch nearby. Keep your back off a bare wall.</td><td class="cost" data-label="~Cost">$0</td><td data-label="What you get">Removes most of the echo in a typical bedroom office.</td></tr>
+              <tr><td data-label="Tier">T1</td><td data-label="What you buy">Tidy background, one lamp for depth</td><td class="cost" data-label="~Cost">$0–50</td><td data-label="What you get">A background that looks intentional.</td></tr>
+              <tr><td data-label="Tier">T2</td><td data-label="What you buy"><span class="badge badge-upgrade">Upgrade pick</span> 4–8 acoustic panels at first-reflection points, or a moving blanket behind the camera</td><td class="cost" data-label="~Cost">$100–300</td><td data-label="What you get">Noticeably drier, closer sound with any mic.</td></tr>
+              <tr><td data-label="Tier">T3</td><td data-label="What you buy">Panels + bass traps + a designed backdrop (shelves, plants, practical lights)</td><td class="cost" data-label="~Cost">$300–800</td><td data-label="What you get">Professional sound and a background that says something about you.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout-info">
+          <p class="callout-title">Clap test</p>
+          <p>Clap once. If you hear a ring or flutter afterward, room fixes will help your audio more than a new mic.</p>
+        </aside>
+      </section>
+
+      <section id="computer">
+        <h2>8. Computer</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Tier</th><th scope="col">What you buy</th><th scope="col">~Cost</th><th scope="col">What you get</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Tier">T0</td><td data-label="What you buy"><span class="badge badge-free">Free fix</span> Close other apps, turn on HD in Zoom</td><td class="cost" data-label="~Cost">$0</td><td data-label="What you get">Fewer freezes. Lets Zoom send its best quality.</td></tr>
+              <tr class="pick"><td data-label="Tier">T1</td><td data-label="What you buy"><span class="badge badge-my">My pick</span> Laptop stand + external keyboard</td><td class="cost" data-label="~Cost">$40–80</td><td data-label="What you get">Camera at eye level. Typing doesn't shake the shot.</td></tr>
+              <tr><td data-label="Tier">T2</td><td data-label="What you buy">New laptop with a good camera, if you're replacing one anyway: <strong>MacBook Air M5</strong> ($1,099, 12MP Center Stage) or a <strong>Copilot+ Windows laptop</strong> such as Surface Laptop (Windows Studio Effects)</td><td class="cost" data-label="~Cost">$1,000+</td><td data-label="What you get">Excellent built-in camera and mics. On Windows, Studio Effects is coming to external webcams too.</td></tr>
+              <tr><td data-label="Tier">—</td><td data-label="What you buy">MacBook Neo ($599)</td><td class="cost" data-label="~Cost">—</td><td data-label="What you get">A great laptop, but its camera is mediocre. Plan on Camera T2.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="network">
+        <h2>9. Network</h2>
+        <p>
+          If you want to have great video calls, here’s the path I suggest you
+          take.
+        </p>
+        <ol class="steps">
+          <li>
+            Start with a test call from the spot where you usually work. Open
+            your calling app’s network statistics and aim for under 100 ms of
+            latency, under 30 ms of jitter, and under 0.5% packet loss in each
+            direction. Leave about 5 Mbps of upload and download capacity
+            available per simultaneous HD call.
+          </li>
+          <li>
+            If the call breaks up, try the same setup over Ethernet. If that
+            clears it up, focus on Wi-Fi coverage at your desk. Move closer to
+            the access point or use a cable where you work.
+          </li>
+          <li>
+            Next, run a bufferbloat test over Ethernet. It measures how much
+            delay a busy connection adds. Aim for 20 ms or less of added
+            round-trip delay during both uploads and downloads. If backups or
+            large transfers make calls stutter, cap their speeds or schedule
+            them outside meeting hours.
+          </li>
+          <li>
+            Then repeat the call with the same background activity. Listen for
+            clean audio and check for spikes in jitter or packet loss. If the
+            call stays clear under the conditions that used to cause trouble,
+            you have evidence the change helped. Keep those readings as your new
+            baseline.
+          </li>
+        </ol>
+      </section>
+
+      <div class="back-link">
+        <a href="index.html">← Back to Main Portfolio</a>
+      </div>
+    </main>
+    <!-- Side contents: a copy of nav.toc pinned in the left margin on wide screens, highlighting the current section. -->
+    <script>
+      (function () {
+        var toc = document.querySelector("nav.toc ol");
+        if (!toc || !("IntersectionObserver" in window)) return;
+        var side = document.createElement("nav");
+        side.className = "side-toc";
+        side.setAttribute("aria-label", "On this page");
+        var title = document.createElement("p");
+        title.className = "side-toc-title";
+        title.textContent = "On this page";
+        side.appendChild(title);
+        var list = document.createElement("ol");
+        var picks = document.getElementById("picks");
+        var entries = [];
+        if (picks) entries.push(["#picks", "Quick picks"]);
+        toc.querySelectorAll("a").forEach(function (a) {
+          entries.push([a.getAttribute("href"), a.textContent.replace(/\s*\(.*\)$/, "")]);
+        });
+        var links = {};
+        entries.forEach(function (e) {
+          var li = document.createElement("li");
+          var a = document.createElement("a");
+          a.href = e[0];
+          a.textContent = e[1];
+          li.appendChild(a);
+          list.appendChild(li);
+          links[e[0].slice(1)] = a;
+        });
+        side.appendChild(list);
+        document.body.appendChild(side);
+
+        var visible = {};
+        var observer = new IntersectionObserver(
+          function (changes) {
+            changes.forEach(function (c) {
+              visible[c.target.id] = c.isIntersecting;
+            });
+            var current = null;
+            for (var i = 0; i < entries.length; i++) {
+              var id = entries[i][0].slice(1);
+              if (visible[id]) {
+                current = id;
+                break;
+              }
+            }
+            Object.keys(links).forEach(function (id) {
+              if (id === current) links[id].setAttribute("aria-current", "true");
+              else links[id].removeAttribute("aria-current");
+            });
+          },
+          { rootMargin: "-20% 0px -60% 0px" }
+        );
+        Object.keys(links).forEach(function (id) {
+          var sec = document.getElementById(id);
+          if (sec) observer.observe(sec);
+        });
+      })();
+    </script>
+
+    <!-- Decision map: built from #tree-list (the single source of truth) plus the area tables.
+         Desktop: map + sticky detail panel. Phones: details expand inline. -->
+    <script>
+      (function () {
+        var list = document.getElementById("tree-list");
+        var app = document.getElementById("tree-app");
+        var map = document.getElementById("tree-map");
+        var panel = document.getElementById("tree-panel");
+        var intro = document.getElementById("tree-intro");
+        if (!list || !app || !map || !panel || !window.matchMedia) return;
+
+        var AREAS = {
+          "Eye contact": "eye-contact",
+          Listening: "listening",
+          Lighting: "lighting",
+          Computer: "computer",
+          Camera: "camera",
+          Room: "room",
+          Mic: "microphone",
+          Interface: "interface",
+        };
+        var TOKEN = /Eye contact|Listening|Lighting|Computer|Camera|Room|Mic|Interface|T\d[ab]?(?:–T\d)?/g;
+        var DONE_REFS = "Lighting T4 + Eye contact T3–T4";
+
+        function el(tag, cls, text) {
+          var e = document.createElement(tag);
+          if (cls) e.className = cls;
+          if (text) e.textContent = text;
+          return e;
+        }
+
+        function ownText(node) {
+          var t = "";
+          node.childNodes.forEach(function (n) {
+            if (n.nodeType === 3) t += n.textContent;
+          });
+          return t.replace(/\s+/g, " ").trim();
+        }
+
+        function child(node, sel) {
+          for (var i = 0; i < node.children.length; i++) {
+            if (node.children[i].matches(sel)) return node.children[i];
+          }
+          return null;
+        }
+
+        // "Mic T3b + Interface T2–T3" -> [{area:"Mic",tier:"T3b"}, {area:"Interface",tier:"T2"}, {area:"Interface",tier:"T3"}]
+        function refs(text) {
+          var out = [];
+          var area = null;
+          (text.match(TOKEN) || []).forEach(function (t) {
+            if (AREAS[t]) {
+              area = t;
+              return;
+            }
+            if (!area) return;
+            var m = t.match(/^T(\d)([ab]?)(?:–T(\d))?$/);
+            var from = +m[1];
+            var to = m[3] ? +m[3] : from;
+            for (var n = from; n <= to; n++) {
+              out.push({ area: area, tier: "T" + n + (n === from ? m[2] : "") });
+            }
+          });
+          return out;
+        }
+
+        function findRow(ref) {
+          var sec = document.getElementById(AREAS[ref.area]);
+          var table = sec && sec.querySelector("table");
+          if (!table) return null;
+          var rows = table.tBodies[0].rows;
+          for (var i = 0; i < rows.length; i++) {
+            if (rows[i].cells[0].textContent.trim() === ref.tier) {
+              return { cells: rows[i].cells, section: sec };
+            }
+          }
+          return null;
+        }
+
+        function sectionName(sec) {
+          return sec.querySelector("h2").textContent.replace(/^\d+\.\s*/, "").replace(/\s*\(.*\)$/, "");
+        }
+
+        function outcome(node) {
+          return {
+            label: child(node, ".ans").textContent.trim(),
+            tier: node.querySelector("strong").textContent.trim(),
+            what: ownText(node),
+          };
+        }
+
+        // ---- Parse the source list ----
+        var steps = [];
+        Array.prototype.forEach.call(list.children, function (li) {
+          var q = li.querySelector(".q");
+          var hint = q.querySelector("small");
+          var why = li.querySelector(".why");
+          var step = {
+            q: ownText(q),
+            hint: hint ? hint.textContent.trim() : "",
+            why: why ? why.innerHTML : "",
+            end: li.classList.contains("end"),
+            answers: [],
+          };
+          li.querySelectorAll(".outcomes > .outcome").forEach(function (o) {
+            var sub = o.querySelector(".sub-q");
+            if (sub) {
+              var forks = [];
+              o.querySelectorAll(".fork > div").forEach(function (d) {
+                forks.push(outcome(d));
+              });
+              step.answers.push({
+                label: child(o, ".ans").textContent.trim(),
+                sub: sub.textContent.trim(),
+                forks: forks,
+              });
+            } else {
+              step.answers.push(outcome(o));
+            }
+          });
+          var no = li.querySelector(".no");
+          step.next = no ? no.textContent.trim() : "No";
+          steps.push(step);
+        });
+        if (!steps.length) return;
+        var questions = steps.filter(function (s) {
+          return !s.end;
+        }).length;
+
+        // ---- Detail content (shared by panel and inline view) ----
+        function addLinks(sections, container) {
+          sections.forEach(function (sec) {
+            var a = el("a", "td-link", "See the " + sectionName(sec) + " table →");
+            a.href = "#" + sec.id;
+            container.appendChild(a);
+            container.appendChild(document.createTextNode(" "));
+          });
+        }
+
+        // Renders the table rows for a tier string; returns the sections they came from.
+        function rowsFor(tierText, container, skipLinks) {
+          var sections = [];
+          var list = refs(tierText);
+          var multiArea = list.some(function (r) {
+            return r.area !== list[0].area;
+          });
+          list.forEach(function (ref) {
+            var found = findRow(ref);
+            if (!found) return;
+            var c = found.cells;
+            var row = el("div", "td-row");
+            row.appendChild(el("span", "td-tier", multiArea ? ref.area + " " + ref.tier : ref.tier));
+            var buy = el("span", "td-buy");
+            buy.innerHTML = c[1].innerHTML;
+            row.appendChild(buy);
+            row.appendChild(el("span", "td-cost", c[2].textContent.trim()));
+            var get = el("span", "td-get");
+            get.innerHTML = c[3].innerHTML;
+            row.appendChild(get);
+            container.appendChild(row);
+            if (sections.indexOf(found.section) < 0) sections.push(found.section);
+          });
+          if (!skipLinks) addLinks(sections, container);
+          return sections;
+        }
+
+        function answerLine(o) {
+          var p = el("p", "td-ans");
+          p.appendChild(el("span", "ans", o.label));
+          p.appendChild(document.createTextNode(o.tier + (o.what ? " · " + o.what : "")));
+          return p;
+        }
+
+        var desktop = window.matchMedia("(min-width: 900px)");
+        var active = 0;
+        // state[i].a: chosen answer index (s.answers.length means the "No"/"Neither" answer); .f: chosen follow-up
+        var state = steps.map(function () {
+          return { a: null, f: null };
+        });
+
+        function isNext(i, k) {
+          return k === steps[i].answers.length;
+        }
+
+        function answerButton(text, key, pressed, onClick) {
+          var b = el("button", null, text);
+          b.type = "button";
+          b.setAttribute("data-key", key);
+          b.setAttribute("aria-pressed", String(pressed));
+          b.addEventListener("click", onClick);
+          return b;
+        }
+
+        function chosenClass(node, chosen, k) {
+          if (chosen === null) return;
+          node.classList.add(chosen === k ? "is-chosen" : "is-dimmed");
+        }
+
+        function buildDetail(i, withNav) {
+          var s = steps[i];
+          var st = state[i];
+          var frag = document.createDocumentFragment();
+          frag.appendChild(el("p", "td-step", s.end ? "The end" : "Question " + (i + 1) + " of " + questions));
+          var h = el("h3", "td-q", s.q);
+          h.tabIndex = -1;
+          frag.appendChild(h);
+          if (s.hint) frag.appendChild(el("p", "td-sub", s.hint));
+          if (s.why) {
+            var why = el("div", "td-why");
+            why.innerHTML = s.why;
+            frag.appendChild(why);
+          }
+          if (!s.end) {
+            var picks = el("div", "td-answers");
+            picks.setAttribute("role", "group");
+            picks.setAttribute("aria-label", "Your answer");
+            picks.appendChild(el("span", "td-answers-label", "Your answer:"));
+            s.answers.concat([{ label: s.next }]).forEach(function (a, k) {
+              picks.appendChild(
+                answerButton(a.label, i + ":" + k, st.a === k, function () {
+                  choose(i, k);
+                })
+              );
+            });
+            frag.appendChild(picks);
+          }
+          s.answers.forEach(function (a, k) {
+            var box = el("div", "td-outcome");
+            chosenClass(box, st.a, k);
+            if (a.forks) {
+              var p = el("p", "td-ans");
+              p.appendChild(el("span", "ans", a.label));
+              p.appendChild(document.createTextNode("Then: " + a.sub));
+              box.appendChild(p);
+              if (st.a === k) {
+                var sub = el("div", "td-answers");
+                sub.setAttribute("role", "group");
+                sub.setAttribute("aria-label", a.sub);
+                a.forks.forEach(function (f, fi) {
+                  sub.appendChild(
+                    answerButton(f.label, i + ":" + k + ":" + fi, st.f === fi, function () {
+                      chooseFork(i, fi);
+                    })
+                  );
+                });
+                box.appendChild(sub);
+              }
+              var forkSections = [];
+              a.forks.forEach(function (f, fi) {
+                var fork = el("div", "td-fork");
+                if (st.a === k) chosenClass(fork, st.f, fi);
+                fork.appendChild(answerLine(f));
+                rowsFor(f.tier, fork, true).forEach(function (sec) {
+                  if (forkSections.indexOf(sec) < 0) forkSections.push(sec);
+                });
+                box.appendChild(fork);
+              });
+              addLinks(forkSections, box);
+            } else {
+              box.appendChild(answerLine(a));
+              rowsFor(a.tier, box);
+            }
+            frag.appendChild(box);
+          });
+          if (s.end) {
+            var polish = el("div", "td-outcome");
+            rowsFor(DONE_REFS, polish);
+            frag.appendChild(polish);
+          }
+          if (withNav) {
+            var nav = el("div", "td-nav");
+            if (i > 0) nav.appendChild(navButton("← Question " + i, i - 1));
+            else nav.appendChild(el("span"));
+            if (!s.end) {
+              nav.appendChild(navButton(i + 1 >= questions ? "Next: the end →" : "Next: question " + (i + 2) + " →", i + 1));
+            } else {
+              nav.appendChild(navButton("Back to question 1", 0));
+            }
+            frag.appendChild(nav);
+          }
+          return frag;
+        }
+
+        function focusPanelHeading() {
+          var h = panel.querySelector(".td-q");
+          if (h) h.focus({ preventScroll: true });
+        }
+
+        function navButton(text, target) {
+          var b = el("button", null, text);
+          b.type = "button";
+          b.addEventListener("click", function () {
+            select(target);
+            focusPanelHeading();
+          });
+          return b;
+        }
+
+        // ---- Answers ----
+        function choose(i, k) {
+          var st = state[i];
+          if (st.a === k) {
+            st.a = null;
+          } else {
+            st.a = k;
+          }
+          st.f = null;
+          var advance = st.a !== null && isNext(i, k) && i + 1 < steps.length;
+          update();
+          if (desktop.matches) {
+            if (advance) {
+              select(i + 1);
+              focusPanelHeading();
+            } else {
+              select(i);
+              refocus(panel, i + ":" + k);
+            }
+          } else {
+            refreshDetails();
+            refocus(items[i].li, i + ":" + k);
+          }
+        }
+
+        function chooseFork(i, fi) {
+          var st = state[i];
+          st.f = st.f === fi ? null : fi;
+          update();
+          var key = i + ":" + st.a + ":" + fi;
+          if (desktop.matches) {
+            select(i);
+            refocus(panel, key);
+          } else {
+            refreshDetails();
+            refocus(items[i].li, key);
+          }
+        }
+
+        function refocus(scope, key) {
+          var b = scope.querySelector('[data-key="' + key + '"]');
+          if (b) b.focus({ preventScroll: true });
+        }
+
+        // The first question answered with something other than "No" decides the next upgrade.
+        function decision() {
+          for (var i = 0; i < steps.length; i++) {
+            var st = state[i];
+            if (st.a !== null && !isNext(i, st.a)) return i;
+          }
+          return -1;
+        }
+
+        function update() {
+          var d = decision();
+          items.forEach(function (it, i) {
+            var st = state[i];
+            it.li.classList.toggle("is-answered", st.a !== null);
+            it.li.classList.toggle("is-after", d >= 0 && i > d);
+            it.chips.forEach(function (c, k) {
+              c.setAttribute("aria-pressed", String(st.a === k));
+            });
+          });
+          renderSummary(d);
+        }
+
+        function renderSummary(d) {
+          summary.textContent = "";
+          var answered = state.some(function (st) {
+            return st.a !== null;
+          });
+          var line = el("p", "ts-line");
+          if (d >= 0) {
+            var s = steps[d];
+            var a = s.answers[state[d].a];
+            var pick = a.forks && state[d].f !== null ? a.forks[state[d].f] : a;
+            summary.appendChild(el("p", "td-step", "Your next upgrade"));
+            var strong = el("strong", null, a.forks && state[d].f === null ? a.forks.map(function (f) { return f.tier; }).join(" or ") : pick.tier);
+            line.appendChild(strong);
+            if (a.forks && state[d].f === null) {
+              line.appendChild(document.createTextNode(" · answer the follow-up in question " + (d + 1)));
+            } else if (pick.what) {
+              line.appendChild(document.createTextNode(" · " + pick.what));
+            }
+            summary.appendChild(line);
+          } else if (answered) {
+            var firstOpen = -1;
+            for (var i = 0; i < questions; i++) {
+              if (state[i].a === null) {
+                firstOpen = i;
+                break;
+              }
+            }
+            summary.appendChild(el("p", "td-step", firstOpen < 0 ? "Your next upgrade" : "So far"));
+            line.textContent =
+              firstOpen < 0
+                ? "Nothing urgent. " + steps[steps.length - 1].hint
+                : "No upgrades needed yet. Keep going with question " + (firstOpen + 1) + ".";
+            summary.appendChild(line);
+          } else {
+            line.textContent = "Choose an answer for each question. Your next upgrade appears here, and you can change any answer at any time.";
+            summary.appendChild(line);
+          }
+          if (answered) {
+            var nav = el("div", "ts-nav");
+            if (d >= 0) {
+              var show = el("button", "ts-link", "Show question " + (d + 1));
+              show.type = "button";
+              show.addEventListener("click", function () {
+                if (desktop.matches) {
+                  select(d);
+                  focusPanelHeading();
+                } else {
+                  if (!items[d].li.querySelector(".tm-detail")) toggle(d);
+                  items[d].btn.scrollIntoView({ block: "start", behavior: "smooth" });
+                  items[d].btn.focus({ preventScroll: true });
+                }
+              });
+              nav.appendChild(show);
+            }
+            var clear = el("button", "ts-link", "Clear answers");
+            clear.type = "button";
+            clear.addEventListener("click", function () {
+              state.forEach(function (st) {
+                st.a = null;
+                st.f = null;
+              });
+              update();
+              if (desktop.matches) select(0);
+              else refreshDetails();
+            });
+            nav.appendChild(clear);
+            summary.appendChild(nav);
+          }
+        }
+
+        // ---- Map ----
+        var summary = el("div", "tree-summary");
+        summary.setAttribute("aria-live", "polite");
+        app.insertBefore(summary, app.firstChild);
+
+        var items = [];
+        steps.forEach(function (s, i) {
+          var li = el("li", s.end ? "end" : null);
+          li.appendChild(el("span", "tm-num", s.end ? "✓" : String(i + 1)));
+          var btn = el("button", "tm-q", s.end ? s.q + " " + s.hint : s.q);
+          btn.type = "button";
+          btn.addEventListener("click", function () {
+            if (desktop.matches) select(i);
+            else toggle(i);
+          });
+          li.appendChild(btn);
+          var chipButtons = [];
+          if (!s.end) {
+            var chips = el("div", "tm-chips");
+            chips.setAttribute("role", "group");
+            chips.setAttribute("aria-label", "Answer for question " + (i + 1));
+            s.answers.concat([{ label: s.next, isNext: true }]).forEach(function (a, k) {
+              var chip = el("button", a.isNext ? "tm-chip next" : "tm-chip");
+              chip.type = "button";
+              chip.setAttribute("aria-pressed", "false");
+              chip.appendChild(el("b", null, a.label));
+              var to = a.isNext
+                ? " ↓"
+                : " → " + (a.forks ? a.forks.map(function (f) { return f.tier; }).join(" or ") : a.tier);
+              chip.appendChild(document.createTextNode(to));
+              chip.addEventListener("click", function () {
+                choose(i, k);
+              });
+              chips.appendChild(chip);
+              chipButtons.push(chip);
+            });
+            li.appendChild(chips);
+          }
+          map.appendChild(li);
+          items.push({ li: li, btn: btn, chips: chipButtons });
+        });
+
+        function select(i) {
+          active = i;
+          items.forEach(function (it, n) {
+            it.li.classList.toggle("is-active", n === i);
+            if (n === i) it.btn.setAttribute("aria-current", "step");
+            else it.btn.removeAttribute("aria-current");
+          });
+          panel.textContent = "";
+          panel.appendChild(buildDetail(i, true));
+          panel.scrollTop = 0;
+        }
+
+        function toggle(i) {
+          var it = items[i];
+          var open = it.li.querySelector(".tm-detail");
+          if (open) {
+            open.remove();
+            it.btn.setAttribute("aria-expanded", "false");
+            return;
+          }
+          var d = el("div", "tm-detail");
+          d.id = "tm-detail-" + i;
+          d.appendChild(buildDetail(i, false));
+          it.li.appendChild(d);
+          it.btn.setAttribute("aria-expanded", "true");
+          it.btn.setAttribute("aria-controls", d.id);
+        }
+
+        function refreshDetails() {
+          items.forEach(function (it, i) {
+            var d = it.li.querySelector(".tm-detail");
+            if (!d) return;
+            d.textContent = "";
+            d.appendChild(buildDetail(i, false));
+          });
+        }
+
+        function applyMode() {
+          items.forEach(function (it) {
+            var d = it.li.querySelector(".tm-detail");
+            if (d) d.remove();
+            it.li.classList.remove("is-active");
+            it.btn.removeAttribute("aria-current");
+            it.btn.removeAttribute("aria-controls");
+            if (desktop.matches) it.btn.removeAttribute("aria-expanded");
+            else it.btn.setAttribute("aria-expanded", "false");
+          });
+          if (desktop.matches) select(active);
+          else panel.textContent = "";
+          if (intro) {
+            intro.textContent = desktop.matches
+              ? "Work down the questions and fix the first \"yes\", then start over. Select a question to see why it matters and what to buy."
+              : "Work down the questions and fix the first \"yes\", then start over. Tap a question to see why it matters and what to buy.";
+          }
+        }
+
+        if (desktop.addEventListener) desktop.addEventListener("change", applyMode);
+        else desktop.addListener(applyMode);
+
+        list.hidden = true;
+        app.hidden = false;
+        update();
+        applyMode();
+      })();
+    </script>
+  </body>
+</html>
